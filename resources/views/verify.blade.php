@@ -31,7 +31,9 @@
         <![endif]-->
 </head>
 <body>
-
+    <div class="d-flex justify-content-center">
+        <a href="#" ></a>
+    </div>
 @include('flash-message')
 
 <div class="page-wrapper">
@@ -41,21 +43,18 @@
 <div class="row">
 <div class="col">
 <h3 class="page-title">Verify Users </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active"> / Verify Users</li>
-</ul>
+
 </div>
 
 </div>
 <div class="d-flex justify-content-center">
       <a href="{{route ('verify')}}" class='btn btn-outline-primary mr-2'>Verify Users</a>
       <a href="{{route ('unverified')}}" class='btn btn-outline-primary mr-2'>Unverified Users</a>
-       
+
 </div>
 
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -69,7 +68,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <input type="search" name="search" class="form-control" placeholder="Search here...">
 <button class="btn" type="submit"><i class="fa fa-search"></i></button>
 </form>-->
-    
+
 <form class="form-inline my-2 my-lg-0" action = "" method= "" >
 <div class="input-group">
   <div >
@@ -95,7 +94,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 </thead>
 <tbody>
   @foreach ($users as $user)
-    <tr>      
+    <tr>
       <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
       <td class="text-left"><a href = "#" ><i class="fa fa-envelope"></i></a></td>

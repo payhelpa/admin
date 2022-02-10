@@ -31,31 +31,30 @@
         <![endif]-->
 </head>
 <body>
+    <div class="d-flex justify-content-center">
+        <a href="#" ></a>
+    </div>
 <div class="page-wrapper">
 <div class="content container-fluid">
-
 <div class="page-header">
 <div class="row">
 <div class="col">
 <h3 class="page-title">Users </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active">Users</li>
-</ul>
+
 </div>
 
 </div>
 <div class="d-flex justify-content-center">
     <a href="{{route ('users')}}" class='btn btn-outline-primary mr-2'>All Users</a>
     <a href="{{route ('individualusers')}}" class='btn btn-outline-primary mr-2'>Individual Users</a>
-    <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>    
+    <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -106,12 +105,12 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td class="text-center"><a href = "{{url('message/'.$user->id)}}" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
         <td>{{$user->created_at}}</td>
         <td class="text-right">
-            <div class="actions">                
+            <div class="actions">
                 @if($user->active_status == '1')
                     <a href="{{route('update_status',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
                 @else
                     <a href="{{route('update_status',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO UNSUSPEND THIS USER?')" class="btn btn-sm bg-success-light mr-2"></i>Unsuspend</a>
-                @endif  
+                @endif
             </div>
         </td>
     </tr>

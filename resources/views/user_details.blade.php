@@ -40,11 +40,11 @@
 
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -170,7 +170,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     color: #0062cc;
     }
     #customers {
-  
+
   border-collapse: collapse;
   width: 100%;
     }
@@ -182,7 +182,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
     }
 
-    #customers td, #customers th {  
+    #customers td, #customers th {
     padding: 28px;
     border-top: 1px solid #D8D8D8;
     }
@@ -199,13 +199,13 @@ This is the most basic example of the datatables with zero configuration. Use th
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="{{$user->facial_pix}}" alt="nap shot"/>                        
+                        <img src="{{$user->facial_pix}}" alt="nap shot"/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>{{ucwords(UserController::GetUserName($user->user_id)) }}</h5>
-                        <h6>   </h6>                        
+                        <h6>   </h6>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">User Info</a>
@@ -223,18 +223,18 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <table class="table table-striped">
                             <tbody>
-                              <tr>
+                                <tr>
                                 <th scope="row">User Id</th>
                                 <td>{{$user->user_id}}</td>
-                              </tr>
-                              <tr>
+                                </tr>
+                                <tr>
                                 <th scope="row">Name</th>
                                 <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-                              </tr>
-                              <tr>
+                                </tr>
+                                <tr>
                                 <th scope="row">Email</th>
                                 <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
-                              </tr>
+                                </tr>
                               <tr>
                                 <th scope="row">Occupation</th>
                                 <td>{{$user->occupation}}</td>
@@ -247,10 +247,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">Home Address</th>
                                 <td>{{$user->home_address}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">BVN</th>
-                                <td>{{$user->bvn}}</td>
-                              </tr>
+
                               <tr>
                                 <th scope="row">DOB</th>
                                 <td>{{$user->dob}}</td>
@@ -275,10 +272,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">State ID</th>
                                 <td>{{$user->state_id}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">Kyc Verified</th>
-                                <td>{{$user->kyc_verified}}</td>
-                              </tr>
+                              
                               <tr>
                                 <th scope="row">Created At</th>
                                 <td>{{$user->created_at}}</td>
@@ -289,9 +283,9 @@ This is the most basic example of the datatables with zero configuration. Use th
                               </tr>
                             </tbody>
                           </table>
-                            
+
                 </div>
-  
+
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="row">
                                             <div class="col-md-4">
@@ -325,11 +319,11 @@ This is the most basic example of the datatables with zero configuration. Use th
                         </div>
                     </div>
                 </div>
-            </form>  
-      @endforeach       
+            </form>
+      @endforeach
         </div>
-            
-        </div>    
+
+        </div>
     </div>
 </div>
 </div>

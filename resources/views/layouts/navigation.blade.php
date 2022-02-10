@@ -171,11 +171,14 @@
 <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
 </li>
 <li>
-<a href="{{url ('/transactions')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
+<a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
 </li>
-<li>
+<!--<li>
 <a href="{{route ('status')}}"><i class="fe fe-map"></i> <span>Status</span></a>
-</li>
+</li>-->
+<li>
+    <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
+    </li>
 <li >
     <!-- Authentication -->
      <form method="POST" action="{{ route('logout') }}">
@@ -219,7 +222,7 @@
                 </div>
             </div>
 -->
-            
+
 
                 <!-- Settings Dropdown -->
             <!--<div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -251,9 +254,9 @@
                 </x-dropdown>
             </div>-->
 
-            
+
             <!-- Hamburger -->
-            <!-- 
+            <!--
                 <div class="flex">-->
                 <!-- Logo -->
                 <!--<div class="flex-shrink-0 flex items-center">
@@ -262,7 +265,7 @@
                     </a>
                 </div>-->
 
-                <!-- Navigation Links --><!-- 
+                <!-- Navigation Links --><!--
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -270,7 +273,7 @@
                 </div>-->
             </div>
 
-            
+
         </div>
     </div>
 

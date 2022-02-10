@@ -24,9 +24,8 @@ class UserController extends Controller
         $count = DB::table('users')->count();
         $ver = DB::table('users')->whereNotNull('kyc_verified')->count();
         $counttrans = DB::table('transactions')->count();
-                 
-        return view('dashboard', compact('count', 'counttrans','ver'));
 
+        return view('dashboard', compact('count', 'counttrans','ver'));
     }
     public static function GetUserName($user_id)
     {
@@ -38,7 +37,7 @@ class UserController extends Controller
         else
         {
             echo "N/A";
-        }        
+        }
     }
     public static function GetUserEmail($email)
     {
@@ -50,7 +49,7 @@ class UserController extends Controller
         else
         {
             echo "N/A";
-        }        
+        }
     }
     public static function GetUserAccountNum($account_num)
     {
@@ -62,17 +61,16 @@ class UserController extends Controller
         else
         {
             echo "";
-        }        
+        }
     }
-    
     public function user(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
             $userss = User::where('name','LIKE',"%$search%")->get();
         }else{
             $userss = User::all();
-         }
-          return view('users', compact('search', 'userss'));
+        }
+        return view('users', compact('search', 'userss'));
     }
     public function individualusers (Request $request){
         $userss = DB::table('individual_users')->get();
@@ -84,11 +82,11 @@ class UserController extends Controller
     }
 
     public function user_details($id){
-        $userss = DB::table('individual_users')->where('user_id',$id)->get();   
+        $userss = DB::table('individual_users')->where('user_id',$id)->get();
         return view('user_details', compact('userss'));
     }
     public function user_details_bis($id){
-        $userss = DB::table('business_users')->where('user_id',$id)->get();   
+        $userss = DB::table('business_users')->where('user_id',$id)->get();
         return view('user_details_bis', compact('userss'));
     }
     public function update_status($id){
@@ -98,26 +96,30 @@ class UserController extends Controller
                 ->first();
 
                 if ($post->active_status == 1) {
-                     $status = 0;
+                    $status = 0;
                 }
                 else{
-                     $status = 1;
+                    $status = 1;
                 }
-                $val = array('active_status' => $status); 
+                $val = array('active_status' => $status);
             DB::table('users')->where('id',$id)->update($val);
             return redirect('users');
     }
+    /**
+     * The function verifies users
+     *  @param Request $request
+     *
+     * @var array
+     */
 
-    public function verify(Request $request){ 
+    public function verify(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
             $users = User::whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
         }else{
             $users = User::whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
         }
-         return view('verify', compact('search', 'users'));
-               
-        //return view('verify');       
+        return view('verify', compact('search', 'users'));
     }
     public function unverified(Request $request){
         $search = $request['search'] ?? "";
@@ -126,24 +128,35 @@ class UserController extends Controller
         }else{
             $users = User::where('kyc_verified', null)->get();
         }
-         return view('verify', compact('search', 'users'));
-    
+        return view('verify', compact('search', 'users'));
+
        // return view('unverified');
     }
-    public function transactions(){    
-        $userss = DB::table('transactions')->get();
+    public function transactions($id){
+        $userss = DB::table('transactions')
+        ->where('is_payment_confirmed', 1)
+        ->first();
         return view('transactions', compact('userss'));
     }
-    public function ongoingstatus(){        
-        return view('ongoingstatus');
-    }
-    public function statusdeclined(){       
-       return view('pendingstatus');
-   }
-    public function status(){
-        $post = DB::table('transactions')
+    public function ongoingstatus(){
+        $userss = DB::table('transactions')
+        ->where('is_payment_confirmed', 0)
         ->get();
-        return view('status', compact('post'));
+        return view('ongoingstatus', compact('userss'));
+    }
+    public function statusdeclined(){
+        $userss = DB::table('naira_solicitations')->get();
+        return view('pendingstatus', compact('userss'));
+    }
+    public function fupending(){
+        $userss = DB::table('offers')->get();
+        return view('fupending', compact('userss'));
+    }
+    public function status(){
+        $userss = DB::table('transactions')
+        ->where('is_payment_confirmed', 1)
+        ->get();
+        return view('status', compact('userss'));
     }
     public function update_verify(Request $request, $id){
         $user = User::where('id', '=' ,$id)->first();
@@ -160,16 +173,15 @@ class UserController extends Controller
             'account_name' => $user->name,
             'bvn' =>'',
         ]);
-        if ($response->status() == 200) 
+        if ($response->status() == 200)
         {
-            $rex = json_decode($response);            
+            $rex = json_decode($response);
             $user = (new \App\Models\Wallet)->create([
                 'user_id' => $user->id,
                 'account_name' => $user->name,
                 'account_number' => $rex->account_number,
                 'account_balance' => 0
             ]);
-                   
         }else{
                 return redirect('verify')->with('error','Account was not generated, user not verified');
             }
@@ -178,20 +190,20 @@ class UserController extends Controller
         return redirect('verify')->with('sucess','Account was not generated, userrr not verified');
     }
     DB::commit();
-    return redirect('verify')->with('success','User has been verified!');     
+    return redirect('verify')->with('success','User has been verified!');
     }
     public function message(Request $request, $id){
         $user = DB::table('users')
-       ->select('email')
-       ->where('id', $id)->first();
-       $email = $user->email;
-       return view('message',compact('email'));
-  }
-   public function messagesend(Request $request){       
-       $msg = (new Helper())->helpermessagesend($request);
-       return $msg;
-  }
-  public function show($id){
+        ->select('email')
+        ->where('id', $id)->first();
+        $email = $user->email;
+        return view('message',compact('email'));
+    }
+    public function messagesend(Request $request){
+    $msg = (new Helper())->helpermessagesend($request);
+    return $msg;
+    }
+    public function show($id){
     $users = DB::table('individual_users')->where('user_id',$id)->get();
     return view('show', compact('users'));
 }
@@ -199,7 +211,15 @@ public function showimage($id){
     $users = DB::table('individual_users')->where('user_id',$id)->get();
     return view('showimage', compact('users'));
 }
-    
-    
+public function wallet(Request $request){
+    $search = $request['search'] ?? "";
+    if($search != ""){
+        $userss = Wallet::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
+    }else{
+        $userss = Wallet::all();
+    }
+    return view('wallet', compact('search', 'userss'));
+}
+
     //
 }

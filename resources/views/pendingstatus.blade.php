@@ -15,16 +15,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 <title>PayHelpa - Dashboard</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('public/assets/img/favicon.png')}}">
+<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/feathericon.min.css')}}">
-<link rel="stylesheet" href="{{asset('public/assets/plugins/morris/morris.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
             <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
             <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
@@ -37,7 +37,7 @@
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">Status </h3>
+<h3 class="page-title">Transactions </h3>
 <ul class="breadcrumb">
 <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
 <li class="breadcrumb-item active"></li>
@@ -46,13 +46,14 @@
 
 </div>
 <div class="d-flex justify-content-center">
-      <a href="{{route ('status')}}" class='btn btn-outline-primary mr-2'>Successful Transactions</a>
-      <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary mr-2'>Ongoing Transactions</a>
-      <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary mr-2'>Pending Transactions</a>
-      
+    <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary btn-sm mr-2'>LU Pending Transactions</a>
+    <a href="{{route ('fupending')}}" class='btn btn-outline-primary btn-sm mr-2'>FU Pending Transactions</a>
+    <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary btn-sm mr-2'>Ongoing Transactions</a>
+    <a href="{{route ('status')}}" class='btn btn-outline-primary btn-sm mr-2'>Successful Transactions</a>
+
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -67,26 +68,23 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>Transaction ID</th>
-    <th>Local User</th>
-    
+    <th>User ID</th>
+    <th>Service ID</th>
     <th>Rate</th>
-    <th>Amount</th>
+    <th>Dollar Amount</th>
+    <th>Amount Requested</th>
     <th>Details</th>
 </tr>
 </thead>
 <tbody>
-	@foreach ($post as $key)
+	@foreach ($userss as $user)
 	<tr>
-		<td>{{$key->transaction_id}}</td>
-		<td>{{ucwords(UserController::GetUserName($key->lu_id)) }}<br><a href = "{{url('message/'.$key->lu_id) }}"<i class="fa fa-envelope" style="text-align:center"></i></a></td>
-	
-		<td>N{{number_format($key->rate,2)}}</td>
-		<td>${{number_format($key->amount_requested,2)}}</td>
-		
-		<td><a href="{{route('pendinginfo',$key->transaction_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
-		
-		
+		<td>{{$user->user_id}}</td>
+		<td>{{$user->service_id}}</td>
+        <td>₦{{number_format($user->rate,2)}}</td>
+        <td>${{number_format($user->dollar_amount,2)}}</td>
+		<td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
+		<td><a href="" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>
@@ -103,17 +101,17 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 
 
-<script src="{{asset('public/assets/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/popper.min.js')}}"></script>
-<script src="{{asset('public/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/assets/plugins/datatables/datatables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/script.js')}}"></script>
+<script src="{{asset('assets/js/script.js')}}"></script>
 </body>
 </html>
 </x-app-layout>

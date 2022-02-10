@@ -13,14 +13,13 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        
-        DB::table('admins')->insert(array(
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'adminadmin',
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s'),
-        ));
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->string('password');
+            $table->timestamps();
+        });
     }
 
     /**

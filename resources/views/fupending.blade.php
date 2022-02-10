@@ -58,7 +58,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Successful Transactions</h4>
+<h4 class="card-title">List of FU Pending Transactions</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -69,23 +69,23 @@ This is the most basic example of the datatables with zero configuration. Use th
 <thead>
 <tr>
     <th>User ID</th>
-    <th>Naira Solicitation ID </th>
-    <th>Settlement ID</th>
-    <th>Payment Type</th>
-    <th>Amount Paid</th>
-
+    <th>Rate</th>
+    <th>Title</th>
+    <th>Balance</th>
+    <th>Time created</th>
+    <th>Details</th>
 </tr>
 </thead>
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
 		<td>{{$user->user_id}}</td>
-		<td>{{$user->naira_solicitation_id}}</td>
-        <td>{{$user->settlement_id}}</td>
-        <td>{{$user->payment_type}}</td>
-		<td>₦{{$user->amount_paid}}</td>
+        <td>₦{{number_format($user->rate,2)}}</td>
+		<td>{{$user->title}}</td>
+        <td>${{number_format($user->offer_balance,2)}}</td>
+		<td>{{($user->created_at)}}</td>
 
-
+		<td><a href="" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>

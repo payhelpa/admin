@@ -19,7 +19,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
  */
 class User extends Authenticatable implements  MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, UsesUuidTrait, SoftDeletes, Sluggable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Sluggable;
 
     protected $fillable = [
         'name', 'email', 'password', 'email_verified_at', 'role_id', 'account_verified_at', 'kyc_verified'

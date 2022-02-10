@@ -31,6 +31,9 @@
         <![endif]-->
 </head>
 <body>
+    <div class="d-flex justify-content-center">
+        <a href="#" ></a>
+    </div>
 <div class="page-wrapper">
 <div class="content container-fluid">
 
@@ -38,29 +41,26 @@
 <div class="row">
 <div class="col">
 <h3 class="page-title">Users </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active">Users</li>
-</ul>
+
 </div>
 
 </div>
 <div class="d-flex justify-content-center">
     <a href="{{route ('users')}}" class='btn btn-outline-primary mr-2'>All Users</a>
     <a href="{{route ('individualusers')}}" class='btn btn-outline-primary mr-2'>Individual Users</a>
-    <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>    
+    <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Users</h4>
+<h4 class="card-title">List of Business Users</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -106,11 +106,11 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td class="text-center"><a href = "#" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
         <td>{{$user->created_at}}</td>
         <td class="text-right">
-            <div class="actions">                
+            <div class="actions">
                 <a href="#" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
             </div>
         </td>
-        
+
 
     </tr>
     @endforeach

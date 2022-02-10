@@ -15,19 +15,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 <title>PayHelpa - Dashboard</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('public/assets/img/favicon.png')}}">
+<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/feathericon.min.css')}}">
-<link rel="stylesheet" href="{{asset('public/assets/plugins/morris/morris.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
-            <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
-            <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
+            <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
+            <script src="{{asset('assets/js/respond.min.js')}}"></script>
         <![endif]-->
 </head>
 <body>
@@ -40,11 +40,11 @@
 
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -172,63 +172,92 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                     
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Beneficial Helpa</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ucwords(UserController::GetUserName($key->lu_id)) }}</div>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Transaction Date</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{date('l jS \of F Y h:i:s A', strtotime($key->created_at))}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Amount Needed</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>${{number_format($key->amount_requested, 2)}}</p>
-                                            
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Current Rate </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>N{{number_format($key->rate,2)}}</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <!--<div class="row">
-                                            <div class="col-md-6">
-                                                <label>Ongoing Transactions</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
-                                            </div>
-                                        </div>-->
+
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">User Id</th>
+                                            <td>{{$user->user_id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Name</th>
+                                            <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{$user->title}}</td>
+                                            <td>{{$user->web_link}}</td>
+        <td>{{$user->docs_link}}</td>
+        <td>{{$user->description}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Occupation</th>
+                                            <td>{{$user->occupation}}</td>
+                                        </tr>
+                                      <tr>
+                                        <th scope="row">Phone Number</th>
+                                        <td>{{$user->phone_number}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Home Address</th>
+                                        <td>{{$user->home_address}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">BVN</th>
+                                        <td>{{$user->bvn}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">DOB</th>
+                                        <td>{{$user->dob}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Country</th>
+                                        <td>{{$user->country}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Valid ID Number</th>
+                                        <td>{{$user->valid_id_number}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Transaction Limit</th>
+                                        <td>{{$user->transaction_limit}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Phone Number Verified At</th>
+                                        <td>{{$user->phone_number_verified_at}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">State ID</th>
+                                        <td>{{$user->state_id}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Kyc Verified</th>
+                                        <td>{{$user->kyc_verified}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Created At</th>
+                                        <td>{{$user->created_at}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Updated At</th>
+                                        <td>{{$user->updated_at}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-            </form>  
+            </form>
              @endforeach
         </div>
-            
+
         </div>
-        
-        
-        
-    
+
+
+
+
     </div>
 </div>
 </div>
@@ -240,17 +269,17 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 
 
-<script src="{{asset('public/assets/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/popper.min.js')}}"></script>
-<script src="{{asset('public/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/assets/plugins/datatables/datatables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/script.js')}}"></script>
+<script src="{{asset('assets/js/script.js')}}"></script>
 </body>
 </html>
 </x-app-layout>

@@ -22,11 +22,11 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
- Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
- Route::get('/users', [UserController::class, 'user'])->middleware(['auth'])->name('users');
+Route::get('/users', [UserController::class, 'user'])->middleware(['auth'])->name('users');
 
- Route::get('/individualusers', [UserController::class, 'individualusers'])->middleware(['auth'])->name('individualusers');
+Route::get('/individualusers', [UserController::class, 'individualusers'])->middleware(['auth'])->name('individualusers');
 
  Route::get('/businessusers', [UserController::class, 'businessusers'])->middleware(['auth'])->name('businessusers');
 
@@ -80,5 +80,8 @@ Route::get('/ongoingstatus', [UserController::class, 'ongoingstatus'])->middlewa
 
  Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
 
+ Route::get('/wallet', [UserController::class, 'wallet'])->middleware(['auth'])->name('wallet');
+
+ Route::get('/fupending', [UserController::class, 'fupending'])->middleware(['auth'])->name('fupending');
 
 require __DIR__.'/auth.php';
