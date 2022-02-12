@@ -38,10 +38,7 @@
 <div class="row">
 <div class="col">
 <h3 class="page-title">Transactions </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active"></li>
-</ul>
+
 </div>
 
 </div>
@@ -58,7 +55,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Pending Transactions</h4>
+<h4 class="card-title">List of LU Pending Transactions</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -68,23 +65,25 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>User ID</th>
+    <th>Name</th>
     <th>Service ID</th>
     <th>Rate</th>
     <th>Dollar Amount</th>
     <th>Amount Requested</th>
+    <th>Time Created</th>
     <th>Details</th>
 </tr>
 </thead>
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
-		<td>{{$user->user_id}}</td>
+		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
 		<td>{{$user->service_id}}</td>
         <td>₦{{number_format($user->rate,2)}}</td>
         <td>${{number_format($user->dollar_amount,2)}}</td>
 		<td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
-		<td><a href="" class="btn btn-outline-primary mr-2"></i>View </a></td>
+        <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
+		<td><a href="{{route('pendinginfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>

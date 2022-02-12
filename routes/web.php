@@ -63,7 +63,7 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/statusdeclined', [UserController::class, 'statusdeclined'])->middleware(['auth'])->name('statusdeclined');
 
-// Route::get('/pendinginfo/{transaction_id}', [UserController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
+ Route::get('/pendinginfo/{user_id}', [UserController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
 
 Route::get('/ongoingstatus', [UserController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
 

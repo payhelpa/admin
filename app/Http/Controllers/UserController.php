@@ -15,6 +15,7 @@ use Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Helpers\Helper;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -151,6 +152,10 @@ class UserController extends Controller
     public function fupending(){
         $userss = DB::table('offers')->get();
         return view('fupending', compact('userss'));
+    }
+    public function pendinginfo($user_id){
+        $userss = DB::table('naira_solicitations')->where('user_id', $user_id)->get();
+        return view('pendinginfo', compact('userss'));
     }
     public function status(){
         $userss = DB::table('transactions')

@@ -49,7 +49,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title" style="text-align: center;">Pending Transaction</h4>
+<h4 class="card-title" style="text-align: center;">Local User Pending Transaction</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -166,7 +166,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 }
 </style>
 <div class="container emp-profile"style="text-align: center;">
-    @foreach ($post as $key)
+    @foreach ($userss as $user)
             <form method="post">
                 <div class="row">
                     <div class="col-md-8">
@@ -184,73 +184,50 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Email</th>
-                                            <td>{{$user->title}}</td>
-                                            <td>{{$user->web_link}}</td>
-        <td>{{$user->docs_link}}</td>
-        <td>{{$user->description}}</td>
+                                            <th scope="row">Service ID</th>
+                                            <td>{{$user->service_id}}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Occupation</th>
-                                            <td>{{$user->occupation}}</td>
+                                            <th scope="row">Title</th>
+                                            <td>{{$user->title}}</td>
                                         </tr>
-                                      <tr>
-                                        <th scope="row">Phone Number</th>
-                                        <td>{{$user->phone_number}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Home Address</th>
-                                        <td>{{$user->home_address}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">BVN</th>
-                                        <td>{{$user->bvn}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">DOB</th>
-                                        <td>{{$user->dob}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Country</th>
-                                        <td>{{$user->country}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Valid ID Number</th>
-                                        <td>{{$user->valid_id_number}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Transaction Limit</th>
-                                        <td>{{$user->transaction_limit}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Phone Number Verified At</th>
-                                        <td>{{$user->phone_number_verified_at}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">State ID</th>
-                                        <td>{{$user->state_id}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Kyc Verified</th>
-                                        <td>{{$user->kyc_verified}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Created At</th>
-                                        <td>{{$user->created_at}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">Updated At</th>
-                                        <td>{{$user->updated_at}}</td>
-                                      </tr>
+                                        <tr>
+                                            <th scope="row">Rate</th>
+                                            <td>₦{{number_format($user->rate,2)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Dollar Amount</th>
+                                            <td>${{number_format($user->dollar_amount,2)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Amount Requested in Naira</th>
+                                            <td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Website Link</th>
+                                            <td>{{$user->web_link}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Document Link</th>
+                                            <td>{{$user->docs_link}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Description</th>
+                                            <td>{{$user->description}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Time Created</th>
+                                            <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
+                                        </tr>
                                     </tbody>
-                                  </table>
+                                </table>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </form>
-             @endforeach
+            @endforeach
         </div>
 
         </div>
