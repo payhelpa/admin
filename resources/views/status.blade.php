@@ -65,7 +65,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 <div class="card-body">
 <div class="table-responsive">
-<table class="datatable table table-stripped">
+<table class="datatable table table-stripped center">
 <thead>
 <tr>
     <th>User ID</th>
@@ -79,13 +79,11 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
-		<td>{{$user->user_id}}</td>
+		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
 		<td>{{$user->naira_solicitation_id}}</td>
         <td>{{$user->settlement_id}}</td>
         <td>{{$user->payment_type}}</td>
-		<td>₦{{$user->amount_paid}}</td>
-
-
+		<td>₦{{number_format($user->amount_paid,2)}}</td>
 	</tr>
 	@endforeach
 </tbody>

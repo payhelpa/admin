@@ -190,7 +190,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     #customers tr:nth-child(even){background-color: #FDFDFF;
     ;}
 
-#customers tr:hover {background-color: #F2F6FF;}
+    #customers tr:hover {background-color: #F2F6FF;}
 </style>
 
   <div class="container emp-profile">
@@ -272,7 +272,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">State ID</th>
                                 <td>{{$user->state_id}}</td>
                               </tr>
-                              
+
                               <tr>
                                 <th scope="row">Created At</th>
                                 <td>{{$user->created_at}}</td>
@@ -292,16 +292,16 @@ This is the most basic example of the datatables with zero configuration. Use th
                                                 <label>Pending Transaction</label>
                                             </div>
                                             <div class="col-md-4">
-                                                <p></p>
+                                                <p>{{$pendingtrans}}</p>
                                             </div>
-                                            <div class="col-md-4"><a href="" class="btn btn-outline-primary mr-2"></i>View </a></div>
+                                            <div class="col-md-4"><a href="{{route('pendinginfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label>Ongoing Transaction</label>
                                             </div>
                                             <div class="col-md-4">
-                                                <p></p>
+                                                <p>{{$ongoingtrans}}</p>
                                             </div>
                                             <div class="col-md-4"><a href="" class="btn btn-outline-primary mr-2"></i>View </a></div>
 
@@ -311,9 +311,9 @@ This is the most basic example of the datatables with zero configuration. Use th
                                                 <label>Successful Transaction </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <p></p>
+                                                <p>{{$sucesstrans}}</p>
                                             </div>
-                                            <div class="col-md-4"><a href="" class="btn btn-outline-primary mr-2"></i>View </a></div>
+                                            <div class="col-md-4"><a href="{{route('pendinginfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></div>
                                         </div>
                             </div>
                         </div>

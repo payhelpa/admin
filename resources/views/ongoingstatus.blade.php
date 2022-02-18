@@ -65,23 +65,19 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>User ID</th>
-    <th>Service ID</th>
-    <th>Rate</th>
-    <th>Dollar Amount</th>
-    <th>Amount Requested</th>
-    <th>Details</th>
+    <th>Name</th>
+    <th>Naira Solicitation ID </th>
+    <th>Payment Type</th>
+    <th>Amount Paid</th>
 </tr>
 </thead>
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
-		<td>{{$user->user_id}}</td>
-		<td>{{$user->service_id}}</td>
-        <td>₦{{number_format($user->rate,2)}}</td>
-        <td>${{number_format($user->dollar_amount,2)}}</td>
-		<td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
-		<td><a href="" class="btn btn-outline-primary mr-2"></i>View </a></td>
+		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
+		<td>{{$user->naira_solicitation_id}}</td>
+        <td>{{$user->payment_type}}</td>
+		<td>₦{{number_format($user->amount_paid,2)}}</td>
 	</tr>
 	@endforeach
 </tbody>

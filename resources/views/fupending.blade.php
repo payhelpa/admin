@@ -64,7 +64,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>User ID</th>
+    <th>Name</th>
     <th>Rate</th>
     <th>Title</th>
     <th>Balance</th>
@@ -80,7 +80,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 		<td>{{$user->title}}</td>
         <td>${{number_format($user->offer_balance,2)}}</td>
 		<td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
-        <td class="text-center"><a href = "#" ><i class="fa fa-envelope"></i></a></td>
+        <td class="text-center"><a href = "{{url('message/'.$user->user_id)}}" ><i class="fa fa-envelope"></i></a></td>
 	</tr>
 	@endforeach
 </tbody>
