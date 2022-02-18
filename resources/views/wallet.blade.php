@@ -66,24 +66,23 @@
                                 <table class="datatable table table-stripped">
                                     <thead>
                                         <tr>
-                                            <th>User ID</th>
+
                                             <th>Account Name</th>
                                             <th>Account Number</th>
                                             <th>Account Balance</th>
-                                            <th>Created At</th>
-                                            <th>Updated At</th>
+                                            <th>Time Created</th>
+                                            <th>Time Updated</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($userss as $user)
                                         <tr>
-                                            <td>{{$user->user_id}}</td>
+
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
                                             <td>${{number_format($user->account_balance,2)}}</td>
-
-                                            <td>{{$user->created_at}}</td>
-                                            <td>{{$user->updated_at}}</td>
+                                            <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
+                                            <td>{{\Carbon\Carbon::parse($user->updated_at)->diffForHumans()}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

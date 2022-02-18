@@ -101,9 +101,9 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tbody>
     @foreach ($userss as $user)
     <tr>
-        @if($user->country == 'Nigeria')
+        @if($user->country == 'NG')
         <td class="text-center"><img src="{{asset('assets/img/NGN 1.png')}}"></td>
-     @elseif($user->country == 'USA')
+     @elseif($user->country == 'US')
         <td class="text-center"><img src="{{asset('assets/img/USA 1.png')}}"></td>
         @else
         <td class="text-center"><img src=""></td>
@@ -111,7 +111,7 @@ This is the most basic example of the datatables with zero configuration. Use th
      @endif
         <td><a href="{{route('user_details',$user->user_id)}}">{{ucwords(UserController::GetUserName($user->user_id)) }}</a></td>
         <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
-        <td class="text-center"><a href = "#" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
+        <td class="text-center"><a href = "{{url('message/'.$user->user_id)}}" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
         <td>{{$user->created_at}}</td>
         <td class="text-right">
             <div class="actions">

@@ -32,9 +32,9 @@
 </head>
 <body>
 
-    
 
- 
+
+
 <div class="page-wrapper">
 <div class="content container-fluid">
 
@@ -49,9 +49,9 @@
 </div>
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
-</div> 
+
+      <a href="#" ></a>
+</div>
 <div class="row">
 <div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('users')}}">
 <div class="card">
@@ -148,8 +148,8 @@
 <div class="card-body">
 <div>
     <canvas id="myChart" width="400" height="130"></canvas>
-    
-   
+
+
 </div>
 </div>
 </div>
@@ -187,11 +187,11 @@
     <th class="text-center"> Rate</th>
     <th class="text-right">Amount Requested</th>
     <th class="text-center">Status</th>
-    
+
 </tr>
 </thead>
 <tbody>
- 
+
 </tbody>
 </table>
 </div>
@@ -234,7 +234,7 @@
 </div>
 ----script---
    //var _xidata=JSON.parse(' json_encode($susmonthCounts) ');
-   
+
  /*  var pending = {
     label: "pending",
     data: _xidata,
@@ -246,6 +246,30 @@
 */
 
 -->
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script>
+    var userdata=<?php echo json_encode($userdata)?>;
+    Highcharts.chart('container',{
+        title:{
+            text:"A chart for new users"
+        }
+        xAxis:{
+            categories: ['jan','feb', 'march', 'april']
+        }
+        yAxis:{
+            title:{
+                text:"Num of new users"
+            }
+        },
+        series:[{
+            name:"new users",
+            data:userdata
+        }],
+    });
+
+</script>
 </div>
 </div>
 </div>
@@ -267,7 +291,7 @@
 <script src="{{asset('assets/js/script.js')}}"></script>
 
 <script type="text/javascript">
-  
+
 </script>
 
 

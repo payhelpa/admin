@@ -44,11 +44,6 @@ class User extends Authenticatable implements  MustVerifyEmail
         return $this->hasOne(IndividualUser::class);
     }
 
-    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
-
     public function wallet(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Wallet::class);

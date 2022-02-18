@@ -15,7 +15,7 @@ use Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Helpers\Helper;
-
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -25,7 +25,12 @@ class UserController extends Controller
         $ver = DB::table('users')->whereNotNull('kyc_verified')->count();
         $counttrans = DB::table('transactions')->count();
 
-        return view('dashboard', compact('count', 'counttrans','ver'));
+        $userdata = User::select(DB::raw("COUNT(*) as count"))
+        ->whereYear("created_at", date('Y'))
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck('count');
+
+        return view('dashboard', compact('count', 'counttrans','ver','userdata'));
     }
     public static function GetUserName($user_id)
     {
@@ -68,8 +73,15 @@ class UserController extends Controller
         if($search != ""){
             $userss = User::where('name','LIKE',"%$search%")->get();
         }else{
-            $userss = User::all();
+            $userss = DB::table('users')->get();
         }
+
+        // $search = $request['search'] ?? "";
+        // if($search != ""){
+        //     $userss = User::where('name','LIKE',"%$search%")->get();
+        // }else{
+        //     $userss = User::all();
+        // }
         return view('users', compact('search', 'userss'));
     }
     public function individualusers (Request $request){
@@ -83,7 +95,11 @@ class UserController extends Controller
 
     public function user_details($id){
         $userss = DB::table('individual_users')->where('user_id',$id)->get();
-        return view('user_details', compact('userss'));
+        $pendingtrans = DB::table('naira_solicitations')->where('user_id',$id)->count();
+        $ongoingtrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',0)->count();
+        $sucesstrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',1)->count();
+
+        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans'));
     }
     public function user_details_bis($id){
         $userss = DB::table('business_users')->where('user_id',$id)->get();
@@ -151,6 +167,17 @@ class UserController extends Controller
     public function fupending(){
         $userss = DB::table('offers')->get();
         return view('fupending', compact('userss'));
+    }
+    public function pendinginfo($user_id){
+        $userss = DB::table('naira_solicitations')->where('user_id', $user_id)->get();
+        return view('pendinginfo', compact('userss'));
+    }
+    public function ongoinginfo($user_id){
+        $userss = DB::table('transactions')
+        ->where('user_id', $user_id)
+        ->where('is_payment_confirmed', 0)
+        ->get();
+        return view('ongoinginfo', compact('userss'));
     }
     public function status(){
         $userss = DB::table('transactions')

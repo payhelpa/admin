@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Helpers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewMessage;
+use Illuminate\Support\Facades\Notification;
+use Notifiable;
 
 class Helper{
     public function generateAccountNum($number)
@@ -15,15 +19,18 @@ class Helper{
         }
         return $randomString;
     }
-    
-     public function helpermessagesend(Request $request){
-       $content = [
-          "subject"=>"New Message from PayHelpa",
-          "details"=>$request->details
-       ];
-       Mail::to($request->email)->send(new NewMessage($content, $request));
-      return back()->with('success','Message Sent!');
-  }
+
+    public function helpermessagesend($request){
+        $content = [
+            "subject"=>"New Message from PayHelpa",
+            "details"=>$request->details
+        ];
+        Mail::to($request->email)->send(new NewMessage($content, $request));
+
+        //return redirect('ongoingstatus')->with('success','Message Sent!');
+
+        return back()->with('info','Message Sent!');
+    }
 }
 //generate random order id
-    
+

@@ -14,14 +14,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 <title>PayHelpa - Dashboard</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('public/assets/img/favicon.png')}}">
+<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('public/assets/css/feathericon.min.css')}}">
-<link rel="stylesheet" href="{{asset('public/assets/plugins/morris/morris.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script src="javascript/common.js" type="text/javascript" defer></script>
@@ -32,14 +32,14 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js" defer></script>
 
-<link href="{{asset('public/assets/plugins/summernote/dist/summernote-bs4.min.css')}}" rel="stylesheet">
-<script src="{{asset('public/assets/plugins/summernote/dist/summernote-bs4.min.js')}}" defer></script>
+<link href="{{asset('assets/plugins/summernote/dist/summernote-bs4.min.css')}}" rel="stylesheet">
+<script src="{{asset('assets/plugins/summernote/dist/summernote-bs4.min.js')}}" defer></script>
 
 
-<link href="{{asset('public/assets/plugins/summernote/summernote.min.js')}}" rel="stylesheet">
-<script src="{{asset('public/assets/plugins/summernote/summernote.min.js')}}" defer></script>
+<link href="{{asset('assets/plugins/summernote/summernote.min.js')}}" rel="stylesheet">
+<script src="{{asset('assets/plugins/summernote/summernote.min.js')}}" defer></script>
 
-<link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
             <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
             <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
@@ -55,11 +55,11 @@
 
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -169,25 +169,25 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                  
+
                         <textarea placeholder="Enter Message" name="details" rows="25" cols="160"  id = "details" required></textarea><br>
- 
+
                                   <button type = "submit" class = 'btn btn-outline-primary mr-2'>Send Message</button>
-                                        
+
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-            </form>  
-            
+            </form>
+
         </div>
-            
+
         </div>
-        
-        
-        
-    
+
+
+
+
     </div>
 </div>
 </div>
@@ -199,17 +199,17 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 
 
-<script src="{{asset('public/assets/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/popper.min.js')}}"></script>
-<script src="{{asset('public/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
-<script src="{{asset('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/assets/plugins/datatables/datatables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
 
-<script src="{{asset('public/assets/js/script.js')}}"></script>
+<script src="{{asset('assets/js/script.js')}}"></script>
 
 <script>$(document).ready(function() {
   $('#details').summernote({

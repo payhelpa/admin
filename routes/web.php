@@ -61,19 +61,21 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 // Route::get('/selectuser', [UserController::class, 'selectuser'])->middleware(['auth'])->name('selectuser');
 
 
- Route::get('/statusdeclined', [UserController::class, 'statusdeclined'])->middleware(['auth'])->name('statusdeclined');
+Route::get('/statusdeclined', [UserController::class, 'statusdeclined'])->middleware(['auth'])->name('statusdeclined');
 
-// Route::get('/pendinginfo/{transaction_id}', [UserController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
+Route::get('/pendinginfo/{user_id}', [UserController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
 
 Route::get('/ongoingstatus', [UserController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
 
- Route::get('/show/{id}', [UserController::class, 'show'])->middleware(['auth'])->name('show');
+Route::get('/ongoinginfo/{user_id}', [UserController::class, 'ongoinginfo'])->middleware(['auth'])->name('ongoinginfo');
 
- Route::get('/showimage/{id}', [UserController::class, 'showimage'])->middleware(['auth'])->name('showimage');
+Route::get('/show/{id}', [UserController::class, 'show'])->middleware(['auth'])->name('show');
 
- Route::get('/message/{user_id}', [UserController::class, 'message'])->middleware(['auth'])->name('message');
+Route::get('/showimage/{id}', [UserController::class, 'showimage'])->middleware(['auth'])->name('showimage');
 
-// Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(['auth'])->name('messagesend');
+Route::get('/message/{id}', [UserController::class, 'message'])->middleware(['auth'])->name('message');
+
+Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(['auth'])->name('messagesend');
 
 // Route::post('/messagesend2', [UserController::class, 'messagesend2'])->middleware(['auth'])->name('messagesendtoUsers');
 

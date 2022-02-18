@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from ventura.dreamguystech.com/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Jul 2021 00:16:17 GMT 
+<!-- Mirrored from ventura.dreamguystech.com/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Jul 2021 00:16:17 GMT
 
 -->
 <head>
@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 <title>PayHelpa - Dashboard</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}"> 
+<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
@@ -36,7 +36,7 @@
 <div class="page-wrapper">
 <div class="content container-fluid">
 <div class="d-flex justify-content-center">
-      <a href="#" ></a>     
+      <a href="#" ></a>
 </div>
 
 <div class="row">
@@ -54,7 +54,7 @@ body{
 }
 .team{
     padding:15px 0;
-    
+
 }
 h6.description{
 	font-weight: bold;
@@ -165,19 +165,19 @@ i.red{
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <div class="col-lg-12">          
+        <div class="col-lg-12">
           <div class="row pt-md">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
                 <h1 style="text-align:center">Snap shot</h1>
-                <img src="{$user->facial_pix}}" class="img-responsive">
+                <img src="{{$user->facial_pix}}" class="img-responsive">
             </div>
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
                 <h1 style="text-align:center">ID Card</h1><a href="{{route('showimage',$user->user_id)}}">
                 <img src="{{$user->valid_id}}" class="img-responsive">
                </a> <h1></h1>
-              </div>        
-            </div>         
-            
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@ i.red{
   @endforeach
 </section>
 <footer>
-    
+
 </footer>
 </div>
 

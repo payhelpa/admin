@@ -38,10 +38,6 @@
 <div class="row">
 <div class="col">
 <h3 class="page-title">Transactions </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active"></li>
-</ul>
 </div>
 
 </div>
@@ -68,27 +64,27 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>User ID</th>
+    <th>Name</th>
     <th>Rate</th>
     <th>Title</th>
     <th>Balance</th>
     <th>Time created</th>
-    <th>Details</th>
+    <th>Send Message</th>
 </tr>
 </thead>
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
-		<td>{{$user->user_id}}</td>
+		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
         <td>₦{{number_format($user->rate,2)}}</td>
 		<td>{{$user->title}}</td>
         <td>${{number_format($user->offer_balance,2)}}</td>
-		<td>{{($user->created_at)}}</td>
-
-		<td><a href="" class="btn btn-outline-primary mr-2"></i>View </a></td>
+		<td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
+        <td class="text-center"><a href = "{{url('message/'.$user->user_id)}}" ><i class="fa fa-envelope"></i></a></td>
 	</tr>
 	@endforeach
 </tbody>
+
 
 </table>
 </div>
