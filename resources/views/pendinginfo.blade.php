@@ -184,8 +184,14 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Service ID</th>
-                                            <td>{{$user->service_id}}</td>
+                                            <th scope="row">Service</th>
+                                                @if($user->service_id == '4')
+                                            <td>School Fees Payment</td>
+                                            @elseif ($user->service_id == '14')
+                                                <td>Marriage Payment</td>
+                                            @else
+                                                <td>Amazon Payment</td>
+                                            @endif
                                         </tr>
                                         <tr>
                                             <th scope="row">Title</th>
@@ -209,7 +215,8 @@ This is the most basic example of the datatables with zero configuration. Use th
                                         </tr>
                                         <tr>
                                             <th scope="row">Document Submitted</th>
-                                            <td><a href="{{route('show',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
+                                            <td><a href="{{route('showdoc',$user->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
+                                            
                                         </tr>
                                         <tr>
                                             <th scope="row">Description</th>

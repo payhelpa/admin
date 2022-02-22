@@ -12,3 +12,4 @@ class VerificationToken extends Model
         'email', 'token'
      ];
 }
+

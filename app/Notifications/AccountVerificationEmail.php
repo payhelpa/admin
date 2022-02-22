@@ -17,7 +17,7 @@ class AccountVerificationEmail extends Notification
      *
      * @return void
      */
-    
+
     public function __construct(/*$name*/)
     {
        // $this->name = $name;
@@ -45,9 +45,9 @@ class AccountVerificationEmail extends Notification
     {
         return (new MailMessage)
                     ->Subject('Account Verified!')
-                    ->greeting('Hello,'/*,['name' => $this->name]*/)     
+                    ->greeting('Hello,'/*,['name' => $this->name]*/)
                     ->line('Thank you, your account is now active. Please use the link below to log in to your account!')
-                    ->action('Go to home page', url('https://switfx.com'))
+                    ->action('Go to home page', url('https://payhelpa.com'))
                     ->line('Thank you for using PayHelpa.');
     }
 

@@ -303,7 +303,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             <div class="col-md-4">
                                                 <p>{{$ongoingtrans}}</p>
                                             </div>
-                                            <div class="col-md-4"><a href="" class="btn btn-outline-primary mr-2"></i>View </a></div>
+                                            <div class="col-md-4"><a href="{{route('ongoinginfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></div>
 
                                         </div>
                                         <div class="row">
@@ -313,7 +313,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             <div class="col-md-4">
                                                 <p>{{$sucesstrans}}</p>
                                             </div>
-                                            <div class="col-md-4"><a href="{{route('pendinginfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></div>
+                                            <div class="col-md-4"><a href="{{route('successinfo',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>View </a></div>
                                         </div>
                             </div>
                         </div>

@@ -52,7 +52,7 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/status', [UserController::class, 'status'])->middleware(['auth'])->name('status');
 
-// Route::get('/successinfo/{transaction_id}', [UserController::class, 'successinfo'])->middleware(['auth'])->name('successinfo');
+ Route::get('/successinfo/{user_id}', [UserController::class, 'successinfo'])->middleware(['auth'])->name('successinfo');
 
 // Route::get('/localUsersStatus', [UserController::class, 'localUsersStatus'])->middleware(['auth'])->name('localUsersStatus');
 
@@ -72,6 +72,8 @@ Route::get('/ongoinginfo/{user_id}', [UserController::class, 'ongoinginfo'])->mi
 Route::get('/show/{id}', [UserController::class, 'show'])->middleware(['auth'])->name('show');
 
 Route::get('/showimage/{id}', [UserController::class, 'showimage'])->middleware(['auth'])->name('showimage');
+
+Route::get('/showdoc/{id}', [UserController::class, 'showdoc'])->middleware(['auth'])->name('showdoc');
 
 Route::get('/message/{id}', [UserController::class, 'message'])->middleware(['auth'])->name('message');
 

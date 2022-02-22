@@ -131,9 +131,9 @@ class UserController extends Controller
     public function verify(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
-            $users = User::whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
+            $users = DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
         }else{
-            $users = User::whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
+            $users =  DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
         }
         return view('verify', compact('search', 'users'));
     }
@@ -185,6 +185,10 @@ class UserController extends Controller
         ->get();
         return view('status', compact('userss'));
     }
+    public function successinfo($user_id){
+        $userss = DB::table('transactions')->where('user_id', $user_id)->where('is_payment_confirmed', 1)->get();
+        return view('successinfo', compact('userss'));
+    }
     public function update_verify(Request $request, $id){
         $user = User::where('id', '=' ,$id)->first();
         DB::beginTransaction();
@@ -217,6 +221,7 @@ class UserController extends Controller
         return redirect('verify')->with('sucess','Account was not generated, userrr not verified');
     }
     DB::commit();
+    $user->notif(new AccountVerificationEmail());
     return redirect('verify')->with('success','User has been verified!');
     }
     public function message(Request $request, $id){
@@ -237,6 +242,12 @@ class UserController extends Controller
 public function showimage($id){
     $users = DB::table('individual_users')->where('user_id',$id)->get();
     return view('showimage', compact('users'));
+}
+
+public function showdoc($id){
+
+    $users = DB::table('naira_solicitations')->where('id',$id)->first();
+    return view('showdoc', compact('users'));
 }
 public function wallet(Request $request){
     $search = $request['search'] ?? "";
