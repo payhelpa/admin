@@ -10,7 +10,10 @@ class Wallet extends Model
 {
     use HasFactory, Notifiable;
     protected $fillable = [
-        'user_id', 'account_name', 'account_number', 'account_balance'
+        'user_id',
+        'account_name',
+        'account_number',
+        'account_balance'
     ];
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

@@ -59,11 +59,11 @@ class UserController extends Controller
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('count');
 
-        $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
-           //->whereDate('transactions.created_at')
-            ->latest('transactions.created_at')
-            ->limit(5)
-            ->get();
+        // $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
+        //    //->whereDate('transactions.created_at')
+        //     ->latest('transactions.created_at')
+        //     ->limit(5)
+        //     ->get();
 
         //users chart
         $userschart =  DB::table('users')->select('id','created_at')->get()->groupBy(function($userschart){
@@ -280,10 +280,10 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'account_name' => $user->name,
                 'account_number' => $rex->account_number,
-                'account_balance' => 0
+                'account_balance' => 0.00
             ]);
         }else{
-                return redirect('verify')->with('error','Account was not generated, user not verified');
+                return redirect('verify')->with('sucess','Account was not generated, user not verified');
             }
     } catch (\Exception $e) {
         DB::rollBack();
@@ -293,6 +293,7 @@ class UserController extends Controller
     $user->notify(new AccountVerificationEmail());
     return redirect('verify')->with('success','User has been verified!');
     }
+
     public function message(Request $request, $id){
         $user = DB::table('users')
         ->select('email')

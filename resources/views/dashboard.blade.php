@@ -188,27 +188,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($post as $key)
-                <tr>
-                    <td>{{$key->transaction_id}}</td>
-                    <td>{{ucwords(UserController::GetUserName($key->fu_id)) }}</td>
-                    <td>{{ucwords(UserController::GetUserName($key->lu_id)) }}</td>
-                    <td class="text-nowrap">
-                        <div class="font-weight-600">{{$key->created_at}}</div>
-                    </td>
-                    <td class="text-center">{{$key->rate}}</td>
-                    <td class="text-right">
-                        <div class="font-weight-600">{{$key->amount_requested}}</div>
-                    </td>
-                    <td class="text-center">
-                        @if($key->status == '2')
-                                <span class="badge badge-pill bg-success inv-badge">Completed</span>
-                            @else
-                                <span class="badge badge-pill bg-warning inv-badge">Ongoing</span>
-                            @endif
-                    </td>
-                </tr>
-	            @endforeach
+
             </tbody>
         </table>
     </div>
