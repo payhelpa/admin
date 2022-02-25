@@ -34,6 +34,11 @@ class NairaSolicitation extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function history(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Status::class , 'naira_solicitation_history');
+    }
+
     protected $casts = [
         'docs_link' => 'array',
         'completion_prove' => 'array'

@@ -148,14 +148,12 @@
 <div class="card-body">
 <div>
     <canvas id="myChart" width="400" height="130"></canvas>
-
-
 </div>
 </div>
 </div>
 
 </div>
-<div class="col-md-12 col-lg-12">
+<!--<div class="col-md-12 col-lg-12">
 
 <div class="card card-chart">
 <div class="card-header">
@@ -166,7 +164,7 @@
 </div>
 </div>
 
-</div>
+</div>-->
 </div>
 <div class="row">
 <div class="col-md-12 d-flex">
@@ -176,25 +174,44 @@
 <h4 class="card-title">Recent Transactions</h4>
 </div>
 <div class="card-body">
-<div class="table-responsive">
-<table class="table table-hover table-center">
-<thead>
-<tr>
-    <th>Transaction ID</th>
-    <th>Forieng User</th>
-    <th>Local User</th>
-    <th>Date</th>
-    <th class="text-center"> Rate</th>
-    <th class="text-right">Amount Requested</th>
-    <th class="text-center">Status</th>
-
-</tr>
-</thead>
-<tbody>
-
-</tbody>
-</table>
-</div>
+    <div class="table-responsive">
+        <table class="table table-hover table-center">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Forieng User</th>
+                    <th>Local User</th>
+                    <th>Date</th>
+                    <th class="text-center"> Rate</th>
+                    <th class="text-right">Amount Requested</th>
+                    <th class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($post as $key)
+                <tr>
+                    <td>{{$key->transaction_id}}</td>
+                    <td>{{ucwords(UserController::GetUserName($key->fu_id)) }}</td>
+                    <td>{{ucwords(UserController::GetUserName($key->lu_id)) }}</td>
+                    <td class="text-nowrap">
+                        <div class="font-weight-600">{{$key->created_at}}</div>
+                    </td>
+                    <td class="text-center">{{$key->rate}}</td>
+                    <td class="text-right">
+                        <div class="font-weight-600">{{$key->amount_requested}}</div>
+                    </td>
+                    <td class="text-center">
+                        @if($key->status == '2')
+                                <span class="badge badge-pill bg-success inv-badge">Completed</span>
+                            @else
+                                <span class="badge badge-pill bg-warning inv-badge">Ongoing</span>
+                            @endif
+                    </td>
+                </tr>
+	            @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 </div>
 
@@ -294,6 +311,48 @@
 
 </script>
 
+<script>
+//usersChart
+const ctx = document.getElementById('myChart').getContext('2d');;
+
+ var _ydata=JSON.parse('{!! json_encode($months) !!}');
+   var _xdata=JSON.parse('{!! json_encode($monthCount) !!}');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+  labels: _ydata,
+  datasets: [{
+    label: 'Users',
+    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+    borderColor: 'rgb(54, 162, 235)',
+    borderWidth: 1,
+    data: _xdata,
+  }]
+},
+
+  options: {
+    scales: {
+      xAxes: [{
+        grid: {
+          tickColor: 'red'
+        },
+        ticks: {
+          color: 'blue',
+        }
+      }],
+      yAxes:[{
+          ticks:{
+              min: 0,
+              stepSize: 100,
+              max:1000
+          }
+      }]
+    }
+  }
+
+});
+
+</script>
 
 
 

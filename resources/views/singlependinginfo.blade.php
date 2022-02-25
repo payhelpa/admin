@@ -49,7 +49,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title" style="text-align: center;">Local User Pending Transaction {{$userss->count()}}</h4>
+<h4 class="card-title" style="text-align: center;">Local User Pending Transaction </h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -166,7 +166,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     }
 </style>
 <div class="container emp-profile"style="text-align: center;">
-    @foreach ($userss as $user)
+
             <form method="post">
                 <div class="row">
                     <div class="col-md-12">
@@ -234,7 +234,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                     </div>
                 </div>
             </form>
-            @endforeach
+
         </div>
 
         </div>

@@ -3,22 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Notifications\AccountVerificationEmail;
+use App\Helpers\Helper;
+use Carbon\Carbon;
+use App\Models\Status;
 use App\Notifications\MessageSend;
 use Illuminate\Support\Facades\Notification;
 use Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
-use App\Helpers\Helper;
-use Carbon\Carbon;
+use App\Models\Admin;
+use App\Models\NairaSolicitation;
+
+
 
 class UserController extends Controller
 {
+    private NairaSolicitation $model;
+
+    public function __construct(
+        NairaSolicitation $model
+    )
+    {
+        $this->model = $model;
+        // $this->helper = $helper;
+        // $this->transaction = $transaction;
+        // $this->status = $status;
+        // $this->wallet = $wallet;
+    }
+
+
+    public function nairaSolicitation(Request $request, $id){
+        $data = $this->model->where('id', '=', $request->solicitation_id)->exists();
+        dd($data);
+
+
+        $solicitation = $this->model->find();
+        $solicitation->solicitors()->get();
+        $NairaSolicitations = NairaSolicitation::all();
+        dd($solicitation);
+        return view('users', compact('solicitation'));
+    }
     public function dashboard()
     {
         $count = DB::table('users')->count();
@@ -30,7 +59,25 @@ class UserController extends Controller
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('count');
 
-        return view('dashboard', compact('count', 'counttrans','ver','userdata'));
+        $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
+           //->whereDate('transactions.created_at')
+            ->latest('transactions.created_at')
+            ->limit(5)
+            ->get();
+
+        //users chart
+        $userschart =  DB::table('users')->select('id','created_at')->get()->groupBy(function($userschart){
+            return Carbon::parse($userschart->created_at)->format('M');
+           });
+
+          $months=[];
+          $monthCount=[];
+          foreach($userschart as $month => $values){
+              $months[]=$month;
+              $monthCount[]=count($values);
+          }
+
+        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata'));
     }
     public static function GetUserName($user_id)
     {
@@ -56,12 +103,25 @@ class UserController extends Controller
             echo "N/A";
         }
     }
+
     public static function GetUserAccountNum($account_num)
     {
         $user = Wallet::where('user_id', $account_num)->select('account_number')->first();
         if($user != null)
         {
             echo $user->account_number;
+        }
+        else
+        {
+            echo "";
+        }
+    }
+    public static function GetUserAccountBal($account_balance)
+    {
+        $user = Wallet::where('user_id', $account_balance)->select('account_balance')->first();
+        if($user != null)
+        {
+            echo $user->account_balance;
         }
         else
         {
@@ -86,6 +146,7 @@ class UserController extends Controller
     }
     public function individualusers (Request $request){
         $userss = DB::table('individual_users')->get();
+
         return view('individualusers', compact('userss'));
     }
     public function businessusers (Request $request){
@@ -98,8 +159,8 @@ class UserController extends Controller
         $pendingtrans = DB::table('naira_solicitations')->where('user_id',$id)->count();
         $ongoingtrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',0)->count();
         $sucesstrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',1)->count();
-
-        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans'));
+        $wallet = DB::table('wallets')->where('user_id',$id)->get();
+        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans', 'wallet'));
     }
     public function user_details_bis($id){
         $userss = DB::table('business_users')->where('user_id',$id)->get();
@@ -172,6 +233,14 @@ class UserController extends Controller
         $userss = DB::table('naira_solicitations')->where('user_id', $user_id)->get();
         return view('pendinginfo', compact('userss'));
     }
+    public function singlependinginfo($id){
+        $data = $this->model->where('id', '=', $id)->exists();
+        if ($data) {
+            $user = $this->model->with(['history'])->find($id);
+        }
+       // dd($userss);
+        return view('singlependinginfo', compact('user'));
+    }
     public function ongoinginfo($user_id){
         $userss = DB::table('transactions')
         ->where('user_id', $user_id)
@@ -221,7 +290,7 @@ class UserController extends Controller
         return redirect('verify')->with('sucess','Account was not generated, userrr not verified');
     }
     DB::commit();
-    $user->notif(new AccountVerificationEmail());
+    $user->notify(new AccountVerificationEmail());
     return redirect('verify')->with('success','User has been verified!');
     }
     public function message(Request $request, $id){

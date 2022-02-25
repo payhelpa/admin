@@ -88,4 +88,8 @@ Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(
 
  Route::get('/fupending', [UserController::class, 'fupending'])->middleware(['auth'])->name('fupending');
 
+ Route::get('/nairaSolicitation/{id}', [UserController::class, 'nairaSolicitation'])->middleware(['auth'])->name('nairaSolicitation');
+
+ Route::get('/singlependinginfo/{id}', [UserController::class, 'singlependinginfo'])->middleware(['auth'])->name('singlependinginfo');
+
 require __DIR__.'/auth.php';

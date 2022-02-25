@@ -143,6 +143,12 @@ This is the most basic example of the datatables with zero configuration. Use th
     border: none;
     border-bottom:2px solid #0062cc;
     }
+    .profile-head-acc-num{
+        color: #6c757d;
+        display: flex;
+        text-align: right !important;
+
+    }
     .profile-work{
     padding: 14%;
     margin-top: -15%;
@@ -195,6 +201,11 @@ This is the most basic example of the datatables with zero configuration. Use th
 
   <div class="container emp-profile">
     @foreach ($userss as $user)
+    <!--<div class="col-md-6">
+        <div class="profile-head-acc-num">
+            <h2>{{ucwords(UserController::GetUserAccountBal($user->user_id)) }}</h2>
+        </div>
+    </div>-->
         <form method="post">
             <div class="row">
                 <div class="col-md-4">
@@ -205,7 +216,8 @@ This is the most basic example of the datatables with zero configuration. Use th
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>{{ucwords(UserController::GetUserName($user->user_id)) }}</h5>
-                        <h6>   </h6>
+
+
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">User Info</a>
@@ -216,6 +228,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                         </ul>
                     </div>
                 </div>
+
             </div>
             <div class="row">
             <div class="col-md-10" id="customers">
@@ -259,8 +272,8 @@ This is the most basic example of the datatables with zero configuration. Use th
                               <tr>
                                 <th scope="row">Valid ID Number</th>
                                 <td>{{$user->valid_id_number}}</td>
-                              </tr>
-                              <tr>
+                                </tr>
+                                <tr>
                                 <th scope="row">Transaction Limit</th>
                                 <td>{{$user->transaction_limit}}</td>
                               </tr>

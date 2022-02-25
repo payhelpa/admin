@@ -97,7 +97,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     <tr>
       <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
-      <td class="text-left"><a href = "#" ><i class="fa fa-envelope"></i></a></td>
+      <td class="text-left"><a href = "{{url('message/'.$user->id)}}" ><i class="fa fa-envelope"></i></a></td>
       <td><a href="{{route('show',$user->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
       <td><a href="{{route('update_verify',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO VERIFY THIS USER?')"  class="btn btn-outline-primary mr-2"></i>Verify </a></td>
   </tr>
