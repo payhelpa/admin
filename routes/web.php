@@ -82,14 +82,18 @@ Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(
 // Route::post('/messagesend2', [UserController::class, 'messagesend2'])->middleware(['auth'])->name('messagesendtoUsers');
 
 
- Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
+Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
 
- Route::get('/wallet', [UserController::class, 'wallet'])->middleware(['auth'])->name('wallet');
+Route::get('/wallet', [UserController::class, 'wallet'])->middleware(['auth'])->name('wallet');
 
- Route::get('/fupending', [UserController::class, 'fupending'])->middleware(['auth'])->name('fupending');
+Route::get('/fupending', [UserController::class, 'fupending'])->middleware(['auth'])->name('fupending');
 
- Route::get('/nairaSolicitation/{id}', [UserController::class, 'nairaSolicitation'])->middleware(['auth'])->name('nairaSolicitation');
+Route::get('/nairaSolicitation/{id}', [UserController::class, 'nairaSolicitation'])->middleware(['auth'])->name('nairaSolicitation');
 
- Route::get('/singlependinginfo/{id}', [UserController::class, 'singlependinginfo'])->middleware(['auth'])->name('singlependinginfo');
+Route::get('/singlependinginfo/{id}', [UserController::class, 'singlependinginfo'])->middleware(['auth'])->name('singlependinginfo');
+
+Route::get('/withdrawals', [UserController::class, 'withdrawals'])->middleware(['auth'])->name('withdrawals');
+
+Route::get('/approvewithdrawals/{user_id}', [UserController::class, 'approvewithdrawals'])->middleware(['auth'])->name('approvewithdrawals');
 
 require __DIR__.'/auth.php';

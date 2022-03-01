@@ -43,7 +43,7 @@
 <div class="col-sm-12">
 <div class="card card-table">
 <div class="card-header">
-<h4 class="card-title">Documents of this user to be verified</h4>
+<h4 class="card-title">Documents of transaction</h4>
 
 </div>
 <div class="card-body">

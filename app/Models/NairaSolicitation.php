@@ -9,7 +9,7 @@ class NairaSolicitation extends Model
 {
     use HasFactory;
 
-    protected  $fillable = [
+    protected  $fillable = [ 
         'user_id', 'title', 'rate', 'dollar_amount', 'amount_requested_for_in_naira', 'web_link',
         'docs_link', 'description', 'slug' , 'is_taken', 'completion_prove', 'completion_message', 'service_id', 'status_id'
     ];

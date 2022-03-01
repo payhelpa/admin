@@ -162,35 +162,36 @@
 </li>
 
 <li class="menu-title">
-<span>Pages</span>
-</li>
-<li>
-<a href="{{route ('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
-</li>
-<li>
-<a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
-</li>
-<li>
-<a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
-</li>
-<!--<li>
-<a href="{{route ('status')}}"><i class="fe fe-map"></i> <span>Status</span></a>
-</li>-->
-<li>
-    <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
+    <span>Pages</span>
     </li>
-<li >
-    <!-- Authentication -->
-     <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-responsive-nav-link :href="route('logout')"
-             onclick="event.preventDefault();
-                this.closest('form').submit();">
-                <i class="fe fe-user-plus"></i>
-                    {{ __('Logout') }}
-                    </x-responsive-nav-link>
-    </form>
-<!--<a href="/cms/public/logout"><i class="fe fe-user-plus"></i> <span>Logout</span></a>-->
+    <li>
+        <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
+    </li>
+    <li>
+        <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
+    </li>
+    <li>
+        <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
+    </li>
+    <li>
+        <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
+    </li>
+    <li>
+        <a href="{{route ('withdrawals')}}"><i class="fe fe-map"></i> <span>Withdrawals</span></a>
+    </li>
+    <li>
+
+        <!-- Authentication -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link :href="route('logout')"
+                onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                    <i class="fe fe-user-plus"></i>
+                        {{ __('Logout') }}
+                        </x-responsive-nav-link>
+        </form>
+    <!--<a href="/cms/public/logout"><i class="fe fe-user-plus"></i> <span>Logout</span></a>-->
 </li>
 </ul>
 </div>

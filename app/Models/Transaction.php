@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
     protected  $fillable = [
         'user_id', 'naira_solicitation_id', 'settlement_id', 'amount_paid', 'is_payment_confirmed',

@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\FundWithdrawal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Notifications\AccountVerificationEmail;
 use App\Helpers\Helper;
 use Carbon\Carbon;
+use App\Models\NairaSolicitation;
+
 use App\Models\Status;
 use App\Notifications\MessageSend;
 use Illuminate\Support\Facades\Notification;
@@ -17,8 +20,6 @@ use Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Models\Admin;
-use App\Models\NairaSolicitation;
-
 
 
 class UserController extends Controller
@@ -37,17 +38,12 @@ class UserController extends Controller
     }
 
 
-    public function nairaSolicitation(Request $request, $id){
-        $data = $this->model->where('id', '=', $request->solicitation_id)->exists();
-        dd($data);
-
-
-        $solicitation = $this->model->find();
-        $solicitation->solicitors()->get();
-        $NairaSolicitations = NairaSolicitation::all();
-        dd($solicitation);
-        return view('users', compact('solicitation'));
+    public function nairaSolicitation($id){
+        $NairaSolicitations = NairaSolicitation::find($id)->where('is_taken', 1);
+        dd($NairaSolicitations);
+        return view('users', compact('NairaSolicitations'));
     }
+
     public function dashboard()
     {
         $count = DB::table('users')->count();
@@ -81,10 +77,24 @@ class UserController extends Controller
     }
     public static function GetUserName($user_id)
     {
+
         $user = User::where('id', $user_id)->select('name')->first();
-        if($user != null)
+            if($user != null)
         {
             echo $user->name;
+        }
+        else
+        {
+            echo "N/A";
+        }
+    }
+    public static function GetOfferUserName($user_id)
+    {
+        $user = DB::table('offers')->where('user_id', $user_id)->select('user_id')->first();
+        $name =  DB::table('users')->select('user_id', $user)->select('name')->first();
+        if($name != null)
+        {
+            echo $name->name;
         }
         else
         {
@@ -216,13 +226,12 @@ class UserController extends Controller
         return view('transactions', compact('userss'));
     }
     public function ongoingstatus(){
-        $userss = DB::table('transactions')
-        ->where('is_payment_confirmed', 0)
-        ->get();
+        $userss = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
+        //dd($userss);
         return view('ongoingstatus', compact('userss'));
     }
     public function statusdeclined(){
-        $userss = DB::table('naira_solicitations')->get();
+        $userss = DB::table('naira_solicitations')->where('is_taken', 0)->get();
         return view('pendingstatus', compact('userss'));
     }
     public function fupending(){
@@ -328,6 +337,22 @@ public function wallet(Request $request){
     }
     return view('wallet', compact('search', 'userss'));
 }
+public function withdrawals(Request $request){
+    $search = $request['search'] ?? "";
+    if($search != ""){
+        $userss = FundWithdrawal::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
+    }else{
+        $userss = FundWithdrawal::all();
+    }
+    return view('withdrawals', compact('search', 'userss'));
+}
+public function approvewithdrawals(Request $request, $id){
+    $userss = DB::table('fund_withdrawals')
+            ->where('user_id', '=' ,$id )
+            ->update(['approval_status' => 1, 'approved_date' => Carbon::now()]);
+        return redirect('withdrawals');
+}
+
 
     //
 }

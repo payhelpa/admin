@@ -65,19 +65,41 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>Name</th>
-    <th>Naira Solicitation ID </th>
-    <th>Payment Type</th>
-    <th>Amount Paid</th>
+    <th>Local User</th>
+    <th>Foriegn User</th>
+    <th>Rate</th>
+    <th>Dollar Amount</th>
+    <th>Amount Requested</th>
+    <th>Status</th>
+
+
+    <th>Details</th>
 </tr>
 </thead>
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
+
 		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-		<td>{{$user->naira_solicitation_id}}</td>
-        <td>{{$user->payment_type}}</td>
-		<td>₦{{number_format($user->amount_paid,2)}}</td>
+
+        @dump($user)
+        <td>₦{{number_format($user->rate,2)}}</td>
+        <td>${{number_format($user->dollar_amount,2)}}</td>
+		<td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
+        <td>
+            @if($user->status_id == '1')
+                <a class="btn btn-sm bg-primary-light">Confirming Transfer</a>
+            @elseif($user->status_id == '2')
+                <a class="btn btn-sm bg-info-light">Transfer Confirmed</a>
+            @elseif($user->status_id == '3')
+                <a class="btn btn-sm bg-warning-light">Processing Transaction</a>
+            @else
+                <a class="btn btn-sm bg-danger-light">Awaiting Confirmation</a>
+            @endif
+        </td>
+
+
+		<td><a href="{{route('singlependinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>
