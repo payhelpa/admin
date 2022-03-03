@@ -31,18 +31,6 @@ class Helper{
 
         return back()->with('info','Message Sent!');
     }
-    public function rangenerateAccountNum($number)
-{
-    $today = date('YmdHis');
-    $characters = '0123456789';
-    $main = $today."". $characters;
-    $randomString = '';
-    for ($i = 0; $i < $number; $i++) {
-        $index = rand(0, strlen($main) - 1);
-        $randomString .= $main[$index];
-    }
-    return $randomString;
-}
 
 }
 //generate random order id
