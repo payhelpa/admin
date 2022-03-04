@@ -12,15 +12,15 @@ use App\Notifications\AccountVerificationEmail;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use App\Models\NairaSolicitation;
-
+use Illuminate\Notifications\Notifiable;
 use App\Models\Status;
 use App\Notifications\MessageSend;
 use Illuminate\Support\Facades\Notification;
-use Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Models\Admin;
-
+use App\Mail\AccountVerified;
+use App\Models\Service;
 
 class UserController extends Controller
 {
@@ -208,6 +208,15 @@ class UserController extends Controller
         }
         return view('verify', compact('search', 'users'));
     }
+    public function verifyFU(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $users = DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
+        }else{
+            $users =  DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
+        }
+        return view('verify', compact('search', 'users'));
+    }
     public function unverified(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
@@ -267,8 +276,12 @@ class UserController extends Controller
         $userss = DB::table('transactions')->where('user_id', $user_id)->where('is_payment_confirmed', 1)->get();
         return view('successinfo', compact('userss'));
     }
-    public function update_verify(Request $request, $id){
-        $user = User::where('id', '=' ,$id)->first();
+    public function update_verify($id){
+        $user = User::find($id);
+        // dd($user['id']);
+        // $data = [
+        //     "id"=> $user->id
+        // ];
         DB::beginTransaction();
         try {
             $user->update([
@@ -282,24 +295,26 @@ class UserController extends Controller
             'account_name' => $user->name,
             'bvn' =>'',
         ]);
+
         if ($response->status() == 200)
         {
             $rex = json_decode($response);
-            $user = (new \App\Models\Wallet)->create([
-                'user_id' => $user->id,
+            $Wallet = (new \App\Models\Wallet)->create([
+                'user_id' => $id,
                 'account_name' => $user->name,
                 'account_number' => $rex->account_number,
                 'account_balance' => 0.00
             ]);
         }else{
-                return redirect('verify')->with('sucess','Account was not generated, user not verified');
+                return redirect('verify');
             }
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('verify')->with('sucess','Account was not generated, userrr not verified');
+        return redirect('verify')->with('error','Account was not generated, userrr not verified');
     }
     DB::commit();
     $user->notify(new AccountVerificationEmail());
+   // Mail::to($request->email)->send(new AccountVerified($data));
     return redirect('verify')->with('success','User has been verified!');
     }
 

@@ -171,6 +171,9 @@
         <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
     </li>
     <li>
+        <a href="{{url ('/services')}}"><i class="fe fe-activity"></i> <span>Services</span></a>
+    </li>
+    <li>
         <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
     </li>
     <li>

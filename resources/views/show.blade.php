@@ -177,6 +177,24 @@ i.red{
                </a> <h1></h1>
               </div>
             </div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">State of Residence </th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Residential Address</th>
+                        <td>{{$user->home_address}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Valid ID Number</th>
+                        <td>{{$user->valid_id_number}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
 
           </div>
         </div>

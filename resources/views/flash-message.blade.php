@@ -1,11 +1,11 @@
 @if ($message = Session::get('success'))
 <div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>THIS USER HAS BEEN VERIFIED! </strong>
+    <strong>THIS USER HAS BEEN VERIFIED!!! </strong>
 </div>
 @endif
 
-@if ($message = Session::get('error'))
+@if ($message = Session::get('warning'))
 <div class="alert alert-danger alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>ACCOUNT NUMBER NOT GENERATED. PLEASE TRY AGAIN  </strong>
@@ -19,13 +19,12 @@
 </div>
 @endif
 
-@if ($message = Session::get('warning'))
-<div class="alert alert-warning alert-block">
+@if ($message = Session::get('error'))
+<div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $message }}</strong>
+    <strong>SERVICE ADDED! </strong>
 </div>
 @endif
-
 
 
 @if ($errors->any())

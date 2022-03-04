@@ -42,9 +42,9 @@ class MessageSend extends Notification
     {
         return (new MailMessage)
                     ->line('You got a new message from PayHelpa')
-                     
-                    ->action('Go to home page', url('/https://switfx.com/'))
-                    ->line('Thank you for using our application!');
+
+                    ->action('Go to home page', url('/https://payhelpa.com/'))
+                    ->line('Team PayHelpa');
     }
 
     /**

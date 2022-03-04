@@ -26,48 +26,38 @@
 
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
-            <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
-            <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
+            <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
+            <script src="{{asset('assets/js/respond.min.js')}}"></script>
         <![endif]-->
 </head>
 <body>
     <div class="d-flex justify-content-center">
         <a href="#" ></a>
     </div>
-@include('flash-message')
-
 <div class="page-wrapper">
 <div class="content container-fluid">
-
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">Verify Users </h3>
+<h3 class="page-title">Services </h3>
 
 </div>
 
 </div>
+
 <div class="d-flex justify-content-center">
-      <a href="{{route ('verify')}}" class='btn btn-outline-primary mr-2'>Verify Users</a>
-      <a href="{{route ('unverified')}}" class='btn btn-outline-primary mr-2'>Unverified Users</a>
 
+      <a href="#" ></a>
 </div>
-
 </div>
-
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of users to be verified</h4>
-<!--<p class="card-text">
-This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
-</p>-->
+<h4 class="card-title">Create New Services</h4>
+
 <div class="d-flex flex-row-reverse">
- <!--   <form action="" method="">
-<input type="search" name="search" class="form-control" placeholder="Search here...">
-<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-</form>-->
+<div class="top-nav-search " style="background: linear-gradient(-45deg,#3949ab,#2962ff); border-radius: 50px;">
 
 <form class="form-inline my-2 my-lg-0" action = "" method= "" >
 <div class="input-group">
@@ -80,35 +70,27 @@ This is the most basic example of the datatables with zero configuration. Use th
 </form>
 </div>
 </div>
-<div class="card-body">
-<div class="table-responsive">
-<table class="datatable table table-stripped">
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Send Message</th>
-<th>Documents</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-  @foreach ($users as $user)
-    <tr>
-      <td>{{$user->name}}</td>
-      <td>{{$user->email}}</td>
-      <td class="text-left"><a href = "{{url('message/'.$user->id)}}" ><i class="fa fa-envelope"></i></a></td>
-      <td><a href="{{route('show',$user->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-      <td><a href="{{url('update_verify',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO VERIFY THIS USER?')"  class="btn btn-outline-primary mr-2"></i>Verify </a></td>
 
-    </tr>
-@endforeach
-@include('flash-message')
-</tbody>
-
-
-</table>
 </div>
+<div class="card-body">
+    
+<div class="table-responsive">
+    @include('flash-message')
+
+    <form method="POST" action="{{route('createServices')}}" style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
+        @csrf
+        Title:<br>
+        <input type="text" name="title" id="title" style="border: 1px solid gray;  border-radius: 5px;">
+        <br>
+        Description:<br>
+        <input type="text" name="description" id="description" style="border: 1px solid gray;  border-radius: 5px;">
+        <br><br>
+        <input type="submit" value="Submit" style="border: 1px solid gray;  border-radius: 5px;">
+    </form>
+    @include('flash-message')
+
+</div>
+
 </div>
 </div>
 </div>
@@ -130,10 +112,6 @@ This is the most basic example of the datatables with zero configuration. Use th
 <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
 
 <script src="{{asset('assets/js/script.js')}}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-
-
 </body>
 </html>
 </x-app-layout>

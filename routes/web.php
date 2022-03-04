@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -95,5 +96,11 @@ Route::get('/singlependinginfo/{id}', [UserController::class, 'singlependinginfo
 Route::get('/withdrawals', [UserController::class, 'withdrawals'])->middleware(['auth'])->name('withdrawals');
 
 Route::get('/approvewithdrawals/{user_id}', [UserController::class, 'approvewithdrawals'])->middleware(['auth'])->name('approvewithdrawals');
+
+Route::get('/services', [ServiceController::class, 'services'])->middleware(['auth'])->name('services');
+
+Route::get('/addServices', [ServiceController::class, 'addServices'])->middleware(['auth'])->name('addServices');
+
+Route::post('/createServices', [ServiceController::class, 'createServices'])->middleware(['auth'])->name('createServices');
 
 require __DIR__.'/auth.php';
