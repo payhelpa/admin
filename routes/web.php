@@ -53,6 +53,8 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/status', [UserController::class, 'status'])->middleware(['auth'])->name('status');
 
+ Route::get('/single-Solicitors/{id}', [UserController::class, 'singleSolicitors'])->middleware(['auth'])->name('singleSolicitors');
+
  Route::get('/successinfo/{user_id}', [UserController::class, 'successinfo'])->middleware(['auth'])->name('successinfo');
 
 // Route::get('/localUsersStatus', [UserController::class, 'localUsersStatus'])->middleware(['auth'])->name('localUsersStatus');
@@ -102,5 +104,11 @@ Route::get('/services', [ServiceController::class, 'services'])->middleware(['au
 Route::get('/addServices', [ServiceController::class, 'addServices'])->middleware(['auth'])->name('addServices');
 
 Route::post('/createServices', [ServiceController::class, 'createServices'])->middleware(['auth'])->name('createServices');
+
+Route::get('/services/delete/{id}', [ServiceController::class, 'deleteServices'])->middleware(['auth'])->name('services.delete');
+
+Route::get('/services/edit/{id}', [ServiceController::class, 'editServices'])->middleware(['auth'])->name('services.edit');
+
+Route::post('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
 
 require __DIR__.'/auth.php';

@@ -70,7 +70,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     <th>Dollar Amount</th>
     <th>Amount Requested</th>
     <th>Time Created</th>
-    <th>Foriegn User</th>
+
     <th>Details</th>
 </tr>
 </thead>
@@ -82,7 +82,6 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td>${{number_format($user->dollar_amount,2)}}</td>
 		<td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
         <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
-        <td>{{$userss->count('user_id')}}</td>
 		<td><a href="{{route('singlependinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach

@@ -85,6 +85,15 @@ This is the most basic example of the datatables with zero configuration. Use th
     </div>
 <div class="table-responsive">
 
+    <!-- Alert message (start) -->
+    @if(Session::has('message'))
+    <div class="alert {{ Session::get('alert-class') }}">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+        
+        {{ Session::get('message') }}
+    </div>
+    @endif
+    <!-- Alert message (end) -->
 
 <table class="datatable table table-stripped">
 <thead>
@@ -108,8 +117,8 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td>{{$service->created_at}}</td>
         <td class="text-right">
             <div class="actions">
-                <a ><i class="fe fe-edit"></i></a>
-                <a ><i class="fe fe-trash"></i></a>
+                <a href="{{ route('services.edit',$service->id) }}"><i class="fe fe-edit" style="margin-right: 10px; margin-left: 10px"></i></a>
+                <a href="{{ route('services.delete',$service->id) }}"><i class="fe fe-trash"></i></a>
             </div>
         </td>
     </tr>

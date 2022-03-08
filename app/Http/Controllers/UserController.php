@@ -12,6 +12,7 @@ use App\Notifications\AccountVerificationEmail;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use App\Models\NairaSolicitation;
+use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Status;
 use App\Notifications\MessageSend;
@@ -25,14 +26,15 @@ use App\Models\Service;
 class UserController extends Controller
 {
     private NairaSolicitation $model;
+    private Transaction $transaction;
 
     public function __construct(
-        NairaSolicitation $model
+        NairaSolicitation $model, Transaction $transaction
     )
     {
         $this->model = $model;
         // $this->helper = $helper;
-        // $this->transaction = $transaction;
+        $this->transaction = $transaction;
         // $this->status = $status;
         // $this->wallet = $wallet;
     }
@@ -64,11 +66,11 @@ class UserController extends Controller
         //users chart
         $userschart =  DB::table('users')->select('id','created_at')->get()->groupBy(function($userschart){
             return Carbon::parse($userschart->created_at)->format('M');
-           });
+        });
 
-          $months=[];
-          $monthCount=[];
-          foreach($userschart as $month => $values){
+        $months=[];
+        $monthCount=[];
+        foreach($userschart as $month => $values){
               $months[]=$month;
               $monthCount[]=count($values);
           }
@@ -234,12 +236,38 @@ class UserController extends Controller
         ->first();
         return view('transactions', compact('userss'));
     }
-    public function ongoingstatus(){
-        $userss = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
-        //dd($userss);
+    public function ongoingstatus(Request $request){
+
+        $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
+            $query->where('is_payment_confirmed', '=', true);
+        })->get();
+
+        //$userss = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
+        
+        //$data = $this->model->where('id', '=', $request->solicitation_id)->first();
+        //dd($data);
         return view('ongoingstatus', compact('userss'));
     }
+
+    public function ongoinginfo($id){
+        $solicitation = $this->model->with(['solicitors'])->find($id);
+        $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);    
+        
+        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
+    }
+
+    public function singleOngoingStatus($id){
+        $solicitation = $this->model->with(['solicitors'])->find($id);
+            //dd($solicitation);   
+            //transaction details
+            $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
+        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
+  
+    }
     public function statusdeclined(){
+        // $userss = $this->model->with(['user'])->where('is_taken', '=', false)->whereHas('transaction', function ($query)  {
+        //     $query->where('is_payment_confirmed', '=', true);
+        // })->get();
         $userss = DB::table('naira_solicitations')->where('is_taken', 0)->get();
         return view('pendingstatus', compact('userss'));
     }
@@ -259,29 +287,36 @@ class UserController extends Controller
        // dd($userss);
         return view('singlependinginfo', compact('user'));
     }
-    public function ongoinginfo($user_id){
-        $userss = DB::table('transactions')
-        ->where('user_id', $user_id)
-        ->where('is_payment_confirmed', 0)
-        ->get();
-        return view('ongoinginfo', compact('userss'));
+    
+    public function status(Request $request){
+
+        $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 5)->whereHas('transaction', function ($query)  {
+            $query->where('is_payment_confirmed', '=', true);
+        })->get();
+
+        //dd($solicitations);
+        
+
+        //$solicitations = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
+
+        // $userss = DB::table('naira_solicitations')
+        // ->get();
+        return view('status', compact('solicitations'));
     }
-    public function status(){
-        $userss = DB::table('transactions')
-        ->where('is_payment_confirmed', 1)
-        ->get();
-        return view('status', compact('userss'));
+    public function singleSolicitors($id){        
+        $solicitation = $this->model->with(['solicitors'])->find($id);
+            //dd($solicitation);   
+            //transaction details
+            $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
+        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
     }
+
     public function successinfo($user_id){
         $userss = DB::table('transactions')->where('user_id', $user_id)->where('is_payment_confirmed', 1)->get();
         return view('successinfo', compact('userss'));
     }
     public function update_verify($id){
         $user = User::find($id);
-        // dd($user['id']);
-        // $data = [
-        //     "id"=> $user->id
-        // ];
         DB::beginTransaction();
         try {
             $user->update([
@@ -314,7 +349,6 @@ class UserController extends Controller
     }
     DB::commit();
     $user->notify(new AccountVerificationEmail());
-   // Mail::to($request->email)->send(new AccountVerified($data));
     return redirect('verify')->with('success','User has been verified!');
     }
 

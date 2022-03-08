@@ -73,9 +73,17 @@
 
 </div>
 <div class="card-body">
-    
+        <!-- Alert message (start) -->
+        @if(Session::has('message'))
+        
+        <div class="alert {{ Session::get('alert-class') }}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ Session::get('message') }}
+        </div>
+        @endif
+        <!-- Alert message (end) -->
 <div class="table-responsive">
-    @include('flash-message')
+
 
     <form method="POST" action="{{route('createServices')}}" style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
         @csrf
@@ -87,7 +95,7 @@
         <br><br>
         <input type="submit" value="Submit" style="border: 1px solid gray;  border-radius: 5px;">
     </form>
-    @include('flash-message')
+
 
 </div>
 

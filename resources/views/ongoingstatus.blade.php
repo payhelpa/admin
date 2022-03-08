@@ -98,7 +98,7 @@ This is the most basic example of the datatables with zero configuration. Use th
         </td>
 
 
-		<td><a href="{{route('singlependinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
+		<td><a href="{{route('singleSolicitors',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>

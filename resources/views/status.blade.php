@@ -1,4 +1,5 @@
 @php use \App\Http\Controllers\UserController; @endphp
+@php use \App\Models\IndividualUser; @endphp
 <x-app-layout>
     <x-slot name="header">
         <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -68,22 +69,25 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped center">
 <thead>
 <tr>
-    <th>User ID</th>
-    <th>Naira Solicitation ID </th>
-    <th>Settlement ID</th>
-    <th>Payment Type</th>
+    <th>Name</th>
+    <th>Service</th>
+    <th>Rate</th>
+    <th>Dollar</th>
     <th>Amount Paid</th>
+    <th>Action</th>
 
 </tr>
 </thead>
 <tbody>
-	@foreach ($userss as $user)
+	@foreach ($solicitations as $solicitation)
 	<tr>
-		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-		<td>{{$user->naira_solicitation_id}}</td>
-        <td>{{$user->settlement_id}}</td>
-        <td>{{$user->payment_type}}</td>
-		<td>₦{{number_format($user->amount_paid,2)}}</td>
+		<td>{{ucwords(UserController::GetUserName($solicitation->user_id)) }}</td>        
+		<td>{{$solicitation->service->title}}</td>        
+        <td>{{$solicitation->rate}}</td>
+		<td>₦{{number_format($solicitation->dollar_amount,2)}}</td>
+        <td>₦{{number_format($solicitation->amount_requested_for_in_naira,2)}}</td>
+        <td><a href="{{url('single-Solicitors',$solicitation->id)}}" class="btn btn-outline-primary mr-2">Details</a></td>  
+            
 	</tr>
 	@endforeach
 </tbody>
