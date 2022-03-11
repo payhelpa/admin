@@ -183,6 +183,9 @@
         <a href="{{route ('withdrawals')}}"><i class="fe fe-map"></i> <span>Withdrawals</span></a>
     </li>
     <li>
+        <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>
+    </li>
+    <li>
 
         <!-- Authentication -->
         <form method="POST" action="{{ route('logout') }}">

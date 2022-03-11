@@ -1,5 +1,4 @@
 @php use \App\Http\Controllers\UserController; @endphp
-
 <x-app-layout>
     <x-slot name="header">
         <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -17,37 +16,38 @@
 <title>PayHelpa - Dashboard</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
+
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
 <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+
 <link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
+
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
-            <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
-            <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
+            <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
+            <script src="{{asset('assets/js/respond.min.js')}}"></script>
         <![endif]-->
 </head>
 <body>
+    <div class="d-flex justify-content-center">
+        <a href="#" ></a>
+    </div>
 <div class="page-wrapper">
 <div class="content container-fluid">
-
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">Transactions </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active"></li>
-</ul>
+<h3 class="page-title">Providus Log </h3>
+
 </div>
 
 </div>
+
 <div class="d-flex justify-content-center">
-    <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary btn-sm mr-2'>LU Pending Transactions</a>
-    <a href="{{route ('fupending')}}" class='btn btn-outline-primary btn-sm mr-2'>FU Pending Transactions</a>
-    <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary btn-sm mr-2'>Ongoing Transactions</a>
-    <a href="{{route ('status')}}" class='btn btn-outline-primary btn-sm mr-2'>Successful Transactions</a>
 
+      <a href="#" ></a>
 </div>
 </div>
 
@@ -55,51 +55,66 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Ongoing Transactions</h4>
+<h4 class="card-title">Providus Log</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
+<div class="d-flex flex-row-reverse">
+<div class="top-nav-search " style="background: linear-gradient(-45deg,#3949ab,#2962ff); border-radius: 50px;">
+<!--<form action="" method="">
+<input type="search" name="search" class="form-control" placeholder="Search here...">
+<button class="btn" type="submit"><i class="fa fa-search"></i></button>
+</form>-->
+
+<form class="form-inline my-2 my-lg-0" action = "" method= "" >
+<div class="input-group">
+  <div >
+    <input type="search" class="form-control mr-sm-2" placeholder ="Search" name="search">
+    <label class="form-label" for="form1"></label>
+  </div>
+  <input type="submit" class="btn btn-primary">
+</div>
+</form>
+</div>
+</div>
 </div>
 <div class="card-body">
 <div class="table-responsive">
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>Type</th>
-    <th>Local User</th>
 
-    <th>Rate</th>
-    <th>Dollar Amount</th>
-    <th>Amount Requested</th>
-    <th>Status</th>
-    <th>Details</th>
+
+<th>Settlement ID</th>
+<th>Session ID</th>
+<th>Account Number </th>
+<th>Transaction Amount  </th>
+<th>Message  </th>
+<th>Status  </th>
+<th>Created at</th>
+<th>Updated at</th>
+<th class="text-right">Action</th>
+
 </tr>
 </thead>
 <tbody>
-	@foreach ($userss as $user)
-	<tr>
-        <td></td>
-		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-        <td>₦{{number_format($user->rate /100,2)}}</td>
-        <td>${{number_format($user->dollar_amount / 100,2)}}</td>
-		<td>₦{{number_format($user->amount_requested_for_in_naira / 100,2)}}</td>
-        <td>
-            @if($user->status_id == '1')
-                <a class="btn btn-sm bg-primary-light">Confirming Transfer</a>
-            @elseif($user->status_id == '2')
-                <a class="btn btn-sm bg-info-light">Transfer Confirmed</a>
-            @elseif($user->status_id == '3')
-                <a class="btn btn-sm bg-warning-light">Processing Transaction</a>
-            @else
-                <a class="btn btn-sm bg-danger-light">Awaiting Confirmation</a>
-            @endif
-        </td>
-		<td><a href="{{route('singleOngoinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
-	</tr>
-	@endforeach
-</tbody>
+    @foreach ($log as $log)
+    <tr>
+        <td>{{$log->settlement_id}}</td>
+        <td>{{$log->session_id}}</td>
+        <td>{{$log->account_number}}</td>
+        <td>{{$log->transaction_amount}}</td>
+        <td>{{$log->message}}</td>
+        <td>{{$log->status}}</td>
+        <td>{{$log->created_at}}</td>
+        <td>{{$log->updated_at}}</td>
+        
 
+    </tr>
+    @endforeach
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -107,15 +122,20 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 </div>
 </div>
+
 </div>
+
 
 <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
 <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+
 <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
+
 <script src="{{asset('assets/js/script.js')}}"></script>
 </body>
 </html>

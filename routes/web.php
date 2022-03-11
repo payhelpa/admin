@@ -70,6 +70,8 @@ Route::get('/pendinginfo/{user_id}', [UserController::class, 'pendinginfo'])->mi
 
 Route::get('/ongoingstatus', [UserController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
 
+Route::get('/singleOngoinginfo/{id}', [UserController::class, 'singleOngoinginfo'])->middleware(['auth'])->name('singleOngoinginfo');
+
 Route::get('/ongoinginfo/{user_id}', [UserController::class, 'ongoinginfo'])->middleware(['auth'])->name('ongoinginfo');
 
 Route::get('/show/{id}', [UserController::class, 'show'])->middleware(['auth'])->name('show');
@@ -110,5 +112,7 @@ Route::get('/services/delete/{id}', [ServiceController::class, 'deleteServices']
 Route::get('/services/edit/{id}', [ServiceController::class, 'editServices'])->middleware(['auth'])->name('services.edit');
 
 Route::post('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
+
+Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware(['auth'])->name('providuslog');
 
 require __DIR__.'/auth.php';

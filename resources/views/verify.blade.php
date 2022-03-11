@@ -6,30 +6,31 @@
         </h2>-->
     </x-slot>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from ventura.dreamguystech.com/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Jul 2021 00:16:17 GMT -->
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-<title>PayHelpa - Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>PayHelpa - Dashboard</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
 
-<link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
-<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-<!--[if lt IE 9]>
-            <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
-            <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
-        <![endif]-->
-</head>
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <!--[if lt IE 9]>
+                <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
+                <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
+            <![endif]-->
+    </head>
 <body>
     <div class="d-flex justify-content-center">
         <a href="#" ></a>

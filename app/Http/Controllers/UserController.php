@@ -12,6 +12,7 @@ use App\Notifications\AccountVerificationEmail;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use App\Models\NairaSolicitation;
+use App\Models\IndividualUser;
 use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Status;
@@ -27,16 +28,19 @@ class UserController extends Controller
 {
     private NairaSolicitation $model;
     private Transaction $transaction;
+    private Status $status;
+    private IndividualUser $IndividualUser;
 
     public function __construct(
-        NairaSolicitation $model, Transaction $transaction
+        NairaSolicitation $model, Transaction $transaction, Status $status, IndividualUser $IndividualUser
     )
     {
         $this->model = $model;
-        // $this->helper = $helper;
         $this->transaction = $transaction;
-        // $this->status = $status;
+        $this->status = $status;
+        // $this->helper = $helper;
         // $this->wallet = $wallet;
+        $this->IndividualUser = $IndividualUser;
     }
 
 
@@ -140,6 +144,16 @@ class UserController extends Controller
             echo "";
         }
     }
+    /**
+     * convert kobo to naira
+     * @param $amount
+     * @return float|int
+     */
+    public function convertKoboToNaira($amount): float|int
+    {
+        return $amount / 100;
+    }
+
     public function user(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
@@ -147,14 +161,16 @@ class UserController extends Controller
         }else{
             $userss = DB::table('users')->get();
         }
-
-        // $search = $request['search'] ?? "";
-        // if($search != ""){
-        //     $userss = User::where('name','LIKE',"%$search%")->get();
-        // }else{
-        //     $userss = User::all();
-        // }
         return view('users', compact('search', 'userss'));
+    }
+    public function providuslog(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $log = DB::table('providus_logs')->where('settlement_id','LIKE',"%$search%")->get();
+        }else{
+            $log = DB::table('providus_logs')->get();
+        }
+        return view('providuslog', compact('search', 'log'));
     }
     public function individualusers (Request $request){
         $userss = DB::table('individual_users')->get();
@@ -241,28 +257,23 @@ class UserController extends Controller
         $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true);
         })->get();
-
-        //$userss = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
-        
-        //$data = $this->model->where('id', '=', $request->solicitation_id)->first();
-        //dd($data);
         return view('ongoingstatus', compact('userss'));
     }
 
-    public function ongoinginfo($id){
-        $solicitation = $this->model->with(['solicitors'])->find($id);
-        $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);    
-        
-        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
-    }
+    // public function ongoinginfo($id){
+    //     $solicitation = $this->model->with(['solicitors'])->find($id);
+    //     $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
 
-    public function singleOngoingStatus($id){
+    //     return view('singleongoinginfo', compact('solicitation', 'transactionsolicitations'));
+    // }
+
+    public function singleOngoinginfo($id){
         $solicitation = $this->model->with(['solicitors'])->find($id);
-            //dd($solicitation);   
+            //dd($solicitation);
             //transaction details
             $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
-        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
-  
+        return view('singleongoinginfo', compact('solicitation', 'transactionsolicitations'));
+
     }
     public function statusdeclined(){
         // $userss = $this->model->with(['user'])->where('is_taken', '=', false)->whereHas('transaction', function ($query)  {
@@ -287,7 +298,7 @@ class UserController extends Controller
        // dd($userss);
         return view('singlependinginfo', compact('user'));
     }
-    
+
     public function status(Request $request){
 
         $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 5)->whereHas('transaction', function ($query)  {
@@ -295,7 +306,7 @@ class UserController extends Controller
         })->get();
 
         //dd($solicitations);
-        
+
 
         //$solicitations = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
 
@@ -303,9 +314,9 @@ class UserController extends Controller
         // ->get();
         return view('status', compact('solicitations'));
     }
-    public function singleSolicitors($id){        
+    public function singleSolicitors($id){
         $solicitation = $this->model->with(['solicitors'])->find($id);
-            //dd($solicitation);   
+            //dd($solicitation);
             //transaction details
             $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
         return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));

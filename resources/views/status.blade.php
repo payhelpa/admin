@@ -81,13 +81,13 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tbody>
 	@foreach ($solicitations as $solicitation)
 	<tr>
-		<td>{{ucwords(UserController::GetUserName($solicitation->user_id)) }}</td>        
-		<td>{{$solicitation->service->title}}</td>        
-        <td>{{$solicitation->rate}}</td>
-		<td>₦{{number_format($solicitation->dollar_amount,2)}}</td>
-        <td>₦{{number_format($solicitation->amount_requested_for_in_naira,2)}}</td>
-        <td><a href="{{url('single-Solicitors',$solicitation->id)}}" class="btn btn-outline-primary mr-2">Details</a></td>  
-            
+		<td>{{ucwords(UserController::GetUserName($solicitation->user_id)) }}</td>
+		<td>{{$solicitation->service->title}}</td>
+        <td>{{$solicitation->rate / 100}}</td>
+		<td>₦{{number_format($solicitation->dollar_amount / 100,2)}}</td>
+        <td>₦{{number_format($solicitation->amount_requested_for_in_naira / 100,2)}}</td>
+        <td><a href="{{url('single-Solicitors',$solicitation->id)}}" class="btn btn-outline-primary mr-2">Details</a></td>
+
 	</tr>
 	@endforeach
 </tbody>
