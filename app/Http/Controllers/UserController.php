@@ -356,7 +356,7 @@ class UserController extends Controller
             }
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('verify')->with('error','Account was not generated, userrr not verified');
+        return redirect('verify')->with('warning','Account was not generated, userrr not verified');
     }
     DB::commit();
     $user->notify(new AccountVerificationEmail());
