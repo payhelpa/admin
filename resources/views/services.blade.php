@@ -86,13 +86,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <div class="table-responsive">
 
     <!-- Alert message (start) -->
-    @if(Session::has('message'))
-    <div class="alert {{ Session::get('alert-class') }}">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-        
-        {{ Session::get('message') }}
-    </div>
-    @endif
+
     <!-- Alert message (end) -->
 
 <table class="datatable table table-stripped">

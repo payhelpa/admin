@@ -74,13 +74,7 @@
 </div>
 <div class="card-body">
         <!-- Alert message (start) -->
-        @if(Session::has('message'))
-        
-        <div class="alert {{ Session::get('alert-class') }}">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-            {{ Session::get('message') }}
-        </div>
-        @endif
+
         <!-- Alert message (end) -->
 <div class="table-responsive">
 
