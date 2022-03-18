@@ -172,10 +172,10 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="col-md-12">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            
+
                                 <table class="table table-striped">
                                     <tbody>
-                                        
+
                                         <tr>
                                             <th scope="row">Name</th>
                                             <td>{{$solicitations->name}}</td>
@@ -183,7 +183,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                         <tr>
                                             <th scope="row">Users Email</th>
                                             <td>{{$solicitations->email}}</td>
-                                        </tr>   
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -199,64 +199,68 @@ This is the most basic example of the datatables with zero configuration. Use th
 
     <div class="container emp-profile"style="text-align: center; margin-top:-30px;">
         <h4>Transaction Details</h4>
-    
+
                 <form method="post">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
+
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Naira Solicitator</th>
                                                 <td>{{ucwords(UserController::GetUserName($solicitation->user_id)) }}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Service</th>
                                                 <td>{{$transactionsolicitations->service->title}}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Service Desription</th>
                                                 <td>{{$transactionsolicitations->service->description}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Title </th>
                                                 <td>{{$transactionsolicitations->title}}</td>
-                                            </tr>  
+                                            </tr>
                                             <tr>
                                                 <th scope="row">Rate</th>
-                                                <td>{{$transactionsolicitations->rate}}</td>
+                                                <td>{{$transactionsolicitations->rate/ 100}}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Dollar Amount</th>
-                                                <td>${{number_format($solicitation->dollar_amount,2)}}</td>
+                                                <td>${{number_format($solicitation->dollar_amount /100,2)}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Naira Amount</th>
                                                 <td>₦{{number_format($transactionsolicitations->amount_requested_for_in_naira / 100,2)}}</td>
-                                            </tr>  
+                                            </tr>
                                             <tr>
                                                 <th scope="row">Web Link</th>
                                                 <td>{{$transactionsolicitations->web_link}}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Documents Submitted</th>
                                                 <td><a href="{{route('showdoc',$transactionsolicitations->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-                                        </tr>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Completion Prove </th>
+                                                <td><a href="{{route('completionprove',$transactionsolicitations->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
+                                            </tr>
                                             <tr>
                                                 <th scope="row">Status </th>
                                                 <td>{{$transactionsolicitations->status_id}}</td>
-                                            </tr>  
+                                            </tr>
                                             <tr>
                                                 <th scope="row">Description</th>
                                                 <td>{{$transactionsolicitations->description}}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Time Created</th>
                                                 <td>{{date('l jS \of F Y h:i:s A', strtotime($transactionsolicitations->created_at))}}</td>
                                             </tr>
-                                            <tr>                                            
+                                            <tr>
                                                 <th scope="row">Time Completed</th>
                                                 <td>{{date('l jS \of F Y h:i:s A', strtotime($transactionsolicitations->updated_at))}}</td>
                                             </tr>
@@ -267,14 +271,14 @@ This is the most basic example of the datatables with zero configuration. Use th
                         </div>
                     </div>
                 </form>
-                
+
             </div>
-    
+
         </div>
-    
-    
-    
-    
+
+
+
+
         </div>
 </div>
 </div>

@@ -80,6 +80,8 @@ Route::get('/showimage/{id}', [UserController::class, 'showimage'])->middleware(
 
 Route::get('/showdoc/{id}', [UserController::class, 'showdoc'])->middleware(['auth'])->name('showdoc');
 
+Route::get('/completionprove/{id}', [UserController::class, 'completionprove'])->middleware(['auth'])->name('completionprove');
+
 Route::get('/message/{id}', [UserController::class, 'message'])->middleware(['auth'])->name('message');
 
 Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(['auth'])->name('messagesend');

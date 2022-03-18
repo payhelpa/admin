@@ -388,6 +388,11 @@ public function showdoc($id){
     $users = DB::table('naira_solicitations')->where('id',$id)->first();
     return view('showdoc', compact('users'));
 }
+public function completionprove($id){
+
+    $users = DB::table('naira_solicitations')->where('id',$id)->first();
+    return view('completionprove', compact('users'));
+}
 public function wallet(Request $request){
     $search = $request['search'] ?? "";
     if($search != ""){

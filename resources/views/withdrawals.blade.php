@@ -83,7 +83,7 @@
                                             <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
-                                            <td>${{number_format($user->amount,2)}}</td>
+                                            <td>${{number_format($user->amount / 100,2)}}</td>
                                             <td>{{$user->bank->bank_name}}</td>
                                             <td>
                                                 @if ($user->approval_status == 0)
@@ -100,7 +100,11 @@
                                             @endif
                                         </td>
                                         <td>
+                                            @if ($user->approval_status == 0)
                                             <a href="{{route('approvewithdrawals',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO APPROVE THIS REQUEST?')" class="btn btn-outline-primary mr-2">Approve</a>
+                                            @else
+                                            <a class="btn btn-outline-primary mr-2">Approved</a>
+                                            @endif
                                         </td>
                                     </tr>
                                         @endforeach
