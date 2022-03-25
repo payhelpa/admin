@@ -52,9 +52,9 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $count = DB::table('users')->count();
-        $ver = DB::table('users')->whereNotNull('kyc_verified')->count();
-        $counttrans = DB::table('transactions')->count();
+        $count = User::count();
+        $ver = User::whereNotNull('kyc_verified')->count();
+        $counttrans = Transaction::count();
 
         $userdata = User::select(DB::raw("COUNT(*) as count"))
         ->whereYear("created_at", date('Y'))
@@ -75,11 +75,17 @@ class UserController extends Controller
         $months=[];
         $monthCount=[];
         foreach($userschart as $month => $values){
-              $months[]=$month;
-              $monthCount[]=count($values);
-          }
+                $months[]=$month;
+                $monthCount[]=count($values);
+            }
 
-        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata'));
+            $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
+            $query->where('is_payment_confirmed', '=', true);
+        })->latest()->limit(5)->get();
+
+        $userss = Transaction::all();
+
+        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata', 'userss'));
     }
     public static function GetUserName($user_id)
     {
@@ -242,7 +248,7 @@ class UserController extends Controller
         }else{
             $users = User::where('kyc_verified', null)->get();
         }
-        return view('verify', compact('search', 'users'));
+        return view('unverified', compact('search', 'users'));
 
        // return view('unverified');
     }
@@ -341,9 +347,12 @@ class UserController extends Controller
             'account_name' => $user->name,
             'bvn' =>'',
         ]);
-
-        if ($response->status() == 200)
+//$response->status() == 200
+        //$account_number = account_number;
+        if ('account_number' == NULL)
         {
+            return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+        }else{
             $rex = json_decode($response);
             $Wallet = (new \App\Models\Wallet)->create([
                 'user_id' => $id,
@@ -351,9 +360,7 @@ class UserController extends Controller
                 'account_number' => $rex->account_number,
                 'account_balance' => 0.00
             ]);
-        }else{
-                return redirect('verify');
-            }
+        }
     } catch (\Exception $e) {
         DB::rollBack();
         return redirect('verify')->with('warning','Account was not generated, userrr not verified');

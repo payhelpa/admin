@@ -66,7 +66,6 @@
                                 <table class="datatable table table-stripped">
                                     <thead>
                                         <tr>
-
                                             <th>Account Name</th>
                                             <th>Account Number</th>
                                             <th>Account Balance</th>
@@ -77,7 +76,6 @@
                                     <tbody>
                                         @foreach ($userss as $user)
                                         <tr>
-
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
                                             <td>${{number_format($user->account_balance,2)}}</td>

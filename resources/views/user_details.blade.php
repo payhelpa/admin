@@ -248,6 +248,10 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">Email</th>
                                 <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row">Valid ID Number</th>
+                                    <td>{{$user->valid_id_number}}</td>
+                                    </tr>
                               <tr>
                                 <th scope="row">Occupation</th>
                                 <td>{{$user->occupation}}</td>
@@ -269,30 +273,26 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">Country</th>
                                 <td>{{$user->country}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">Valid ID Number</th>
-                                <td>{{$user->valid_id_number}}</td>
-                                </tr>
-                                <tr>
+                             <tr>
                                 <th scope="row">Transaction Limit</th>
                                 <td>{{$user->transaction_limit}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Phone Number Verified At</th>
-                                <td>{{$user->phone_number_verified_at}}</td>
+                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->phone_number_verified_at))}}</td>
                               </tr>
                               <tr>
-                                <th scope="row">State ID</th>
+                                <th scope="row">State</th>
                                 <td>{{$user->state_id}}</td>
                               </tr>
 
                               <tr>
                                 <th scope="row">Created At</th>
-                                <td>{{$user->created_at}}</td>
+                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->created_at))}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Updated At</th>
-                                <td>{{$user->updated_at}}</td>
+                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->updated_at))}}</td>
                               </tr>
                             </tbody>
                           </table>

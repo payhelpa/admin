@@ -178,18 +178,28 @@
         <table class="table table-hover table-center">
             <thead>
                 <tr>
-                    <th>Transaction ID</th>
-                    <th>Forieng User</th>
-                    <th>Local User</th>
-                    <th>Date</th>
-                    <th class="text-center"> Rate</th>
-                    <th class="text-right">Amount Requested</th>
-                    <th class="text-center">Status</th>
+                    <th>Name</th>
+                    <th>Payment Type</th>
+                    <th>Amount Requested</th>
+                    <th>Status</th>
                 </tr>
             </thead>
+            @foreach ($userss as $user)
             <tbody>
 
+                <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
+                <td>{{$user->payment_type}}</td>
+                <td>₦{{number_format($user->amount_paid / 100,2)}}</td>
+                <td>
+                    @if($user->status_id == '1')
+                        <a class="btn btn-sm bg-sucess-light">Confirmed</a>
+                    @else
+                        <a class="btn btn-sm bg-info-light">Not Yet Confirmed</a>
+                    @endif
+                </td>
+
             </tbody>
+            @endforeach
         </table>
     </div>
 </div>
