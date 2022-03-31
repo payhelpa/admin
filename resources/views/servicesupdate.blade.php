@@ -1,5 +1,4 @@
-@php use \App\Http\Controllers\UserController; @endphp
-@php use \App\Models\IndividualUser; @endphp
+
 <x-app-layout>
     <x-slot name="header">
         <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -27,73 +26,73 @@
 
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <!--[if lt IE 9]>
-            <script src="{{asset('public/assets/js/html5shiv.min.js')}}"></script>
-            <script src="{{asset('public/assets/js/respond.min.js')}}"></script>
+            <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
+            <script src="{{asset('assets/js/respond.min.js')}}"></script>
         <![endif]-->
 </head>
 <body>
+    <div class="d-flex justify-content-center">
+        <a href="#" ></a>
+    </div>
 <div class="page-wrapper">
 <div class="content container-fluid">
-
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">Transactions </h3>
-<ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-<li class="breadcrumb-item active"></li>
-</ul>
+<h3 class="page-title">Services </h3>
+
 </div>
 
 </div>
+
 <div class="d-flex justify-content-center">
-    <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary btn-sm mr-2'>LU Pending Transactions</a>
-    <a href="{{route ('fupending')}}" class='btn btn-outline-primary btn-sm mr-2'>FU Pending Transactions</a>
-    <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary btn-sm mr-2'>Ongoing Transactions</a>
-    <a href="{{route ('status')}}" class='btn btn-outline-primary btn-sm mr-2'>Successful Transactions</a>
 
+      <a href="#" ></a>
 </div>
 </div>
-
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Successful Transactions</h4>
-<!--<p class="card-text">
-This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
-</p>-->
+<h4 class="card-title">Edit Services</h4>
+
+<div class="d-flex flex-row-reverse">
+<div class="top-nav-search " style="background: linear-gradient(-45deg,#3949ab,#2962ff); border-radius: 50px;">
+
+<form class="form-inline my-2 my-lg-0" action = "" method= "" >
+<div class="input-group">
+  <div >
+    <input type="search" class="form-control mr-sm-2" placeholder ="Search" name="search">
+    <label class="form-label" for="form1"></label>
+  </div>
+  <input type="submit" class="btn btn-primary">
+</div>
+</form>
+</div>
+</div>
+
 </div>
 <div class="card-body">
+        <!-- Alert message (start) -->
+
+        <!-- Alert message (end) -->
 <div class="table-responsive">
-<table class="datatable table table-stripped center">
-<thead>
-<tr>
-    <th>Name</th>
-    <th>Service</th>
-    <th>Rate</th>
-    <th>Dollar</th>
-    <th>Amount Paid</th>
-    <th>Action</th>
 
-</tr>
-</thead>
-<tbody>
-	@foreach ($solicitations as $solicitation)
-	<tr>
-		<td>{{ucwords(UserController::GetUserName($solicitation->user_id)) }}</td>
-		<td>{{$solicitation->service->title}}</td>
-        <td>₦{{$solicitation->rate / 100}}</td>
-		<td>${{number_format($solicitation->dollar_amount / 100,2)}}</td>
-        <td>₦{{number_format($solicitation->amount_requested_for_in_naira / 100,2)}}</td>
-        <td><a href="{{url('single-Solicitors',$solicitation->id)}}" class="btn btn-outline-primary mr-2">Details</a></td>
+        <form method="POST" action="{{url('services/update/'.$services->id) }}" style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
+        @csrf
+        @method('PUT')
+        Title:<br>
+        <input type="text" name="title" id="title" value="{{$services->title}}" style="border: 1px solid gray;  border-radius: 5px;">
+        <br>
+        Description:<br>
+        <input type="text" name="description" id="description" value="{{$services->description}}" style="border: 1px solid gray;  border-radius: 5px;">
+        <br><br>
+        <input type="submit" value="Update" style="border: 1px solid gray;  border-radius: 5px;">
+    </form>
 
-	</tr>
-	@endforeach
-</tbody>
 
-</table>
 </div>
+
 </div>
 </div>
 </div>

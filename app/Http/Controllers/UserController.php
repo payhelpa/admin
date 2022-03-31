@@ -261,7 +261,7 @@ class UserController extends Controller
     public function ongoingstatus(Request $request){
 
         $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
-            $query->where('is_payment_confirmed', '=', true);
+            $query->where('is_payment_confirmed', '=', true)->where('status_id', '!=' , 6);
         })->get();
         return view('ongoingstatus', compact('userss'));
     }
@@ -307,7 +307,7 @@ class UserController extends Controller
 
     public function status(Request $request){
 
-        $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 5)->whereHas('transaction', function ($query)  {
+        $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 6)->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true);
         })->get();
 
@@ -412,19 +412,36 @@ public function wallet(Request $request){
 public function withdrawals(Request $request){
     $search = $request['search'] ?? "";
     if($search != ""){
-        $userss = FundWithdrawal::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
+        $fund_withdrawal = FundWithdrawal::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
     }else{
-        $userss = FundWithdrawal::all();
+        $fund_withdrawal = FundWithdrawal::all();
     }
-    return view('withdrawals', compact('search', 'userss'));
+    return view('withdrawals', compact('search', 'fund_withdrawal'));
 }
-public function approvewithdrawals(Request $request, $id){
-    $userss = DB::table('fund_withdrawals')
-            ->where('user_id', '=' ,$id )
-            ->update(['approval_status' => 1, 'approved_date' => Carbon::now()]);
-        return redirect('withdrawals');
+
+public function approvewithdrawals($id){
+    //dd($id);
+    $fund_withdrawal = FundWithdrawal::find($id);
+    //$fund_withdrawal = DB::table('fund_withdrawals')->where('user_id', '=' ,$id )->first();
+    //dd($fund_withdrawal);
+    $wallet = Wallet::where('user_id', '=', $fund_withdrawal->user_id)->first(); //get user wallet
+    $fund_withdrawal->update([
+        'approval_status' => 1,
+        'approved_date' => Carbon::now()
+    ]);
+    $wallet->decrement('account_balance',  $fund_withdrawal->amount);
+    return redirect('withdrawals');
 }
 
 
-    //
+
+// public function approvewithdrawals($id){
+//     $userss = DB::table('fund_withdrawals')
+//             ->where('user_id', '=' ,$id )
+//             ->update(['approval_status' => 1, 'approved_date' => Carbon::now()]);
+//         return redirect('withdrawals');
+// }
+
+
+    //$user_wallet->increment('account_balance',  $amount);
 }

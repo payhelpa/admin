@@ -76,9 +76,9 @@ This is the most basic example of the datatables with zero configuration. Use th
 	@foreach ($userss as $user)
 	<tr>
 		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-        <td>₦{{number_format($user->rate,2)}}</td>
+        <td>₦{{number_format($user->rate / 100,2)}}</td>
 		<td>{{$user->title}}</td>
-        <td>${{number_format($user->offer_balance,2)}}</td>
+        <td>${{number_format($user->offer_balance / 100,2)}}</td>
 		<td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
         <td class="text-center"><a href = "{{url('message/'.$user->user_id)}}" ><i class="fa fa-envelope"></i></a></td>
 	</tr>

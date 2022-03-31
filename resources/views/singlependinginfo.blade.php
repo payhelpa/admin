@@ -199,15 +199,15 @@ This is the most basic example of the datatables with zero configuration. Use th
                                         </tr>
                                         <tr>
                                             <th scope="row">Rate</th>
-                                            <td>₦{{number_format($user->rate,2)}}</td>
+                                            <td>₦{{number_format($user->rate / 100,2)}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Dollar Amount</th>
-                                            <td>${{number_format($user->dollar_amount,2)}}</td>
+                                            <td>${{number_format($user->dollar_amount / 100,2)}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Amount Requested in Naira</th>
-                                            <td>₦{{number_format($user->amount_requested_for_in_naira,2)}}</td>
+                                            <td>₦{{number_format($user->amount_requested_for_in_naira /100,2)}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Website Link</th>

@@ -78,8 +78,8 @@ This is the most basic example of the datatables with zero configuration. Use th
 	@foreach ($userss as $user)
 	<tr>
 		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-        <td>₦{{number_format($user->rate,2)}}</td>
-        <td>${{number_format($user->dollar_amount,2)}}</td>
+        <td>₦{{number_format($user->rate / 100,2)}}</td>
+        <td>${{number_format($user->dollar_amount / 100,2)}}</td>
 		<td>₦{{number_format($user->amount_requested_for_in_naira / 100,2)}}</td>
         <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
 		<td><a href="{{route('singlependinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>

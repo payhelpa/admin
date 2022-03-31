@@ -84,7 +84,7 @@ This is the most basic example of the datatables with zero configuration. Use th
         <a href="{{route ('addServices')}}" class='btn btn-primary mr-2' >Create</a>
     </div>
 <div class="table-responsive">
-
+    @include('flash-message')
     <!-- Alert message (start) -->
 
     <!-- Alert message (end) -->

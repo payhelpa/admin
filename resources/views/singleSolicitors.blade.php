@@ -226,7 +226,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             </tr>
                                             <tr>
                                                 <th scope="row">Rate</th>
-                                                <td>{{$transactionsolicitations->rate/ 100}}</td>
+                                                <td>₦{{$transactionsolicitations->rate/ 100}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Dollar Amount</th>

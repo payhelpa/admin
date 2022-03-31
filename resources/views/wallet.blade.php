@@ -78,7 +78,7 @@
                                         <tr>
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
-                                            <td>${{number_format($user->account_balance,2)}}</td>
+                                            <td>${{number_format($user->account_balance / 100,2)}}</td>
                                             <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
                                             <td>{{\Carbon\Carbon::parse($user->updated_at)->diffForHumans()}}</td>
                                         </tr>

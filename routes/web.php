@@ -113,7 +113,9 @@ Route::get('/services/delete/{id}', [ServiceController::class, 'deleteServices']
 
 Route::get('/services/edit/{id}', [ServiceController::class, 'editServices'])->middleware(['auth'])->name('services.edit');
 
-Route::post('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
+Route::get('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
+
+Route::put('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
 
 Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware(['auth'])->name('providuslog');
 

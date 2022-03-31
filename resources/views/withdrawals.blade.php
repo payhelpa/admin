@@ -78,7 +78,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($userss as $user)
+                                        @foreach ($fund_withdrawal as $user)
                                         <tr>
                                             <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                             <td>{{$user->account_name}}</td>
@@ -101,7 +101,7 @@
                                         </td>
                                         <td>
                                             @if ($user->approval_status == 0)
-                                            <a href="{{route('approvewithdrawals',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO APPROVE THIS REQUEST?')" class="btn btn-outline-primary mr-2">Approve</a>
+                                            <a href="{{route('approvewithdrawals',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO APPROVE THIS REQUEST?')" class="btn btn-outline-primary mr-2">Approve</a>
                                             @else
                                             <a class="btn btn-outline-primary mr-2">Approved</a>
                                             @endif

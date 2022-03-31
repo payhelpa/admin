@@ -82,15 +82,23 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td>₦{{number_format($user->rate /100,2)}}</td>
         <td>${{number_format($user->dollar_amount / 100,2)}}</td>
 		<td>₦{{number_format($user->amount_requested_for_in_naira / 100,2)}}</td>
+        <td>{{$user->status_id}}</td>
+
         <td>
             @if($user->status_id == '1')
-                <a class="btn btn-sm bg-primary-light">Confirming Transfer</a>
+                <a>Credit Wallet</a>
             @elseif($user->status_id == '2')
-                <a class="btn btn-sm bg-info-light">Transfer Confirmed</a>
+                <a>Confirming Transfer</a>
             @elseif($user->status_id == '3')
-                <a class="btn btn-sm bg-warning-light">Processing Transaction</a>
+                <a>Transfer Confirmed</a>
+            @elseif($user->status_id == '4')
+            <a>Processing Transaction</a>
+            @elseif($user->status_id == '5')
+            <a>Awaiting Confirmation</a>
+            @elseif($user->status_id == '6')
+            <a>Transfer Successful</a>
             @else
-                <a class="btn btn-sm bg-danger-light">Awaiting Confirmation</a>
+                <a>Cancel Transaction</a>
             @endif
         </td>
 		<td><a href="{{route('singleOngoinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
