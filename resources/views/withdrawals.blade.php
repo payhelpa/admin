@@ -83,7 +83,7 @@
                                             <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
-                                            <td>${{number_format($user->amount / 100,2)}}</td>
+                                            <td>₦{{number_format($user->amount / 100,2)}}</td>
                                             <td>{{$user->bank->bank_name}}</td>
                                             <td>
                                                 @if ($user->approval_status == 0)
