@@ -160,6 +160,9 @@
     </x-responsive-nav-link>
 <!--<a href="/cms/public/index"><i class="fe fe-home"></i> <span>Dashboard</span></a>-->
 </li>
+<li>
+    <a href="{{route ('charges')}}"><i class="fe fe-credit-card"></i> <span>Charges</span></a>
+</li>
 
 <li class="menu-title">
     <span>Pages</span>
@@ -185,6 +188,7 @@
     <li>
         <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>
     </li>
+
     <li>
 
         <!-- Authentication -->

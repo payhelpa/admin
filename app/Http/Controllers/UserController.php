@@ -334,9 +334,12 @@ class UserController extends Controller
     }
     public function update_verify($id){
         $user = User::find($id);
+        $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
+        //dd($userReferralLink);
         DB::beginTransaction();
         try {
             $user->update([
+                'referral_id' =>$userReferralLink,
                 'account_verified_at' => now()
             ]);
         $response = Http::withHeaders([

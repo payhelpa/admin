@@ -53,119 +53,116 @@
       <a href="#" ></a>
 </div>
 <div class="row">
-<div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('users')}}">
-<div class="card">
-<div class="card-body">
-<div class="dash-widget-header">
-<span class="dash-widget-icon bg-primary">
-<i class="fe fe-users"></i>
-</span>
+        <div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('users')}}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-icon bg-primary">
+                            <i class="fe fe-users"></i>
+                        </span>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h3>{{$count}}</h3>
+                        <h6 class="text-muted">Total Registered Users</h6>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-primary w-50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div></a>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('verify')}}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-icon bg-warning">
+                            <i class="fe fe-folder"></i>
+                        </span>
+                        <div class="dash-count">
+                            <i class="fa fa-arrow-up text-success"></i> 17%
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h3>{{$ver}}</h3>
+                        <h6 class="text-muted">Total Verified Users</h6>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-warning w-50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div></a>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('transactions')}}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-icon bg-success">
+                            <i class="fe fe-money"></i>
+                        </span>
+                        <div class="dash-count">
+                            <i class="fa fa-arrow-down text-danger"></i>%
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h3>{{$counttrans}}</h3>
+                        <h6 class="text-muted">Total Transaction</h6>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-success w-50"></div>
+                            </div>
+                    </div>
+                </div>
+            </div></a>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        <span class="dash-widget-icon bg-danger">
+                            <i class="fe fe-credit-card"></i>
+                        </span>
+                        <div class="dash-count">
+                            AS:
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h3>$</h3>
+                        <h6 class="text-muted">Sales</h6>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-danger w-50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
-<div class="dash-widget-info">
-<h3>{{$count}}</h3>
-<h6 class="text-muted">Total Registered Users</h6>
-<div class="progress progress-sm">
-<div class="progress-bar bg-primary w-50"></div>
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('verify')}}">
-<div class="card">
-<div class="card-body">
-<div class="dash-widget-header">
-<span class="dash-widget-icon bg-warning">
-<i class="fe fe-folder"></i>
-</span>
-<div class="dash-count">
-<i class="fa fa-arrow-up text-success"></i> 17%
-</div>
-</div>
-<div class="dash-widget-info">
-<h3>{{$ver}}</h3>
-<h6 class="text-muted">Total Verified Users</h6>
-<div class="progress progress-sm">
-<div class="progress-bar bg-warning w-50"></div>
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="col-xl-3 col-sm-6 col-12"><a href="{{route ('transactions')}}">
-<div class="card">
-<div class="card-body">
-<div class="dash-widget-header">
-<span class="dash-widget-icon bg-success">
-<i class="fe fe-money"></i>
-</span>
-<div class="dash-count">
-<i class="fa fa-arrow-down text-danger"></i>%
-</div>
-</div>
-<div class="dash-widget-info">
-<h3>{{$counttrans}}</h3>
-<h6 class="text-muted">Total Transaction</h6>
-<div class="progress progress-sm">
-<div class="progress-bar bg-success w-50"></div>
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="col-xl-3 col-sm-6 col-12">
-<div class="card">
-<div class="card-body">
-<div class="dash-widget-header">
-<span class="dash-widget-icon bg-danger">
-<i class="fe fe-credit-card"></i>
-</span>
-<div class="dash-count">
- AS:
-</div>
-</div>
-<div class="dash-widget-info">
-<h3>$</h3>
-<h6 class="text-muted">Sales</h6>
-<div class="progress progress-sm">
-<div class="progress-bar bg-danger w-50"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-</div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Registered Users</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <canvas id="myChart" width="400" height="130"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-md-12 col-lg-12">
 
-<div class="row">
-<div class="col-md-12 col-lg-12">
+        <div class="card card-chart">
+        <div class="card-header">
+        <h4 class="card-title">Transaction </h4>
+        </div>
+        <div class="card-body">
+        <canvas id="myChartt" width="400" height="130"></canvas>
+        </div>
+        </div>
 
-<div class="card card-chart">
-<div class="card-header">
-<h4 class="card-title">Registered Users</h4>
-</div>
-<div class="card-body">
-<div>
-    <canvas id="myChart" width="400" height="130"></canvas>
-</div>
-</div>
-</div>
-
-</div>
-<!--<div class="col-md-12 col-lg-12">
-
-<div class="card card-chart">
-<div class="card-header">
-<h4 class="card-title">Transaction </h4>
-</div>
-<div class="card-body">
- <canvas id="myChartt" width="400" height="130"></canvas>
-</div>
-</div>
-
-</div>-->
-</div>
+        </div>-->
+    </div>
 <div class="row">
 <div class="col-md-12 d-flex">
 

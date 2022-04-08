@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ChargesController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -118,5 +119,7 @@ Route::get('/services/update/{id}', [ServiceController::class, 'updateServices']
 Route::put('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
 
 Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware(['auth'])->name('providuslog');
+
+Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
 
 require __DIR__.'/auth.php';
