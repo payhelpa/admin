@@ -43,13 +43,6 @@ class UserController extends Controller
         $this->IndividualUser = $IndividualUser;
     }
 
-
-    public function nairaSolicitation($id){
-        $NairaSolicitations = NairaSolicitation::find($id)->where('is_taken', 1);
-        dd($NairaSolicitations);
-        return view('users', compact('NairaSolicitations'));
-    }
-
     public function dashboard()
     {
         $count = User::count();
@@ -78,12 +71,10 @@ class UserController extends Controller
                 $months[]=$month;
                 $monthCount[]=count($values);
             }
-
-            $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
-            $query->where('is_payment_confirmed', '=', true);
-        })->latest()->limit(5)->get();
-
-        $userss = Transaction::all();
+            //recent transaction
+        $userss = Transaction::latest('created_at')
+        ->limit(5)
+        ->get();;
 
         return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata', 'userss'));
     }
@@ -252,19 +243,7 @@ class UserController extends Controller
 
        // return view('unverified');
     }
-    public function transactions($id){
-        $userss = DB::table('transactions')
-        ->where('is_payment_confirmed', 1)
-        ->first();
-        return view('transactions', compact('userss'));
-    }
-    public function ongoingstatus(Request $request){
 
-        $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
-            $query->where('is_payment_confirmed', '=', true)->where('status_id', '!=' , 6);
-        })->get();
-        return view('ongoingstatus', compact('userss'));
-    }
 
     // public function ongoinginfo($id){
     //     $solicitation = $this->model->with(['solicitors'])->find($id);
@@ -272,74 +251,13 @@ class UserController extends Controller
 
     //     return view('singleongoinginfo', compact('solicitation', 'transactionsolicitations'));
     // }
-
-    public function singleOngoinginfo($id){
-        $solicitation = $this->model->with(['solicitors'])->find($id);
-            //dd($solicitation);
-            //transaction details
-            $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
-        return view('singleongoinginfo', compact('solicitation', 'transactionsolicitations'));
-
-    }
-    public function statusdeclined(){
-        // $userss = $this->model->with(['user'])->where('is_taken', '=', false)->whereHas('transaction', function ($query)  {
-        //     $query->where('is_payment_confirmed', '=', true);
-        // })->get();
-        $userss = DB::table('naira_solicitations')->where('is_taken', 0)->get();
-        return view('pendingstatus', compact('userss'));
-    }
-    public function fupending(){
-        $userss = DB::table('offers')->get();
-        return view('fupending', compact('userss'));
-    }
-    public function pendinginfo($user_id){
-        $userss = DB::table('naira_solicitations')->where('user_id', $user_id)->get();
-        return view('pendinginfo', compact('userss'));
-    }
-    public function singlependinginfo($id){
-        $data = $this->model->where('id', '=', $id)->exists();
-        if ($data) {
-            $user = $this->model->with(['history'])->find($id);
-        }
-       // dd($userss);
-        return view('singlependinginfo', compact('user'));
-    }
-
-    public function status(Request $request){
-
-        $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 6)->whereHas('transaction', function ($query)  {
-            $query->where('is_payment_confirmed', '=', true);
-        })->get();
-
-        //dd($solicitations);
-
-
-        //$solicitations = NairaSolicitation::where('is_taken', 1)->where('status_id', "!=" , 5)->with('solicitors')->get();
-
-        // $userss = DB::table('naira_solicitations')
-        // ->get();
-        return view('status', compact('solicitations'));
-    }
-    public function singleSolicitors($id){
-        $solicitation = $this->model->with(['solicitors'])->find($id);
-            //dd($solicitation);
-            //transaction details
-            $transactionsolicitations = $this->model->with(['user', 'solicitors'])->find($id);
-        return view('singleSolicitors', compact('solicitation', 'transactionsolicitations'));
-    }
-
-    public function successinfo($user_id){
-        $userss = DB::table('transactions')->where('user_id', $user_id)->where('is_payment_confirmed', 1)->get();
-        return view('successinfo', compact('userss'));
-    }
     public function update_verify($id){
         $user = User::find($id);
-        $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
+       // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         //dd($userReferralLink);
         DB::beginTransaction();
         try {
             $user->update([
-                'referral_id' =>$userReferralLink,
                 'account_verified_at' => now()
             ]);
         $response = Http::withHeaders([
@@ -403,39 +321,6 @@ public function completionprove($id){
     $users = DB::table('naira_solicitations')->where('id',$id)->first();
     return view('completionprove', compact('users'));
 }
-public function wallet(Request $request){
-    $search = $request['search'] ?? "";
-    if($search != ""){
-        $userss = Wallet::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
-    }else{
-        $userss = Wallet::all();
-    }
-    return view('wallet', compact('search', 'userss'));
-}
-public function withdrawals(Request $request){
-    $search = $request['search'] ?? "";
-    if($search != ""){
-        $fund_withdrawal = FundWithdrawal::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
-    }else{
-        $fund_withdrawal = FundWithdrawal::all();
-    }
-    return view('withdrawals', compact('search', 'fund_withdrawal'));
-}
-
-public function approvewithdrawals($id){
-    //dd($id);
-    $fund_withdrawal = FundWithdrawal::find($id);
-    //$fund_withdrawal = DB::table('fund_withdrawals')->where('user_id', '=' ,$id )->first();
-    //dd($fund_withdrawal);
-    $wallet = Wallet::where('user_id', '=', $fund_withdrawal->user_id)->first(); //get user wallet
-    $fund_withdrawal->update([
-        'approval_status' => 1,
-        'approved_date' => Carbon::now()
-    ]);
-    $wallet->decrement('account_balance',  $fund_withdrawal->amount);
-    return redirect('withdrawals');
-}
-
 
 
 // public function approvewithdrawals($id){

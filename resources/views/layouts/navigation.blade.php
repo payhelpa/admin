@@ -147,66 +147,66 @@
 </div>
 
 
-<div class="sidebar" id="sidebar">
-<div class="sidebar-inner slimscroll">
-<div id="sidebar-menu" class="sidebar-menu">
-<ul>
-<li class="menu-title">
-<span>Main</span>
-</li>
-<li class="active">
-    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"><i class="fe fe-home"></i>
-        {{ __('Dashboard') }}
-    </x-responsive-nav-link>
-<!--<a href="/cms/public/index"><i class="fe fe-home"></i> <span>Dashboard</span></a>-->
-</li>
-<li>
-    <a href="{{route ('charges')}}"><i class="fe fe-credit-card"></i> <span>Charges</span></a>
-</li>
-
-<li class="menu-title">
-    <span>Pages</span>
-    </li>
-    <li>
-        <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
-    </li>
-    <li>
-        <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
-    </li>
-    <li>
-        <a href="{{url ('/services')}}"><i class="fe fe-activity"></i> <span>Services</span></a>
-    </li>
-    <li>
-        <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
-    </li>
-    <li>
-        <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
-    </li>
-    <li>
-        <a href="{{route ('withdrawals')}}"><i class="fe fe-map"></i> <span>Withdrawals</span></a>
-    </li>
-    <li>
-        <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>
-    </li>
-
-    <li>
-
-        <!-- Authentication -->
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <x-responsive-nav-link :href="route('logout')"
-                onclick="event.preventDefault();
-                    this.closest('form').submit();">
-                    <i class="fe fe-user-plus"></i>
-                        {{ __('Logout') }}
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span>Main</span>
+                    </li>
+                    <li class="active">
+                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"><i class="fe fe-home"></i>
+                            {{ __('Dashboard') }}
                         </x-responsive-nav-link>
-        </form>
-    <!--<a href="/cms/public/logout"><i class="fe fe-user-plus"></i> <span>Logout</span></a>-->
-</li>
-</ul>
-</div>
-</div>
-</div>
+                        <!--<a href="/cms/public/index"><i class="fe fe-home"></i> <span>Dashboard</span></a>-->
+                    </li>
+                    <li>
+                        <a href="{{route ('blog')}}"><i class="fe fe-globe"></i> <span>Blog</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route ('charges')}}"><i class="fe fe-credit-card"></i> <span>Charges</span></a>
+                    </li>
+                    <li class="menu-title">
+                        <span>Pages</span>
+                    </li>
+                    <li>
+                        <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url ('/services')}}"><i class="fe fe-activity"></i> <span>Services</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route ('withdrawals')}}"><i class="fe fe-map"></i> <span>Withdrawals</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>
+                    </li>
+                    <li>
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                                    <i class="fe fe-user-plus"></i>
+                                        {{ __('Logout') }}
+                                        </x-responsive-nav-link>
+                        </form>
+                    <!--<a href="/cms/public/logout"><i class="fe fe-user-plus"></i> <span>Logout</span></a>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
 

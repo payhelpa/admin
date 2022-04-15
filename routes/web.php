@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ChargesController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -46,17 +48,17 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/update_status/{id}', 'App\Http\Controllers\UserController@update_status')->name('update_status');
 
- Route::get('/transactions', [UserController::class, 'transactions'])->middleware(['auth'])->name('transactions');
+ Route::get('/transactions', [TransactionController::class, 'transactions'])->middleware(['auth'])->name('transactions');
 
  Route::get('/verify', [UserController::class, 'verify'])->middleware(['auth'])->name('verify');
 
  Route::get('/unverified', [UserController::class, 'unverified'])->middleware(['auth'])->name('unverified');
 
- Route::get('/status', [UserController::class, 'status'])->middleware(['auth'])->name('status');
+ Route::get('/status', [TransactionController::class, 'status'])->middleware(['auth'])->name('status');
 
- Route::get('/single-Solicitors/{id}', [UserController::class, 'singleSolicitors'])->middleware(['auth'])->name('singleSolicitors');
+ Route::get('/single-Solicitors/{id}', [TransactionController::class, 'singleSolicitors'])->middleware(['auth'])->name('singleSolicitors');
 
- Route::get('/successinfo/{user_id}', [UserController::class, 'successinfo'])->middleware(['auth'])->name('successinfo');
+ Route::get('/successinfo/{user_id}', [TransactionController::class, 'successinfo'])->middleware(['auth'])->name('successinfo');
 
 // Route::get('/localUsersStatus', [UserController::class, 'localUsersStatus'])->middleware(['auth'])->name('localUsersStatus');
 
@@ -65,13 +67,13 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 // Route::get('/selectuser', [UserController::class, 'selectuser'])->middleware(['auth'])->name('selectuser');
 
 
-Route::get('/statusdeclined', [UserController::class, 'statusdeclined'])->middleware(['auth'])->name('statusdeclined');
+Route::get('/statusdeclined', [TransactionController::class, 'statusdeclined'])->middleware(['auth'])->name('statusdeclined');
 
-Route::get('/pendinginfo/{user_id}', [UserController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
+Route::get('/pendinginfo/{user_id}', [TransactionController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
 
-Route::get('/ongoingstatus', [UserController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
+Route::get('/ongoingstatus', [TransactionController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
 
-Route::get('/singleOngoinginfo/{id}', [UserController::class, 'singleOngoinginfo'])->middleware(['auth'])->name('singleOngoinginfo');
+Route::get('/singleOngoinginfo/{id}', [TransactionController::class, 'singleOngoinginfo'])->middleware(['auth'])->name('singleOngoinginfo');
 
 Route::get('/ongoinginfo/{user_id}', [UserController::class, 'ongoinginfo'])->middleware(['auth'])->name('ongoinginfo');
 
@@ -92,17 +94,17 @@ Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(
 
 Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
 
-Route::get('/wallet', [UserController::class, 'wallet'])->middleware(['auth'])->name('wallet');
+Route::get('/wallet', [TransactionController::class, 'wallet'])->middleware(['auth'])->name('wallet');
 
-Route::get('/fupending', [UserController::class, 'fupending'])->middleware(['auth'])->name('fupending');
+Route::get('/fupending', [TransactionController::class, 'fupending'])->middleware(['auth'])->name('fupending');
 
-Route::get('/nairaSolicitation/{id}', [UserController::class, 'nairaSolicitation'])->middleware(['auth'])->name('nairaSolicitation');
+Route::get('/nairaSolicitation/{id}', [TransactionController::class, 'nairaSolicitation'])->middleware(['auth'])->name('nairaSolicitation');
 
-Route::get('/singlependinginfo/{id}', [UserController::class, 'singlependinginfo'])->middleware(['auth'])->name('singlependinginfo');
+Route::get('/singlependinginfo/{id}', [TransactionController::class, 'singlependinginfo'])->middleware(['auth'])->name('singlependinginfo');
 
-Route::get('/withdrawals', [UserController::class, 'withdrawals'])->middleware(['auth'])->name('withdrawals');
+Route::get('/withdrawals', [TransactionController::class, 'withdrawals'])->middleware(['auth'])->name('withdrawals');
 
-Route::get('/approvewithdrawals/{user_id}', [UserController::class, 'approvewithdrawals'])->middleware(['auth'])->name('approvewithdrawals');
+Route::get('/approvewithdrawals/{user_id}', [TransactionController::class, 'approvewithdrawals'])->middleware(['auth'])->name('approvewithdrawals');
 
 Route::get('/services', [ServiceController::class, 'services'])->middleware(['auth'])->name('services');
 
@@ -121,5 +123,9 @@ Route::put('/services/update/{id}', [ServiceController::class, 'updateServices']
 Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware(['auth'])->name('providuslog');
 
 Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
+
+Route::get('/blog', [BlogController::class, 'blog'])->middleware(['auth'])->name('blog');
+
+Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['auth'])->name('createblog');
 
 require __DIR__.'/auth.php';

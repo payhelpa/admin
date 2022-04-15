@@ -23,7 +23,7 @@ class ServiceController extends Controller
     }
 
     public function addServices(Request $request){
-        return view('addservices');
+        return view('addservices'); 
     }
 
     public function createServices(Request $request){

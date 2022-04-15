@@ -169,11 +169,8 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                        <textarea placeholder="Enter Message" name="details" rows="25" cols="160"  id = "details" required></textarea><br>
-
-                                  <button type = "submit" class = 'btn btn-outline-primary mr-2'>Send Message</button>
-
+                                <textarea placeholder="Enter Message" name="details" rows="25" cols="160"  id = "details" required></textarea><br>
+                                <button type = "submit" class = 'btn btn-outline-primary mr-2'>Send Message</button>
                             </div>
 
                         </div>
