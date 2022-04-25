@@ -128,4 +128,6 @@ Route::get('/blog', [BlogController::class, 'blog'])->middleware(['auth'])->name
 
 Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['auth'])->name('createblog');
 
+Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth'])->name('allblog');
+
 require __DIR__.'/auth.php';

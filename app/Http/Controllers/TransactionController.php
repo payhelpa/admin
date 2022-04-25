@@ -56,13 +56,12 @@ class TransactionController extends Controller
     }
     public function ongoingstatus(Request $request){
         $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
-            $query->where('is_payment_confirmed', '=', true)->where('status_id', '!=' , 6);
+            $query->where('is_payment_confirmed', '=', true)->where('status', '!=' , 6);
         })->get();
         return view('ongoingstatus', compact('userss'));
     }
     public function status(Request $request){
-
-        $solicitations = $this->model->with(['user', 'solicitors'])->where('status_id', '=', 6)->whereHas('transaction', function ($query)  {
+        $solicitations = $this->model->with(['user', 'solicitors'])->where('status', '=', 6)->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true);
         })->get();
         return view('status', compact('solicitations'));

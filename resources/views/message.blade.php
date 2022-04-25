@@ -177,13 +177,9 @@ This is the most basic example of the datatables with zero configuration. Use th
                     </div>
                 </div>
             </form>
-
         </div>
 
         </div>
-
-
-
 
     </div>
 </div>

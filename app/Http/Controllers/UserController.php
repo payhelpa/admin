@@ -60,7 +60,7 @@ class UserController extends Controller
         //     ->limit(5)
         //     ->get();
 
-        //users chart
+         //users chart
         $userschart =  DB::table('users')->select('id','created_at')->get()->groupBy(function($userschart){
             return Carbon::parse($userschart->created_at)->format('M');
         });
@@ -74,13 +74,11 @@ class UserController extends Controller
             //recent transaction
         $userss = Transaction::latest('created_at')
         ->limit(5)
-        ->get();;
-
+        ->get();
         return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata', 'userss'));
     }
     public static function GetUserName($user_id)
     {
-
         $user = User::where('id', $user_id)->select('name')->first();
             if($user != null)
         {

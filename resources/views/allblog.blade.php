@@ -121,36 +121,36 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Create New Blog</h4>
+                                    <h4 class="card-title">Blogs</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form method="POST" action="{{route('createblog')}}" enctype="multipart/form-data" role="form">
+                                                   <!-- <form method="POST" action="{{route('createblog')}}" enctype="multipart/form-data" role="form">
                                                         @csrf
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Cover Image </label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <span class="btn btn-primary btn-file">
-                                                                Browse <input type="file" name="cover_image" id="cover_image" value="cover_image">
-                                                                </span>
-                                                            </span>
-                                                            <input type="text" class="form-control" readonly>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="title" id="title" placeholder="Title"/>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" rows="25" cols="160" id="body" name="body"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
-                                                    </div>
-                                                    </form>
+                                                        <div class="form-group">
+                                                            <label>Cover Image </label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-btn">
+                                                                    <span class="btn btn-primary btn-file">
+                                                                    Browse <input type="file" name="cover_image" id="cover_image" value="cover_image">
+                                                                    </span>
+                                                                </span>
+                                                                <input type="text" class="form-control" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" rows="25" cols="160" id="body" name="body"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
+                                                        </div>
+                                                    </form>-->
                                                 </div>
                                                 </div>
                                             </div>
