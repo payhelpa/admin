@@ -65,7 +65,7 @@
                 </div>
                 <div class="dash-widget-info">
                     <h3></h3>
-                    <h6 class="text-muted">Current LU Rate</h6>
+                    <h6 class="text-muted">Current FU Rate</h6>
                 </div>
             </div>
         </div></a>

@@ -89,6 +89,18 @@ class UserController extends Controller
             echo "N/A";
         }
     }
+    public static function GetUserPhoneNumber($user_id)
+    {
+        $user = IndividualUser::where('user_id', $user_id)->select('phone_number')->first();
+            if($user != null)
+        {
+            echo $user->phone_number;
+        }
+        else
+        {
+            echo "N/A";
+        }
+    }
     public static function GetOfferUserName($user_id)
     {
         $user = DB::table('offers')->where('user_id', $user_id)->select('user_id')->first();

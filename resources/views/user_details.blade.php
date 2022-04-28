@@ -285,6 +285,10 @@ This is the most basic example of the datatables with zero configuration. Use th
                                 <th scope="row">State</th>
                                 <td>{{$user->state_id}}</td>
                               </tr>
+                              <tr>
+                                <th scope="row">Document Submitted</th>
+                                <td><a href="{{route('showimage',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
+                              </tr>
 
                               <tr>
                                 <th scope="row">Created At</th>

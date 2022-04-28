@@ -163,7 +163,6 @@ i.red{
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <section class="team">
     @foreach ($users as $user)
-    <a href= "{{route('show',$user->user_id)}}"><button type="button" class="btn btn-primary">Back</button></a>
 
   <div class="container">
     <div class="row">

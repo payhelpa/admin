@@ -91,6 +91,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 
 <th>Name</th>
 <th>Email</th>
+<th>Phone Number</th>
 <th>Send Message</th>
 <th>Created at</th>
 <th class="text-right">Action</th>
@@ -102,6 +103,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     <tr>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
+        <td>{{ucwords(UserController::GetUserPhoneNumber($user->id)) }}</td>
         <td class="text-center"><a href = "{{url('message/'.$user->id)}}"><i class="fa fa-envelope" style="text-align:center"></i></a></td>
         <td>{{$user->created_at}}</td>
         <td class="text-right">

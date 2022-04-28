@@ -50,6 +50,86 @@
       <a href="#" ></a>
 </div>
 </div>
+<style>
+    /* Dropdown Button */
+    .dropbtn {
+    background-color: #2962ff;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #ddd;}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {background-color: #2962ff;}
+
+    /* blog css */
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+    }
+
+
+</style>
+<div class="d-flex dropdown "style="float:left;">
+    <button class="dropbtn" >Menu</button>
+    <div class="dropdown-content">
+        <a href="{{route('services')}}">View Services</a>
+        <a href="{{route ('addServices')}}">Create Services</a>
+
+    </div>
+</div>
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
