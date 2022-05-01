@@ -125,6 +125,20 @@ Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware([
 
 Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
 
+Route::get('/charges/setPayhelpaFUCharges', [ChargesController::class, 'setPayhelpaFUCharges'])->middleware(['auth'])->name('charges.setPayhelpaFUCharges');
+
+Route::post('/charges/setPayhelpaFUCharges', [ChargesController::class, 'setPayhelpaFUCharges'])->middleware(['auth'])->name('charges.setPayhelpaFUCharges');
+
+Route::get('/charges/setPayhelpaLUCharges', [ChargesController::class, 'setPayhelpaLUCharges'])->middleware(['auth'])->name('charges.setPayhelpaLUCharges');
+
+Route::post('/charges/setPayhelpaLUCharges', [ChargesController::class, 'setPayhelpaLUCharges'])->middleware(['auth'])->name('charges.setPayhelpaLUCharges');
+
+Route::get('/charges/setPayhelpaTimer', [ChargesController::class, 'setPayhelpaTimer'])->middleware(['auth'])->name('charges.setPayhelpaTimer');
+
+Route::post('/charges/setPayhelpaTimer', [ChargesController::class, 'setPayhelpaTimer'])->middleware(['auth'])->name('charges.setPayhelpaTimer');
+
+Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
+
 Route::get('/blog', [BlogController::class, 'blog'])->middleware(['auth'])->name('blog');
 
 Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['auth'])->name('createblog');

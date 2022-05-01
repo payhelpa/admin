@@ -65,7 +65,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <table class="datatable table table-stripped">
 <thead>
 <tr>
-    <th>Type</th>
+
     <th>Local User</th>
     <th>Rate</th>
     <th>Dollar Amount</th>
@@ -77,7 +77,8 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tbody>
 	@foreach ($userss as $user)
 	<tr>
-        <td></td>
+
+
 		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
         <td>₦{{number_format($user->rate /100,2)}}</td>
         <td>${{number_format($user->dollar_amount / 100,2)}}</td>

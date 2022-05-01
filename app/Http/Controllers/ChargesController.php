@@ -4,49 +4,83 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class ChargesController extends Controller
 {
     public function charges(){
         return view('charges');
     }
-    public function setPayhelpaConfigVariable(Request $request)
+    public function setPayhelpaFUCharges(Request $request)
     {
-        $path = app()->environmentFilePath();
-        if (file_exists($path)) {
-            $validator =  Validator::make($request->all(),[
-                'key' => 'required',
-                'value' => 'required'
-            ]);
+        //$charges = ($request->value);
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->post('https://payhelpa-api-staging.herokuapp.com/api/v1/set-config-keys', [
+        'key' => "PAYHELPA_SERVICE_CHARGE_FU",
+        "value" => $request->value,
+        ]);
+        //dd($response);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'message' => $validator->messages()->first(),
-                    'success' => false
-                ], 422);
-            }else {
-                if($request->key == 'APP_KEY' || $request->key == 'PAYHELPA_ACCESS_KEY') {
-                    return response()->json([
-                        'message' => 'Sorry you don\'t have the right to change '.$request->key,
-                        'error' => $request->key,
-                        'success' => false
-                    ], 400);
-                } else {
-                    file_put_contents($path, str_replace(
-                        $request->key . '=' . env($request->key), $request->key . '=' . $request->value, file_get_contents($path)
-                    ));
-                    return response()->json([
-                        'message' => ' Payhelpa variable  '. $request->key. ' '. 'set successfully',
-                        'data' => $request->key. ' set to '. $request->value,
-                        'success' => true
-                    ], 200);
-                }
-            }
-        } else {
-            return response()->json([
-                'message' => 'Sorry no app environmental file',
-                'success' => false
-            ], 404);
-        }
+        // $response = Http::withHeaders([
+        //     'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        // ])->get('https://payhelpa-api-staging.herokuapp.com/api/v1/get-keys', [
+        // 'key' => "PAYHELPA_SERVICE_CHARGE_FU",
+        // "value" => $request->value,
+        // ]);
+        // $charges = json_decode($response);
+        // if (empty($charges->fu_charge)){
+        //     return "N/A";
+        // }
+        // else{
+        //     $charges->fu_charge ;
+        // }
+
+        //$chargess = ($request->value);
+        return redirect('charges')->with('success','FU charges Updated Successfully');
+
     }
+    public function getPayhelpaFUCharges(Request $request)
+    {
+        $charges = ($request->value);
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->post('https://payhelpa-api-staging.herokuapp.com/api/v1/set-config-keys', [
+        'key' => "PAYHELPA_SERVICE_CHARGE_FU",
+        "value" => $request->value,
+        ]);
+        //dd($response);
+        $chargess = ($request->value);
+        return redirect('charges')->with('success','FU charges Updated Successfully');
+
+    }
+
+    public function setPayhelpaLUCharges(Request $request)
+    {
+        $charges = ($request->value);
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->post('https://payhelpa-api-staging.herokuapp.com/api/v1/set-config-keys', [
+        'key' => "PAYHELPA_SERVICE_CHARGE_LU",
+        "value" => $request->value,
+        ]);
+        //dd($response);
+        return redirect('charges')->with('success','LU charges Updated Successfully');
+
+    }
+
+    public function setPayhelpaTimer(Request $request)
+    {
+        $charges = ($request->value);
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->post('https://payhelpa-api-staging.herokuapp.com/api/v1/set-config-keys', [
+        'key' => "PAYHELPA_TRANSACTION_TIMER",
+        "value" => $request->value,
+        ]);
+        //dd($response);
+        return redirect('charges')->with('success','Transaction Timer Updated Successfully');
+
+    }
+
 }

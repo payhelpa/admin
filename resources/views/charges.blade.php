@@ -65,7 +65,7 @@
                 </div>
                 <div class="dash-widget-info">
                     <h3></h3>
-                    <h6 class="text-muted">Current FU Rate</h6>
+                    <h6 class="text-muted">Current FU Charge</h6>
                 </div>
             </div>
         </div></a>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="dash-widget-info">
                     <h3></h3>
-                    <h6 class="text-muted">Current LU Rate</h6>
+                    <h6 class="text-muted">Current LU Charge</h6>
                 </div>
             </div>
         </div></a>
@@ -92,7 +92,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="dash-widget-header">
-                    <span class="dash-widget-icon bg-success">
+                    <span class="dash-widget-icon bg-warning">
                         <i class="fe fe-clock"></i>
                     </span>
                     <div class="dash-count">
@@ -120,14 +120,11 @@
                         <!-- Alert message (start) -->
                         <!-- Alert message (end) -->
                     <div class="table-responsive">
-                            <form method="POST" action="" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
+                            <form method="POST" action="{{url('charges/setPayhelpaFUCharges')}}" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
                             @csrf
-                            @method('PUT')
                             Enter FU Charge:<br>
-                            <input type="text" name="title" id="title" value="" style="border: 1px solid gray;  border-radius: 5px;">
-                            <br>
-                            Confirm FU Charge:<br>
-                            <input type="text" name="description" id="description" value="" style="border: 1px solid gray;  border-radius: 5px;">
+                            <input type="text" name="value" id="value"  style="border: 1px solid gray;  border-radius: 5px;">
+
                             <br><br>
                             <input type="submit" value="Update FU Charge" style="border: 1px solid gray;  border-radius: 5px;">
                         </form>
@@ -147,14 +144,10 @@
                         <!-- Alert message (start) -->
                         <!-- Alert message (end) -->
                     <div class="table-responsive">
-                            <form method="POST" action="" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
+                            <form method="POST" action="{{url('charges/setPayhelpaLUCharges')}}" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
                             @csrf
-                            @method('PUT')
                             Enter LU Charge:<br>
-                            <input type="text" name="title" id="title" value="" style="border: 1px solid gray;  border-radius: 5px;">
-                            <br>
-                            Confirm LU Charge:<br>
-                            <input type="text" name="description" id="description" value="" style="border: 1px solid gray;  border-radius: 5px;">
+                            <input type="text" name="value" id="value"  style="border: 1px solid gray;  border-radius: 5px;">
                             <br><br>
                             <input type="submit" value="Update LU Charge" style="border: 1px solid gray;  border-radius: 5px;">
                         </form>
@@ -174,14 +167,10 @@
                         <!-- Alert message (start) -->
                         <!-- Alert message (end) -->
                     <div class="table-responsive">
-                            <form method="POST" action="" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
+                            <form method="POST" action="{{url('charges/setPayhelpaTimer')}}" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
                             @csrf
-                            @method('PUT')
-                            Current Timer:<br>
-                            <input type="text" name="title" id="title" value="" style="border: 1px solid gray;  border-radius: 5px;">
-                            <br>
                             Enter New Timer:<br>
-                            <input type="text" name="description" id="description" value="" style="border: 1px solid gray;  border-radius: 5px;">
+                            <input type="text" name="value" id="value" value="" style="border: 1px solid gray;  border-radius: 5px;">
                             <br><br>
                             <input type="submit" value="Update Timer" style="border: 1px solid gray;  border-radius: 5px;">
                         </form>

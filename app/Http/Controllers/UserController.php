@@ -23,6 +23,7 @@ use App\Mail\NewMessage;
 use App\Models\Admin;
 use App\Mail\AccountVerified;
 use App\Models\Service;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
@@ -95,6 +96,18 @@ class UserController extends Controller
             if($user != null)
         {
             echo $user->phone_number;
+        }
+        else
+        {
+            echo "N/A";
+        }
+    }
+    public static function GetUserType($user_id)
+    {
+        $country = IndividualUser::where('user_id', $user_id)->select('country')->first();
+            if($country != null)
+        {
+            echo $country->country;
         }
         else
         {
@@ -280,7 +293,21 @@ class UserController extends Controller
         ]);
 //$response->status() == 200
         //$account_number = account_number;
-        if ('account_number' == NULL)
+
+            $rex = json_decode($response);
+            if (empty($rex->account_number)){
+                return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+            }
+            else{
+            $Wallet = (new \App\Models\Wallet)->create([
+                'user_id' => $id,
+                'account_name' => $user->name,
+                'account_number' => $rex->account_number,
+                'account_balance' => 0.00
+            ]);
+        }
+
+        /*if ('account_number' == NULL)
         {
             return redirect('verify')->with('warning','Account was not generated, userrr not verified');
         }else{
@@ -291,7 +318,7 @@ class UserController extends Controller
                 'account_number' => $rex->account_number,
                 'account_balance' => 0.00
             ]);
-        }
+        }*/
     } catch (\Exception $e) {
         DB::rollBack();
         return redirect('verify')->with('warning','Account was not generated, userrr not verified');

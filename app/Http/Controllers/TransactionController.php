@@ -43,6 +43,18 @@ class TransactionController extends Controller
         // $this->wallet = $wallet;
         $this->IndividualUser = $IndividualUser;
     }
+    public static function GetUserType($user_id)
+    {
+        $country = IndividualUser::where('user_id', $user_id)->select('country')->first();
+            if($country != null)
+        {
+            echo $country->country;
+        }
+        else
+        {
+            echo "N/A";
+        }
+    }
     public function nairaSolicitation($id){
         $NairaSolicitations = NairaSolicitation::find($id)->where('is_taken', 1);
         dd($NairaSolicitations);
