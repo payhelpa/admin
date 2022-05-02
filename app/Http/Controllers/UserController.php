@@ -177,9 +177,9 @@ class UserController extends Controller
     public function user(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
-            $userss = User::where('name','LIKE',"%$search%")->get();
+            $userss = User::where('name','LIKE',"%$search%")->whereNotNull('account_verified_at')->get();
         }else{
-            $userss = DB::table('users')->get();
+            $userss = DB::table('users')->whereNotNull('account_verified_at')->get();
         }
         return view('users', compact('search', 'userss'));
     }

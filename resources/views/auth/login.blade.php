@@ -68,7 +68,7 @@
                                 name="password"
                                 required autocomplete="current-password" />
             </div>
-    <div class="form-group">        
+    <div class="form-group">
         <x-button class="btn btn-primary btn-block">
             {{ __('Log in') }}
         </x-button>
