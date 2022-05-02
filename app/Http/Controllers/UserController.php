@@ -104,10 +104,10 @@ class UserController extends Controller
     }
     public static function GetUserType($user_id)
     {
-        $country = IndividualUser::where('user_id', $user_id)->select('country')->first();
-            if($country != null)
+        $user = IndividualUser::where('user_id', $user_id)->select('country')->first();
+            if($user == null)
         {
-            echo $country->country;
+            echo $user->country;
         }
         else
         {
