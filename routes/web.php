@@ -90,6 +90,8 @@ Route::get('/message/{id}', [UserController::class, 'message'])->middleware(['au
 
 Route::post('/messagesend', [UserController::class, 'messagesend'])->middleware(['auth'])->name('messagesend');
 
+Route::get('/user/delete/{id}', [UserController::class, 'deleteuser'])->middleware(['auth'])->name('user.delete');
+
 // Route::post('/messagesend2', [UserController::class, 'messagesend2'])->middleware(['auth'])->name('messagesendtoUsers');
 
 

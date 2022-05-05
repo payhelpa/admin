@@ -24,9 +24,11 @@ class BlogController extends Controller
 
         $blog = Blog::create([
             'title' =>  request('title'),
-            'body' => request('body'),
+            'body' => strip_tags($request->body),
             'cover_image' => $upload['url']
         ]);
+
+        //$body = strip_tags($request->body);
 
         return view('blog');
     }

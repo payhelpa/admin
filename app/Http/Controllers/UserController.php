@@ -359,6 +359,13 @@ public function completionprove($id){
     return view('completionprove', compact('users'));
 }
 
+public function deleteuser($user_id){
+    IndividualUser::destroy($user_id);
+    // Session::flash('message', 'Deleted successfully!');
+    // Session::flash('alert-class', 'alert-success');
+    return redirect()->route('users');
+}
+
 
 // public function approvewithdrawals($id){
 //     $userss = DB::table('fund_withdrawals')
