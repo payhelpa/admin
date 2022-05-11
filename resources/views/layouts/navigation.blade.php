@@ -31,7 +31,7 @@
 <div class="app-list">
 <div class="row">
 <div class="col"><a class="app-item" href="inbox.html"><i class="fa fa-envelope"></i><span>Email</span></a></div>
-<div class="col"><a class="app-item" href="calendar.html"><i class="fa fa-calendar"></i><span>Calendar</span></a></div>
+<div class="col"><a class="app-item" href="calendar.html"><i class="fa fa-calendar"></i><span>Activity Log</span></a></div>
 <div class="col"><a class="app-item" href="chat.html"><i class="fa fa-comments"></i><span>Chat</span></a></div>
 </div>
 </div>
@@ -177,6 +177,9 @@
                     </li>
                     <li>
                         <a href="{{url ('/services')}}"><i class="fe fe-activity"></i> <span>Services</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url ('/industry')}}"><i class="fe cil-industry"></i> <span>Industry</span></a>
                     </li>
                     <li>
                         <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>

@@ -86,12 +86,23 @@ This is the most basic example of the datatables with zero configuration. Use th
 
 
         <td>
+<<<<<<< HEAD
             @if($user->status == '1')
                 <a>Credit Wallet</a>
             @elseif($user->status == '2')
                 <a>Confirming Transfer</a>
             @elseif($user->status == '3')
                 <a>Transfer Confirmed</a>
+=======
+            @if($user->status == '0')
+                <a>Cancel Transfer</a>
+            @elseif($user->status == '1')
+                <a>Credit Wallet </a>
+            @elseif($user->status == '2')
+                <a>Confirming Transfer</a>
+            @elseif($user->status == '3')
+            <a>Transfer Confirmed</a>
+>>>>>>> cbe13eb6c2d697961fdf98a524e35a0e01a8c604
             @elseif($user->status == '4')
             <a>Processing Transaction</a>
             @elseif($user->status == '5')
@@ -99,7 +110,7 @@ This is the most basic example of the datatables with zero configuration. Use th
             @elseif($user->status == '6')
             <a>Transfer Successful</a>
             @else
-                <a>Cancel Transaction</a>
+                <a>Transaction</a>
             @endif
         </td>
 		<td><a href="{{route('singleOngoinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>

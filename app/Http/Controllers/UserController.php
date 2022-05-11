@@ -43,6 +43,20 @@ class UserController extends Controller
         // $this->wallet = $wallet;
         $this->IndividualUser = $IndividualUser;
     }
+    public static function GetUserState(Request $request, $user_id)
+    {
+        $user = IndividualUser::where('id', $user_id)->select('state_id')->first();
+            if($user != null)
+        {
+            echo $user->name;
+        }
+        else
+        {
+            echo "N/A";
+        }
+        // $userss = $this->IndividualUser->with(['individuals'])->where('status', '!=' , 6);
+        // })->get();
+    }
 
     public function dashboard()
     {
@@ -164,6 +178,7 @@ class UserController extends Controller
             echo "";
         }
     }
+
     /**
      * convert kobo to naira
      * @param $amount
@@ -177,9 +192,9 @@ class UserController extends Controller
     public function user(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
-            $userss = User::where('name','LIKE',"%$search%")->get();
+            $userss = User::where('name','LIKE',"%$search%")->whereNotNull('account_verified_at')->get();
         }else{
-            $userss = DB::table('users')->get();
+            $userss = DB::table('users')->whereNotNull('account_verified_at')->get();
         }
         return view('users', compact('search', 'userss'));
     }
@@ -357,6 +372,13 @@ public function completionprove($id){
 
     $users = DB::table('naira_solicitations')->where('id',$id)->first();
     return view('completionprove', compact('users'));
+}
+
+public function deleteuser($user_id){
+    IndividualUser::destroy($user_id);
+    // Session::flash('message', 'Deleted successfully!');
+    // Session::flash('alert-class', 'alert-success');
+    return redirect()->route('users');
 }
 
 

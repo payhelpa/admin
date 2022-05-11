@@ -176,6 +176,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Transaction Ref Number</th>
                     <th>Payment Type</th>
                     <th>Amount Requested</th>
                     <th>Status</th>
@@ -183,18 +184,17 @@
             </thead>
             @foreach ($userss as $user)
             <tbody>
-
                 <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
+                <td>{{$user->transaction_ref}}</td>
                 <td>{{$user->payment_type}}</td>
                 <td>₦{{number_format($user->amount_paid / 100,2)}}</td>
                 <td>
-                    @if($user->status_id == '1')
-                        <a class="btn btn-sm bg-sucess-light">Confirmed</a>
+                    @if($user->is_payment_confirmed == '1')
+                        <a class="btn btn-sm bg-success-light">Confirmed</a>
                     @else
                         <a class="btn btn-sm bg-info-light">Not Yet Confirmed</a>
                     @endif
                 </td>
-
             </tbody>
             @endforeach
         </table>

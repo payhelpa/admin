@@ -2,11 +2,9 @@
 @component('mail::message')
 
 <h3>{!! $content['details'] !!}</h3><br>
-
 @component('mail::button', ['url' => 'payhelpa.com'])
-Login 
+Login
 @endcomponent
-
-Regards,<br>
+Team
 {{ config('app.name') }}
 @endcomponent
