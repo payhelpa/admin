@@ -74,6 +74,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tr>
 <th>Name</th>
 <th>Email</th>
+<th>Phone Number</th>
 <th>Send Message</th>
 <th>Documents</th>
 
@@ -82,13 +83,11 @@ This is the most basic example of the datatables with zero configuration. Use th
 <tbody>
 @foreach ($users as $user)
     <tr>
-
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
+        <td>{{ucwords(UserController::GetUserPhoneNumber($user->id)) }}</td>
         <td class="text-left"><a href = "{{url('message/'.$user->id)}}" ><i class="fa fa-envelope"></i></a></td>
         <td><a href="{{route('show',$user->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-
-
     </tr>
 @endforeach
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ChargesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\IndustryController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -146,5 +147,19 @@ Route::get('/blog', [BlogController::class, 'blog'])->middleware(['auth'])->name
 Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['auth'])->name('createblog');
 
 Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth'])->name('allblog');
+
+Route::get('/industry', [IndustryController::class, 'industry'])->middleware(['auth'])->name('industry');
+
+Route::get('/addindustry', [IndustryController::class, 'addindustry'])->middleware(['auth'])->name('addindustry');
+
+Route::post('/createindustry', [IndustryController::class, 'createindustry'])->middleware(['auth'])->name('createindustry');
+
+Route::get('/industry/delete/{id}', [IndustryController::class, 'deleteindustry'])->middleware(['auth'])->name('industry.delete');
+
+Route::get('/industry/edit/{id}', [IndustryController::class, 'editindustry'])->middleware(['auth'])->name('industry.edit');
+
+Route::get('/industry/update/{id}', [IndustryController::class, 'updateindustry'])->middleware(['auth'])->name('industry.update');
+
+Route::put('/industry/update/{id}', [IndustryController::class, 'updateindustry'])->middleware(['auth'])->name('industry.update');
 
 require __DIR__.'/auth.php';

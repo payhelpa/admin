@@ -283,7 +283,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                               </tr>
                               <tr>
                                 <th scope="row">State</th>
-                                <td>{{$user->state_id}}</td>
+                                <td>{{$user->state->name}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Document Submitted</th>

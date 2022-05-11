@@ -43,6 +43,20 @@ class UserController extends Controller
         // $this->wallet = $wallet;
         $this->IndividualUser = $IndividualUser;
     }
+    public static function GetUserState(Request $request, $user_id)
+    {
+        $user = IndividualUser::where('id', $user_id)->select('state_id')->first();
+            if($user != null)
+        {
+            echo $user->name;
+        }
+        else
+        {
+            echo "N/A";
+        }
+        // $userss = $this->IndividualUser->with(['individuals'])->where('status', '!=' , 6);
+        // })->get();
+    }
 
     public function dashboard()
     {
@@ -164,6 +178,7 @@ class UserController extends Controller
             echo "";
         }
     }
+
     /**
      * convert kobo to naira
      * @param $amount

@@ -20,8 +20,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
-        'last_login_time',
-        'last_login'
+        'last_login_time'
     ];
 
     /**

@@ -67,8 +67,9 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone Number</th>
-                                                <th>Send Message</th>
-                                                <th class="text-center">Created at</th>
+                                                <th>Send Message</th>                                                
+                                                <th>Login as Client</th>
+                                                <th>Created at</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -79,6 +80,8 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{ucwords(UserController::GetUserPhoneNumber($user->id)) }}</td>
                                                 <td class="text-center"><a href = "{{url('message/'.$user->id)}}"><i class="fa fa-envelope" style="text-align:center"></i></a></td>
+                                                
+                                                <td><a href="" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-success">Login</a></td>
                                                 <td>{{$user->created_at}}</td>
                                                 <td class="text-left">
                                                     <div class="actions text-center">
