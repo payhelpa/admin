@@ -45,7 +45,7 @@
             <p class="account-subtitle">Access to our dashboard</p>
 
         <form method="POST" action="{{ route('register') }}">
-            @csrf
+            {{ csrf_field() }}
             <!-- Name -->
             <div class="form-group">
                     <x-label for="name" :value="__('Name')" />
