@@ -162,7 +162,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 <div class="card-body">
     <div style="display: flex; float: right; margin-buttom:-40px; ">
-        <a href="{{route ('addServices')}}" class='btn btn-primary mr-2' >Create</a>
+        <a href="{{route ('addindustry')}}" class='btn btn-primary mr-2' >Create</a>
     </div>
 <div class="table-responsive">
     @include('flash-message')
@@ -187,13 +187,13 @@ This is the most basic example of the datatables with zero configuration. Use th
     @foreach ($industry as $industry)
     <tr>
         <td>{{$industry->id}}</td>
-        <td>{{$industry->title}}</td>
+        <td>{{$industry->name}}</td>
         <td>{{$industry->description}}</td>
         <td>{{$industry->created_at}}</td>
         <td class="text-right">
             <div class="actions">
-                <a href="{{ route('industrys.edit',$industry->id) }}"><i class="fe fe-edit" style="margin-right: 10px; margin-left: 10px"></i></a>
-                <a href="{{ route('industrys.delete',$industry->id) }}"><i class="fe fe-trash"></i></a>
+                <a href="{{ route('industry.edit',$industry->id) }}"><i class="fe fe-edit" style="margin-right: 10px; margin-left: 10px"></i></a>
+                <a href="{{ route('industry.delete',$industry->id) }}"><i class="fe fe-trash"></i></a>
             </div>
         </td>
     </tr>
