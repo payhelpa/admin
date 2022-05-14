@@ -53,7 +53,6 @@
 
  <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <div class="form-group">
                 <x-label for="email" :value="__('Email')" />
 
