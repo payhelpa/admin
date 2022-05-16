@@ -177,13 +177,14 @@ This is the most basic example of the datatables with zero configuration. Use th
                                     <tbody>
 
                                         <tr>
-                                            <th scope="row">Name</th>
+                                            <th class=" ml-6" scope="row">Name</th>
                                             <td>{{$solicitations->name}}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Users Email</th>
+                                            <th class=" ml-5" scope="row">Users Email</th>
                                             <td>{{$solicitations->email}}</td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -248,10 +249,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                                 <th scope="row">Completion Prove </th>
                                                 <td><a href="{{route('completionprove',$transactionsolicitations->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">Status </th>
-                                                <td>{{$transactionsolicitations->status_id}}</td>
-                                            </tr>
+
                                             <tr>
                                                 <th scope="row">Description</th>
                                                 <td>{{$transactionsolicitations->description}}</td>

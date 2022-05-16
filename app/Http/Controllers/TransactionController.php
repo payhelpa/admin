@@ -96,9 +96,10 @@ class TransactionController extends Controller
         return view('pendinginfo', compact('userss'));
     }
     public function singlependinginfo($id){
+        //'status' => \App\Enums\TransactionStatusEnum::CREDIT_WALLET,
         $data = $this->model->where('id', '=', $id)->exists();
         if ($data) {
-            $user = $this->model->with(['history'])->find($id);
+            $user = $this->model->with(['status'])->find($id);
         }
        // dd($userss);
         return view('singlependinginfo', compact('user'));
