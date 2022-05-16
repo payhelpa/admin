@@ -62,7 +62,7 @@
                         </span>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$count}}</h3>
+                        <h3>53</h3>
                         <h6 class="text-muted">Total Registered Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-primary w-50"></div>
