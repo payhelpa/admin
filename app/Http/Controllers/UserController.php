@@ -187,8 +187,9 @@ class UserController extends Controller
         return view('users', compact('search', 'userss'));
     }
 
-    public function profile (Request $request){
-        return view('profile');
+    public function profile (Request $request,$id){
+        $admin = DB::table('admins')->first();
+        return view('profile', compact('admin'));
     }
 
     public function individualusers (Request $request){
@@ -248,7 +249,7 @@ class UserController extends Controller
         }
         return view('verify', compact('search', 'users'));
     }
-    
+
     public function verifyBusiness(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
