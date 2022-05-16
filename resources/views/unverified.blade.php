@@ -35,10 +35,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{route ('verify')}}" class='btn btn-outline-primary mr-2'>Verify Users</a>
-                        <a href="{{route ('unverified')}}" class='btn btn-outline-primary mr-2'>Unverified Users</a>
-                    </div>
+
 
 </div>
 

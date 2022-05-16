@@ -108,7 +108,7 @@ class TransactionController extends Controller
         if($search != ""){
             $userss = Wallet::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
         }else{
-            $userss = Wallet::all();
+            $userss = Wallet::all(); 
         }
         return view('wallet', compact('search', 'userss'));
     }

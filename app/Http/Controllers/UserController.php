@@ -13,6 +13,7 @@ use App\Helpers\Helper;
 use Carbon\Carbon;
 use App\Models\NairaSolicitation;
 use App\Models\IndividualUser;
+use App\Models\IndividualDetail;
 use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Status;
@@ -31,9 +32,10 @@ class UserController extends Controller
     private Transaction $transaction;
     private Status $status;
     private IndividualUser $IndividualUser;
+    private IndividualDetail $IndividualDetail;
 
     public function __construct(
-        NairaSolicitation $model, Transaction $transaction, Status $status, IndividualUser $IndividualUser
+        NairaSolicitation $model, Transaction $transaction, Status $status, IndividualUser $IndividualUser,  IndividualDetail $IndividualDetail
     )
     {
         $this->model = $model;
@@ -42,20 +44,7 @@ class UserController extends Controller
         // $this->helper = $helper;
         // $this->wallet = $wallet;
         $this->IndividualUser = $IndividualUser;
-    }
-    public static function GetUserState(Request $request, $user_id)
-    {
-        $user = IndividualUser::where('id', $user_id)->select('state_id')->first();
-            if($user != null)
-        {
-            echo $user->name;
-        }
-        else
-        {
-            echo "N/A";
-        }
-        // $userss = $this->IndividualUser->with(['individuals'])->where('status', '!=' , 6);
-        // })->get();
+        $this->IndividualDetail = $IndividualDetail;
     }
 
     public function dashboard()
@@ -106,7 +95,7 @@ class UserController extends Controller
     }
     public static function GetUserPhoneNumber($user_id)
     {
-        $user = IndividualUser::where('user_id', $user_id)->select('phone_number')->first();
+        $user = IndividualDetail::where('user_id', $user_id)->select('phone_number')->first();
             if($user != null)
         {
             echo $user->phone_number;
@@ -118,10 +107,10 @@ class UserController extends Controller
     }
     public static function GetUserType($user_id)
     {
-        $country = IndividualUser::where('user_id', $user_id)->select('country')->first();
-            if($country != null)
+        $user = IndividualDetail::where('user_id', $user_id)->select('country')->first();
+            if($user == null)
         {
-            echo $country->country;
+            echo $user->country;
         }
         else
         {
@@ -178,7 +167,6 @@ class UserController extends Controller
             echo "";
         }
     }
-
     /**
      * convert kobo to naira
      * @param $amount
@@ -192,41 +180,40 @@ class UserController extends Controller
     public function user(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
-            $userss = User::where('name','LIKE',"%$search%")->whereNotNull('account_verified_at')->get();
+            $userss = User::whereNotNull('account_verified_at')->where('name','LIKE',"%$search%")->get();
         }else{
             $userss = DB::table('users')->whereNotNull('account_verified_at')->get();
         }
         return view('users', compact('search', 'userss'));
     }
-    public function providuslog(Request $request){
-        $search = $request['search'] ?? "";
-        if($search != ""){
-            $log = DB::table('providus_logs')->where('settlement_id','LIKE',"%$search%")->get();
-        }else{
-            $log = DB::table('providus_logs')->get();
-        }
-        return view('providuslog', compact('search', 'log'));
+
+    public function profile (Request $request){
+        return view('profile');
     }
+
     public function individualusers (Request $request){
-        $userss = DB::table('individual_users')->get();
+        $userss = DB::table('individual_details')->get();
 
         return view('individualusers', compact('userss'));
     }
     public function businessusers (Request $request){
-        $userss = DB::table('business_users')->get();
+        $userss = DB::table('business_details')->get();
         return view('businessusers', compact('userss'));
     }
 
     public function user_details($id){
-        $userss = DB::table('individual_users')->where('user_id',$id)->get();
+        $userss = DB::table('individual_details')->where('user_id',$id)->get();
         $pendingtrans = DB::table('naira_solicitations')->where('user_id',$id)->count();
         $ongoingtrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',0)->count();
         $sucesstrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',1)->count();
-        $wallet = DB::table('wallets')->where('user_id',$id)->get();
-        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans', 'wallet'));
+        $walletbal = DB::table('wallets')->where('user_id',$id)->select('account_balance')->get();
+        $walletnum = DB::table('wallets')->where('user_id',$id)->select('account_number')->get();
+        $walletname = DB::table('wallets')->where('user_id',$id)->select('account_name')->get();
+        $wallets = DB::table('wallets')->where('user_id',$id)->get();
+        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans', 'wallets', 'walletbal', 'walletnum' , 'walletname'));
     }
     public function user_details_bis($id){
-        $userss = DB::table('business_users')->where('user_id',$id)->get();
+        $userss = DB::table('business_details')->where('user_id',$id)->get();
         return view('user_details_bis', compact('userss'));
     }
     public function update_status($id){
@@ -255,11 +242,21 @@ class UserController extends Controller
     public function verify(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
-            $users = DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
+            $users = DB::table('users')->where('role_id', 1)->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
         }else{
-            $users =  DB::table('users')->whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
+            $users =  DB::table('users')->where('role_id', 1)->whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
         }
         return view('verify', compact('search', 'users'));
+    }
+    
+    public function verifyBusiness(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $users = DB::table('users')->where('role_id', 2)->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
+        }else{
+            $users =  DB::table('users')->where('role_id', 2)->where('account_verified_at', null)->get();
+        }
+        return view('verifybusiness', compact('search', 'users'));
     }
     public function verifyFU(Request $request){
         $search = $request['search'] ?? "";
@@ -343,6 +340,60 @@ class UserController extends Controller
     return redirect('verify')->with('success','User has been verified!');
     }
 
+    public function update_verifyBsn($id){
+        $user = User::find($id);
+       // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
+        //dd($userReferralLink);
+        DB::beginTransaction();
+        try {
+            $user->update([
+                'account_verified_at' => now()
+            ]);
+        $response = Http::withHeaders([
+            'X-Auth-Signature' => '63305c904b499922cf2d88cdec26e808c8154fb9d8bb4ab222d84df0e3853e85fafe71e326313205ee849171155644cc4b7e413cee2e301018fdc93a9ee3fc80',
+            'Client-Id' => 'cEBZSDMxTHBhX1ByMCgpLg==',
+            'Secret'=> 'CC1BF237E7EDD89DB08A804F5B8A16E7DBDE4432664BDD54C6AD943CD6F6F012'
+        ])->post('https://vps.providusbank.com/vps/api/PiPCreateReservedAccountNumber', [
+            'account_name' => $user->name,
+            'bvn' =>'',
+        ]);
+//$response->status() == 200
+        //$account_number = account_number;
+
+            $rex = json_decode($response);
+            if (empty($rex->account_number)){
+                return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+            }
+            else{
+            $Wallet = (new \App\Models\Wallet)->create([
+                'user_id' => $id,
+                'account_name' => $user->name,
+                'account_number' => $rex->account_number,
+                'account_balance' => 0.00
+            ]);
+        }
+
+        /*if ('account_number' == NULL)
+        {
+            return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+        }else{
+            $rex = json_decode($response);
+            $Wallet = (new \App\Models\Wallet)->create([
+                'user_id' => $id,
+                'account_name' => $user->name,
+                'account_number' => $rex->account_number,
+                'account_balance' => 0.00
+            ]);
+        }*/
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+    }
+    DB::commit();
+    //$user->notify(new AccountVerificationEmail());
+    return redirect('verify')->with('success','User has been verified!');
+    }
+
     public function message(Request $request, $id){
         $user = DB::table('users')
         ->select('email')
@@ -355,11 +406,16 @@ class UserController extends Controller
     return $msg;
     }
     public function show($id){
-    $users = DB::table('individual_users')->where('user_id',$id)->get();
-    return view('show', compact('users'));
-}
+        $users = DB::table('individual_details')->where('user_id',$id)->get();
+        return view('show', compact('users'));
+    }
+
+    public function showBusiness($id){
+        $users = DB::table('business_details')->where('user_id',$id)->get();
+        return view('showBsn', compact('users'));
+    }
 public function showimage($id){
-    $users = DB::table('individual_users')->where('user_id',$id)->get();
+    $users = DB::table('individual_details')->where('user_id',$id)->get();
     return view('showimage', compact('users'));
 }
 
@@ -373,14 +429,15 @@ public function completionprove($id){
     $users = DB::table('naira_solicitations')->where('id',$id)->first();
     return view('completionprove', compact('users'));
 }
-
-public function deleteuser($user_id){
-    IndividualUser::destroy($user_id);
-    // Session::flash('message', 'Deleted successfully!');
-    // Session::flash('alert-class', 'alert-success');
-    return redirect()->route('users');
+public function providuslog(Request $request){
+    $search = $request['search'] ?? "";
+    if($search != ""){
+        $log = DB::table('providus_logs')->where('settlement_id','LIKE',"%$search%")->get();
+    }else{
+        $log = DB::table('providus_logs')->get();
+    }
+    return view('providuslog', compact('search', 'log'));
 }
-
 
 // public function approvewithdrawals($id){
 //     $userss = DB::table('fund_withdrawals')

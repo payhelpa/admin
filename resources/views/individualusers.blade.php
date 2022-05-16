@@ -40,16 +40,12 @@
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">Users </h3>
+<h3 class="page-title">PayHelpa's Individual Users </h3>
 
 </div>
 
 </div>
-<div class="d-flex justify-content-center">
-    <a href="{{route ('users')}}" class='btn btn-outline-primary mr-2'>All Users</a>
-    <a href="{{route ('individualusers')}}" class='btn btn-outline-primary mr-2'>Individual Users</a>
-    <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>
-</div>
+
 <div class="d-flex justify-content-center">
 
       <a href="#" ></a>

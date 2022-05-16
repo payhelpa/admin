@@ -128,8 +128,8 @@
             </div>
 </div>
 </div>
-<a class="dropdown-item" href="profile.html">My Profile</a>
-<a class="dropdown-item" href="profile.html">Account Settings</a>
+<a class="dropdown-item" href="{{route ('profile')}}">My Profile</a>
+<a class="dropdown-item" href="{{route ('profile')}}">Account Settings</a>
 <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
                     @csrf
 
@@ -160,8 +160,12 @@
                         </x-responsive-nav-link>
                         <!--<a href="/cms/public/index"><i class="fe fe-home"></i> <span>Dashboard</span></a>-->
                     </li>
-                    <li>
-                        <a href="{{route ('blog')}}"><i class="fe fe-globe"></i> <span>Blog</span></a>
+                    <li class="submenu">
+                        <a href="{{route ('blog')}}"><i class="fe fe-globe"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route('blog')}}">Create Blog</a></li>
+                            <li><a href="{{route('allblog')}}">View Blogs</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{route ('charges')}}"><i class="fe fe-credit-card"></i> <span>Charges</span></a>
@@ -169,17 +173,31 @@
                     <li class="menu-title">
                         <span>Pages</span>
                     </li>
-                    <li>
-                        <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
+                    <li class="submenu">
+                        <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('users')}}">All Users</a></li>
+                            <li><a href="{{route ('individualusers')}}">Individual Users</a></li>
+                            <li><a href="{{route ('businessusers')}}">Business Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="{{route ('verify')}}"><i class="fe fe-document"></i> <span> Verify</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('verify')}}">Verify Individual Users</a></li>
+                            <li><a href="#">Verify Business Users</a></li>
+                            <li><a href="{{route ('unverified')}}">Unverified Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-activity"></i> <span> Services</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('addServices')}}">Create Services</a></li>
+                            <li><a href="{{route('services')}}">View Services</a></li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="{{route ('verify')}} "><i class="fe fe-document"></i> <span>Verify</span></a>
-                    </li>
-                    <li>
-                        <a href="{{url ('/services')}}"><i class="fe fe-activity"></i> <span>Services</span></a>
-                    </li>
-                    <li>
-                        <a href="{{url ('/industry')}}"><i class="fe cil-industry"></i> <span>Industry</span></a>
+                        <a href="{{url ('/industry')}}"><i class="fe fe-tiled"></i> <span>Industry</span></a>
                     </li>
                     <li>
                         <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>

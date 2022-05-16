@@ -61,6 +61,22 @@
 
             </div>
 
+             <!-- Phone Number  -->
+             <div class="form-group">
+                <x-label for="phone_number" :value="__('Phone Number')" />
+
+                <x-input id="phone_number" class="form-control" type="phone_number" name="phone_number" :value="old('phone_number')" required />
+
+             </div>
+
+             <!-- Address -->
+             <div class="form-group">
+                <x-label for="address" :value="__('Address')" />
+
+                <x-input id="address" class="form-control" type="address" name="address" :value="old('address')" required />
+
+             </div>
+
             <!-- Password -->
             <div class="form-group">
                 <div class="mt-4">

@@ -35,6 +35,8 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/businessusers', [UserController::class, 'businessusers'])->middleware(['auth'])->name('businessusers');
 
+ Route::get('/profile', [UserController::class, 'profile'])->middleware(['auth'])->name('profile');
+
 // Route::get('/search', [UserController::class, 'search'])->middleware(['auth'])->name('search');
 
  Route::get('/user_details/{id}', [UserController::class, 'user_details'])->middleware(['auth'])->name('user_details');
@@ -52,6 +54,8 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
  Route::get('/transactions', [TransactionController::class, 'transactions'])->middleware(['auth'])->name('transactions');
 
  Route::get('/verify', [UserController::class, 'verify'])->middleware(['auth'])->name('verify');
+
+ Route::get('/verifyBusiness', [UserController::class, 'verifyBusiness'])->middleware(['auth'])->name('verifyBusiness');
 
  Route::get('/unverified', [UserController::class, 'unverified'])->middleware(['auth'])->name('unverified');
 

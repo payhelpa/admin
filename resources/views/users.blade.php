@@ -31,14 +31,10 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col">
-                            <h3 class="page-title">Users </h3>
+                            <h3 class="page-title">PayHelpa's Users </h3>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{route ('users')}}" class='btn btn-outline-primary mr-2'>All Users</a>
-                        <a href="{{route ('individualusers')}}" class='btn btn-outline-primary mr-2'>Individual Users</a>
-                        <a href="{{route ('businessusers')}}" class='btn btn-outline-primary mr-2'>Business Users</a>
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -67,7 +63,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone Number</th>
-                                                <th>Send Message</th>                                                
+                                                <th>Send Message</th>
                                                 <th>Login as Client</th>
                                                 <th>Created at</th>
                                                 <th class="text-center">Action</th>
@@ -80,7 +76,7 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{ucwords(UserController::GetUserPhoneNumber($user->id)) }}</td>
                                                 <td class="text-center"><a href = "{{url('message/'.$user->id)}}"><i class="fa fa-envelope" style="text-align:center"></i></a></td>
-                                                
+
                                                 <td><a href="" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-success">Login</a></td>
                                                 <td>{{$user->created_at}}</td>
                                                 <td class="text-left">
