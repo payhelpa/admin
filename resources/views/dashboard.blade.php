@@ -62,7 +62,7 @@
                         </span>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$count}}</h3>
+                        <h3></h3>
                         <h6 class="text-muted">Total Registered Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-primary w-50"></div>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$ver}}</h3>
+                        <h3></h3>
                         <h6 class="text-muted">Total Verified Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-warning w-50"></div>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$counttrans}}</h3>
+                        <h3></h3>
                         <h6 class="text-muted">Total Transaction</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-success w-50"></div>
