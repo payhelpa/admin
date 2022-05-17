@@ -37,6 +37,13 @@ Route::get('/individualusers', [UserController::class, 'individualusers'])->midd
 
  Route::get('/profile', [UserController::class, 'profile'])->middleware(['auth'])->name('profile');
 
+ Route::post('/profileupdate', [UserController::class, 'profileUpdate'])->middleware(['auth'])->name('profileupdate');
+
+ Route::post('/changePassword', [UserController::class, 'changePassword'])->middleware(['auth'])->name('changePassword');
+//  Route::get('/profile/update/{id}', [ServiceController::class, 'updateprofile'])->middleware(['auth'])->name('profile.update');
+
+// Route::put('/profile/update/{id}', [ServiceController::class, 'updateprofile'])->middleware(['auth'])->name('profile.update');
+
 // Route::get('/search', [UserController::class, 'search'])->middleware(['auth'])->name('search');
 
  Route::get('/user_details/{id}', [UserController::class, 'user_details'])->middleware(['auth'])->name('user_details');

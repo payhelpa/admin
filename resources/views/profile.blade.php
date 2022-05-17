@@ -304,13 +304,13 @@
 <div class="row align-items-center">
 <div class="col-auto profile-image">
 <a href="#">
-<img class="rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
+<!--<img class="rounded-circle" alt="User Image" src="assets/img/profiles/avatar-0.jpg">-->
 </a>
 </div>
 <div class="col ml-md-n2 profile-user-info">
-<h4 class="user-name mb-0">John Doe</h4>
-<h6 class="text-muted">UI/UX Design Team</h6>
-<div class="user-Location"><i class="fa fa-map-marker"></i> Lagos, Nigeria</div>
+<h4 class="user-name mb-0">{{ \Auth::user()->name}}</h4>
+<h6 class="text-muted">Administrator</h6>
+<div class="user-Location"><i class="fa fa-map-marker"></i> {{ \Auth::user()->address}}</div>
 </div><!--
 <div class="col-auto profile-btn">
 
@@ -344,148 +344,139 @@ Edit
 </h5>
 <div class="row">
 <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
-<p class="col-sm-9">John Doe</p>
+<p class="col-sm-9">{{ \Auth::user()->name}} </p>
 </div>
 <div class="row">
 <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
-<p class="col-sm-9"><a href="https://ventura.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543e3b3c3a303b3114312c35392438317a373b39">[email&#160;protected]</a></p>
+<p class="col-sm-9">{{ \Auth::user()->email}}</p>
 </div>
 <div class="row">
 <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
-<p class="col-sm-9">305-310-5857</p>
+<p class="col-sm-9">{{ \Auth::user()->phone_number}}</p>
 </div>
 <div class="row">
 <p class="col-sm-3 text-muted text-sm-right mb-0">Address</p>
-<p class="col-sm-9 mb-0">4663 Agriculture Lane,<br>
-Miami,<br>
-Florida - 33165,<br>
-United States.</p>
+<p class="col-sm-9 mb-0">{{ \Auth::user()->address}}<br></p>
 </div>
 </div>
 </div>
 
-<div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title">Personal Details</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
+    <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Personal Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{route('profileupdate')}}">
+                        @csrf
+                        <div class="row form-row">
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" id ="name" name="name" value="{{Auth::user()->name}}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Email ID</label>
+                                    <input type="email" class="form-control" id ="email" name="email" value="{{Auth::user()->email}}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input type="text" id ="phone_number" name="phone_number" value="{{Auth::user()->phone_number}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Address</span></h5>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" id ="address" name="address" value="{{Auth::user()->address}}">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="modal-body">
-<form>
-<div class="row form-row">
-<div class="col-12 col-sm-12">
-<div class="form-group">
-<label>Name</label>
-<input type="text" class="form-control" value="John">
-</div>
-</div>
+                        <div class="col-lg-3">
 
-<div class="col-12 col-sm-12">
-<div class="form-group">
-<label>Email ID</label>
-<input type="email" class="form-control" value="johndoe@example.com">
-</div>
-</div>
-<div class="col-12 col-sm-12">
-<div class="form-group">
-<label>Mobile</label>
-<input type="text" value="+1 202-555-0125" class="form-control">
-</div>
-</div>
-<div class="col-12">
-<h5 class="form-title"><span>Address</span></h5>
-</div>
-<div class="col-12">
-<div class="form-group">
-<label>Address</label>
-<input type="text" class="form-control" value="4663 Agriculture Lane">
-</div>
-</div>
-<div class="col-12 col-sm-6">
-<div class="form-group">
-<label>Country</label>
-<input type="text" class="form-control" value="United States">
-</div>
-</div>
-</div>
-<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-</form>
-</div>
-</div>
-</div>
-</div>
+                        <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between">
+                        <span>Account Status</span>
+                        <!--<a class="edit-link" href="#"><i class="fa fa-edit mr-1"></i> Edit</a>-->
+                        </h5>
+                        <button class="btn btn-success" type="button"><i class="fe fe-check-verified"></i> Active</button>
+                        </div>
+                        </div>
 
-</div>
-<div class="col-lg-3">
+                        <!--
+                        <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between">
+                        <span>Skills </span>
+                        <a class="edit-link" href="#"><i class="fa fa-edit mr-1"></i> Edit</a>
+                        </h5>
+                        <div class="skill-tags">
+                        <span>Html5</span>
+                        <span>CSS3</span>
+                        <span>WordPress</span>
+                        <span>Javascript</span>
+                        <span>Android</span>
+                        <span>iOS</span>
+                        <span>Angular</span>
+                        <span>PHP</span>
+                        </div>
+                        </div>
+                        </div>
+                        -->
+                        </div>
+                        </div>
 
-<div class="card">
-<div class="card-body">
-<h5 class="card-title d-flex justify-content-between">
-<span>Account Status</span>
-<!--<a class="edit-link" href="#"><i class="fa fa-edit mr-1"></i> Edit</a>-->
-</h5>
-<button class="btn btn-success" type="button"><i class="fe fe-check-verified"></i> Active</button>
-</div>
-</div>
-
-<!--
-<div class="card">
-<div class="card-body">
-<h5 class="card-title d-flex justify-content-between">
-<span>Skills </span>
-<a class="edit-link" href="#"><i class="fa fa-edit mr-1"></i> Edit</a>
-</h5>
-<div class="skill-tags">
-<span>Html5</span>
-<span>CSS3</span>
-<span>WordPress</span>
-<span>Javascript</span>
-<span>Android</span>
-<span>iOS</span>
-<span>Angular</span>
-<span>PHP</span>
-</div>
-</div>
-</div>
--->
-</div>
-</div>
-
-</div>
+                        </div>
 
 
-<div id="password_tab" class="tab-pane fade">
+                        <div id="password_tab" class="tab-pane fade">
 
-<div class="card">
-<div class="card-body">
-<h5 class="card-title">Change Password</h5>
-<div class="row">
-<div class="col-md-10 col-lg-6">
-<form>
-<div class="form-group">
-<label>Old Password</label>
-<input type="password" class="form-control">
-</div>
-<div class="form-group">
-<label>New Password</label>
-<input type="password" class="form-control">
-</div>
-<div class="form-group">
-<label>Confirm Password</label>
-<input type="password" class="form-control">
-</div>
-<button class="btn btn-primary" type="submit">Save Changes</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
+                        <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">Change Password</h5>
+                        <div class="row">
+                        <div class="col-md-10 col-lg-6">
+                        <form method="POST" action="{{ url('changePassword') }}">
+                            @csrf
+                        <!--<div class="form-group">
+                        <label>Old Password</label>
+                        <input type="password" class="form-control">
+                        </div>-->
+                        <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
 
-</div>
+                        </div>
 </div>
 </div>
 </div>

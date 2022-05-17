@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
+use Illuminate\Support\Facades\Hash;
 use App\Models\FundWithdrawal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -15,6 +16,7 @@ use App\Models\NairaSolicitation;
 use App\Models\IndividualUser;
 use App\Models\IndividualDetail;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Status;
 use App\Notifications\MessageSend;
@@ -187,9 +189,54 @@ class UserController extends Controller
         return view('users', compact('search', 'userss'));
     }
 
-    public function profile (Request $request,$id){
-        $admin = DB::table('admins')->first();
+    public function profile (Request $request){
+        $admin = Auth::user();
+        //$admin = DB::table('admins')->first();
         return view('profile', compact('admin'));
+    }
+
+    public function profileUpdate(Request $request){
+        //validation rules
+
+        $request->validate([
+            'name' =>'min:4|string|max:255',
+            'email'=>'email|string|max:255'
+        ]);
+        /** @var \App\Models\Admin $admin */
+        $admin =Auth::user();
+        $admin->name = $request['name'];
+        $admin->email = $request['email'];
+        $admin->phone_number = $request['phone_number'];
+        $admin->address = $request['address'];
+        $admin->save();
+        return back()->with('message','Profile Updated');
+    }
+
+    public function changePassword(Request $request){
+
+        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        //     // The passwords matches
+        //     return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+        // }
+
+        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        //     //Current password and new password are same
+        //     return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        // }
+
+        $validatedData = $request->validate([
+            // 'current-password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        //Change Password
+        /** @var \App\Models\Admin $admin */
+        $admin = Auth::user();
+        $admin->password = Hash::make($request['password']);//$request->get('password'));
+        $admin->save();
+
+        return redirect()->back()->with("success","Password changed successfully !");
+
     }
 
     public function individualusers (Request $request){
