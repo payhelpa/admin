@@ -5,6 +5,10 @@
 </div>
 @endif
 
+<!--@if(Session::has('success'))
+<p class="alert alert-success alert-block {{ Session::get('success') }}">{{ Session::get('success') }}</p>
+@endif
+-->
 @if ($message = Session::get('warning'))
 <div class="alert alert-danger alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>

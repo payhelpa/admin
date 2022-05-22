@@ -36,20 +36,14 @@
     </div>
 <div class="page-wrapper">
 <div class="content container-fluid">
-<div class="page-header">
-<div class="row">
-<div class="col">
-<h3 class="page-title">Charge</h3>
-
-</div>
-
-</div>
-
-<div class="d-flex justify-content-center">
-
-      <a href="#" ></a>
-</div>
-</div>
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Charge</h3>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center"><a href="#" ></a></div>
+    </div>
 
 <div class="row">
     <div class="col-xl-4 col-sm-6 col-12"><a href="">
@@ -60,7 +54,7 @@
                         <i class="fe fe-money"></i>
                     </span>
                     <div class="dash-count">
-                        <i></i>₦5
+                        <i>₦5</i>
                     </div>
                 </div>
                 <div class="dash-widget-info">
@@ -118,7 +112,7 @@
                 <div class="card-body">
                     <div class="card-body">
                         <!-- Alert message (start) -->
-                        <!-- Alert message (end) -->
+                        <!-- Alert message (end) --> 
                     <div class="table-responsive">
                             <form method="POST" action="{{url('charges/setPayhelpaFUCharges')}}" style=" width: 280px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;">
                             @csrf

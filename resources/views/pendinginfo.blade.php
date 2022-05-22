@@ -209,7 +209,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                             <th scope="row">Amount Requested in Naira</th>
                                             <td>₦{{number_format($user->amount_requested_for_in_naira /100,2)}}</td>
                                         </tr>
-                                        <tr>
+                                        <tr> 
                                             <th scope="row">Website Link</th>
                                             <td>{{$user->web_link}}</td>
                                         </tr>

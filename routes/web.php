@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
@@ -95,6 +96,13 @@ Route::get('/showimage/{id}', [UserController::class, 'showimage'])->middleware(
 
 Route::get('/showdoc/{id}', [UserController::class, 'showdoc'])->middleware(['auth'])->name('showdoc');
 
+Route::get('/showBusiness/{id}', [UserController::class, 'showBusiness'])->middleware(['auth'])->name('showBusiness');
+
+Route::get('/showCofI/{id}', [UserController::class, 'showCofI'])->middleware(['auth'])->name('showCofI');
+
+Route::get('/showmemo/{id}', [UserController::class, 'showmemo'])->middleware(['auth'])->name('showmemo');
+
+Route::get('/showotherdoc/{id}', [UserController::class, 'showotherdoc'])->middleware(['auth'])->name('showotherdoc');
 
 Route::get('/completionprove/{id}', [UserController::class, 'completionprove'])->middleware(['auth'])->name('completionprove');
 
@@ -108,6 +116,8 @@ Route::get('/user/delete/{id}', [UserController::class, 'deleteuser'])->middlewa
 
 
 Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
+
+Route::get('/update_verifyBsn/{id}', [UserController::class, 'update_verifyBsn'])->name('update_verifyBsn');
 
 Route::get('/wallet', [TransactionController::class, 'wallet'])->middleware(['auth'])->name('wallet');
 
@@ -136,6 +146,8 @@ Route::get('/services/update/{id}', [ServiceController::class, 'updateServices']
 Route::put('/services/update/{id}', [ServiceController::class, 'updateServices'])->middleware(['auth'])->name('services.update');
 
 Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware(['auth'])->name('providuslog');
+
+Route::get('/adminlog', [AdminController::class, 'adminlog'])->middleware(['auth'])->name('adminlog');
 
 Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
 

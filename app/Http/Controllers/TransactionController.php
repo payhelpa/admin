@@ -33,12 +33,13 @@ class TransactionController extends Controller
     private IndividualUser $IndividualUser;
 
     public function __construct(
-        NairaSolicitation $model, Transaction $transaction, Status $status, IndividualUser $IndividualUser
+        NairaSolicitation $model, Transaction $transaction, Wallet $wallet, /*Status $status,*/ IndividualUser $IndividualUser
     )
+
     {
         $this->model = $model;
         $this->transaction = $transaction;
-        $this->status = $status;
+       // $this->status = $status;
         // $this->helper = $helper;
         // $this->wallet = $wallet;
         $this->IndividualUser = $IndividualUser;
@@ -95,21 +96,13 @@ class TransactionController extends Controller
         $userss = DB::table('naira_solicitations')->where('user_id', $user_id)->get();
         return view('pendinginfo', compact('userss'));
     }
-    public function singlependinginfo($id){
-        //'status' => \App\Enums\TransactionStatusEnum::CREDIT_WALLET,
-        $data = $this->model->where('id', '=', $id)->exists();
-        if ($data) {
-            $user = $this->model->with(['status'])->find($id);
-        }
-       // dd($userss);
-        return view('singlependinginfo', compact('user'));
-    }
+
     public function wallet(Request $request){
         $search = $request['search'] ?? "";
         if($search != ""){
             $userss = Wallet::where('account_name','LIKE',"%$search%")->orWhere('account_number','LIKE',"%$search%")->get();
         }else{
-            $userss = Wallet::all(); 
+            $userss = Wallet::all();
         }
         return view('wallet', compact('search', 'userss'));
     }
@@ -149,6 +142,21 @@ class TransactionController extends Controller
         // })->get();
         $userss = DB::table('naira_solicitations')->where('is_taken', 0)->get();
         return view('pendingstatus', compact('userss'));
+    }
+
+    public function singlependinginfo($id){
+        //'status' => \App\Enums\TransactionStatusEnum::CREDIT_WALLET,
+         //   dd($user);
+    //     $data = $this->model->where('id', '=', $id)->exists();
+    //     if ($data) {
+    //        // $user = DB::table('naira_solicitations')->where('user_id', $id)->get();
+    //         $user = $this->model->with(['status' => \App\Enums\TransactionStatusEnum::CREDIT_WALLET])->find($id);
+    //$user = $this->model->with(['status'])->find($id);
+    //             dd($user);
+    //     }
+       // dd($userss);
+        $user = DB::table('naira_solicitations')->where('id', $id)->get();
+        return view('singlependinginfo', compact('user'));
     }
 
 }

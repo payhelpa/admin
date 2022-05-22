@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class NairaSolicitation extends Model
 {
@@ -47,7 +50,7 @@ class NairaSolicitation extends Model
 
 
 
-    public function status(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+   /* public function status(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
@@ -60,11 +63,19 @@ class NairaSolicitation extends Model
     public function history(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Status::class , 'naira_solicitation_history');
-    }
+    }*/
 
     protected $casts = [
         'docs_link' => 'array',
         'completion_prove' => 'array'
     ];
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
 }

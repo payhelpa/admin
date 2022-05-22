@@ -61,7 +61,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of users to be verified</h4>
+<h4 class="card-title">List of business users to be verified</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -101,7 +101,7 @@ This is the most basic example of the datatables with zero configuration. Use th
       <td>{{$user->email}}</td>
       <td class="text-left"><a href = "{{url('message/'.$user->id)}}" ><i class="fa fa-envelope"></i></a></td>
       <td><a href="{{route('showBusiness',$user->id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-      <td><a href="{{url('update_verifyBsn',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO VERIFY THIS USER?')"  class="btn btn-outline-primary mr-2"></i>Verify </a></td>
+      <td><a href="{{route('update_verifyBsn',$user->id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO VERIFY THIS USER?')"  class="btn btn-outline-primary mr-2"></i>Verify </a></td>
 
     </tr>
 @endforeach

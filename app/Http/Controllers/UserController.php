@@ -51,20 +51,14 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $count = User::count();
+        $countuser = User::count();
         $ver = User::whereNotNull('kyc_verified')->count();
-        $counttrans = Transaction::count();
+        $counttransaction = Transaction::count();
 
         $userdata = User::select(DB::raw("COUNT(*) as count"))
         ->whereYear("created_at", date('Y'))
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('count');
-
-        // $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
-        //    //->whereDate('transactions.created_at')
-        //     ->latest('transactions.created_at')
-        //     ->limit(5)
-        //     ->get();
 
          //users chart
         $userschart =  DB::table('users')->select('id','created_at')->get()->groupBy(function($userschart){
@@ -81,8 +75,14 @@ class UserController extends Controller
         $userss = Transaction::latest('created_at')
         ->limit(5)
         ->get();
-        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('count', 'counttrans','ver','userdata', 'userss'));
-    }
+        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('countuser', 'counttransaction','ver','userdata', 'userss'));
+
+    // $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
+        //    //->whereDate('transactions.created_at')
+        //     ->latest('transactions.created_at')
+        //     ->limit(5)
+        //     ->get();
+}
     public static function GetUserName($user_id)
     {
         $user = User::where('id', $user_id)->select('name')->first();
@@ -184,7 +184,7 @@ class UserController extends Controller
         if($search != ""){
             $userss = User::whereNotNull('account_verified_at')->where('name','LIKE',"%$search%")->get();
         }else{
-            $userss = DB::table('users')->whereNotNull('account_verified_at')->get();
+            $userss = DB::table('users')->whereNotNull('account_verified_at')->orderBy('name')->get()->all();
         }
         return view('users', compact('search', 'userss'));
     }
@@ -302,7 +302,7 @@ class UserController extends Controller
         if($search != ""){
             $users = DB::table('users')->where('role_id', 2)->whereNotNull('kyc_verified')->where('account_verified_at', null)->where('name','LIKE',"%$search%")->get();
         }else{
-            $users =  DB::table('users')->where('role_id', 2)->where('account_verified_at', null)->get();
+            $users =  DB::table('users')->where('role_id', 2)->whereNotNull('kyc_verified')->where('account_verified_at', null)->get();
         }
         return view('verifybusiness', compact('search', 'users'));
     }
@@ -336,7 +336,7 @@ class UserController extends Controller
     // }
     public function update_verify($id){
         $user = User::find($id);
-       // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
+        // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         //dd($userReferralLink);
         DB::beginTransaction();
         try {
@@ -351,8 +351,8 @@ class UserController extends Controller
             'account_name' => $user->name,
             'bvn' =>'',
         ]);
-//$response->status() == 200
-        //$account_number = account_number;
+            //$response->status() == 200
+            //$account_number = account_number;
 
             $rex = json_decode($response);
             if (empty($rex->account_number)){
@@ -390,7 +390,7 @@ class UserController extends Controller
 
     public function update_verifyBsn($id){
         $user = User::find($id);
-       // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
+        // $userReferralLink = "PH" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         //dd($userReferralLink);
         DB::beginTransaction();
         try {
@@ -405,12 +405,12 @@ class UserController extends Controller
             'account_name' => $user->name,
             'bvn' =>'',
         ]);
-//$response->status() == 200
-        //$account_number = account_number;
+            //$response->status() == 200
+            //$account_number = account_number;
 
             $rex = json_decode($response);
             if (empty($rex->account_number)){
-                return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+                return redirect('verifyBusiness')->with('warning','Account was not generated, userrr not verified');
             }
             else{
             $Wallet = (new \App\Models\Wallet)->create([
@@ -435,11 +435,11 @@ class UserController extends Controller
         }*/
     } catch (\Exception $e) {
         DB::rollBack();
-        return redirect('verify')->with('warning','Account was not generated, userrr not verified');
+        return redirect('verifyBusiness')->with('warning','Account was not generated, userrr not verified');
     }
     DB::commit();
-    //$user->notify(new AccountVerificationEmail());
-    return redirect('verify')->with('success','User has been verified!');
+    $user->notify(new AccountVerificationEmail());
+    return redirect('verifyBusiness')->with('success','User has been verified!');
     }
 
     public function message(Request $request, $id){
@@ -462,16 +462,29 @@ class UserController extends Controller
         $users = DB::table('business_details')->where('user_id',$id)->get();
         return view('showBsn', compact('users'));
     }
-public function showimage($id){
-    $users = DB::table('individual_details')->where('user_id',$id)->get();
-    return view('showimage', compact('users'));
-}
+    public function showimage($id){
+        $users = DB::table('individual_details')->where('user_id',$id)->get();
+        return view('showimage', compact('users'));
+    }
 
-public function showdoc($id){
+    public function showdoc($id){
+        $users = DB::table('naira_solicitations')->where('id',$id)->first();
+        return view('showdoc', compact('users'));
+    }
 
-    $users = DB::table('naira_solicitations')->where('id',$id)->first();
-    return view('showdoc', compact('users'));
-}
+    public function showCofI($id){
+        $users = DB::table('business_details')->where('user_id',$id)->get();
+        return view('showCofI', compact('users'));
+    }
+
+    public function showmemo($id){
+        $users = DB::table('business_details')->where('user_id',$id)->get();
+        return view('showmemo', compact('users'));
+    }
+    public function showotherdoc($id){
+        $users = DB::table('business_details')->where('user_id',$id)->get();
+        return view('showotherdoc', compact('users'));
+    }
 public function completionprove($id){
 
     $users = DB::table('naira_solicitations')->where('id',$id)->first();

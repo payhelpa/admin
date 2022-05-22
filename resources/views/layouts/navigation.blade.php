@@ -185,7 +185,7 @@
                         <a href="{{route ('verify')}}"><i class="fe fe-document"></i> <span> Verify</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{route ('verify')}}">Verify Individual Users</a></li>
-                            <li><a href="#">Verify Business Users</a></li>
+                            <li><a href="{{route ('verifyBusiness')}}">Verify Business Users</a></li>
                             <li><a href="{{route ('unverified')}}">Unverified Users</a></li>
                         </ul>
                     </li>
@@ -199,14 +199,28 @@
                     <li>
                         <a href="{{url ('/industry')}}"><i class="fe fe-tiled"></i> <span>Industry</span></a>
                     </li>
-                    <li>
-                        <a href="{{url ('/status')}}"><i class="fe fe-file"></i> <span>Transaction</span></a>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-file"></i> <span> Transaction</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('statusdeclined')}}">LU Pending Transactions</a></li>
+                            <li><a href="{{route('fupending')}}">FU Pending Transactions</a></li>
+                            <li><a href="{{route ('ongoingstatus')}}">Ongoing Transactions</a></li>
+                            <li><a href="{{route('status')}}">Successful Transactions</a></li>
+                        </ul>
                     </li>
+
                     <li>
                         <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>
                     </li>
                     <li>
                         <a href="{{route ('withdrawals')}}"><i class="fe fe-map"></i> <span>Withdrawals</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-book"></i> <span> Logs</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('adminlog')}}">Admin Logs</a></li>
+                            <li><a href="{{route('providuslog')}}">Providus Logs</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>

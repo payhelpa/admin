@@ -8,8 +8,16 @@ use Illuminate\Support\Facades\Http;
 
 class ChargesController extends Controller
 {
-    public function charges(){
-        return view('charges');
+    public function charges(Request $request){
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->get('https://payhelpa-api-staging.herokuapp.com/api/v1/get-keys', [
+        'key' => "PAYHELPA_TRANSACTION_TIMER",
+        "value" ,
+        ]);
+        $tTimer =  $request->value;
+        //dd($response);
+        return view('charges', compact('tTimer'));
     }
     public function setPayhelpaFUCharges(Request $request)
     {
@@ -71,16 +79,35 @@ class ChargesController extends Controller
 
     public function setPayhelpaTimer(Request $request)
     {
-        $charges = ($request->value);
+        //$chargess = ($request->value);
         $response = Http::withHeaders([
             'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
         ])->post('https://payhelpa-api-staging.herokuapp.com/api/v1/set-config-keys', [
         'key' => "PAYHELPA_TRANSACTION_TIMER",
         "value" => $request->value,
         ]);
+        //$chargess = ($request->value);
+        //dd($chargess);
         //dd($response);
         return redirect('charges')->with('success','Transaction Timer Updated Successfully');
 
     }
+
+    public function viewPayhelpaTimer(Request $request)
+    {
+
+        $response = Http::withHeaders([
+            'PayhelpaAccessKey' => "Payhelpa PAY-HELPER#@1~89982+?f6a919HelpERXX"
+        ])->get('https://payhelpa-api-staging.herokuapp.com/api/v1/get-keys', [
+        'key' => "PAYHELPA_TRANSACTION_TIMER",
+        "value" => $request->value,
+        ]);
+        $chargess = "tee";//($request->value);
+        dd($chargess);
+
+        return view('charges', compact('chargess'));
+
+    }
+
 
 }

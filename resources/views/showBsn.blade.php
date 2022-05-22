@@ -1,3 +1,5 @@
+@php use \App\Models\IndividualUser; @endphp
+
 <x-app-layout>
     <x-slot name="header">
         <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -36,15 +38,14 @@
 <div class="page-wrapper">
 <div class="content container-fluid">
 <div class="d-flex justify-content-center">
-      <a href="#" ></a>
+        <a href="#" ></a>
 </div>
 
 <div class="row">
 <div class="col-sm-12">
 <div class="card card-table">
 <div class="card-header">
-<h4 class="card-title">Documents of transaction</h4>
-
+<h4 class="card-title">Documents of this user to be verified</h4>
 </div>
 <div class="card-body">
 <div class="table-responsive">
@@ -162,32 +163,70 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <section class="team">
+    @foreach ($users as $user)
 
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="col-lg-12">
-            <div class="row pt-md">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profile">
-                    <h1 style="text-align:center">Documents Upated</h1>
-
-                    @foreach (json_decode(json_decode($users->docs_link, true),true) as $image)
-                    <img src="{{$image}}" />
-            @endforeach
-                </div>
+          <div class="row pt-md">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
+                <h1 style="text-align:center">C of I</h1><a href="{{route('showCofI',$user->user_id)}}">
+                <img src="{{$user->certificate_of_incorporation}}" class="img-responsive"></a>
             </div>
-        </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
+                <h1 style="text-align:center">Memorandum </h1><a href="{{route('showmemo',$user->user_id)}}">
+                <img src="{{$user->memorandum}}" class="img-responsive">
+               </a> <h1></h1>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
+                <h1 style="text-align:center">Other Document</h1><a href="{{route('showotherdoc',$user->user_id)}}">
+                <img src="{{$user->other_docs}}" class="img-responsive">
+               </a> <h1></h1>
+            </div>
+            </div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">Business Description</th>
+                        <td>{{$user->business_desc}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Business Name </th>
+                        <td>{{$user->business_name}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Business Address</th>
+                        <td>{{$user->business_address}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RC Number</th>
+                        <td>{{$user->rc_number}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Website</th>
+                        <td>{{$user->website}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phone Number</th>
+                        <td>{{$user->phone_number}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+          </div>
         </div>
       </div>
     </div>
   </div>
-
+  @endforeach
 </section>
 <footer>
 
 </footer>
 </div>
-
 
 </div>
 

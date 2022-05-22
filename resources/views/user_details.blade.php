@@ -234,7 +234,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                 </div>
                 <div class="col-md-2">
                     <h6 class="profile-edit-btn">Wallet:<span>₦</span></h6>
-                    
+
                 </div>
             </div>
             <div class="row">
@@ -308,7 +308,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                             </tbody>
                         </table>
 
-                    </div>  
+                    </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                                     <div class="col-md-4">
@@ -341,7 +341,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                     </div>
                     <div class="tab-pane fade" id="wallet" role="tabpanel" aria-labelledby="profile-tab">
                         @foreach ($wallets as $wallet)
-                        <div class="row">                            
+                        <div class="row">
                                     <div class="col-md-4">
                                         <label>Account Number</label>
                                     </div>
@@ -356,7 +356,7 @@ This is the most basic example of the datatables with zero configuration. Use th
                                     <div class="col-md-4">
                                         <p>{{$wallet->account_name}}</p>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
