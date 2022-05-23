@@ -196,8 +196,12 @@
                             <li><a href="{{route('services')}}">View Services</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{url ('/industry')}}"><i class="fe fe-tiled"></i> <span>Industry</span></a>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-tiled"></i> <span> Industry</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('addindustry')}}">Create Industry</a></li>
+                            <li><a href="{{route('industry')}}">View Industry</a></li>
+                        </ul>
                     </li>
                     <li class="submenu">
                         <a href="#"><i class="fe fe-file"></i> <span> Transaction</span> <span class="menu-arrow"></span></a>
@@ -221,9 +225,6 @@
                             <li><a href="{{route ('adminlog')}}">Admin Logs</a></li>
                             <li><a href="{{route('providuslog')}}">Providus Logs</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="{{route ('providuslog')}}"><i class="fe fe-book"></i> <span>Providus Logs</span></a>
                     </li>
                     <li>
                         <!-- Authentication -->
