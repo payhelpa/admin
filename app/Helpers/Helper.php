@@ -21,7 +21,7 @@ class Helper{
         }
         return $randomString;
     }
-
+ 
     public function helpermessagesend($request){
         $content = [
             "subject"=>"New Message from PayHelpa",

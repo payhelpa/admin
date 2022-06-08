@@ -76,7 +76,7 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{ucwords(UserController::GetUserPhoneNumber($user->id)) }}</td>
                                                 <td class="text-center"><a href = "{{url('message/'.$user->id)}}"><i class="fa fa-envelope" style="text-align:center"></i></a></td>
-                                                <td><a href="{{'https://staging.payhelpa.com/auth/admin/login?token=PAY-HELPER#@1~89982+?f6a919HelpERXX&username='.$user->name}}" target="_blank" class="btn btn-sm bg-success">Login</a></td>
+                                                <td><a href="{{'https://payhelpa.com/auth/admin/login?token=PAY-HELPER#@1~89982+?f6a919HelpERXX&username='.$user->name}}" target="_blank" class="btn btn-sm bg-success">Login</a></td>
                                                 <td>{{date('Y/m/d', strtotime($user->created_at))}}</td>
                                                 <td class="text-left">
                                                     <div class="actions text-center">

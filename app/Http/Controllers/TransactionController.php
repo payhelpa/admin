@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Models\Admin;
 use App\Mail\AccountVerified;
+use App\Mail\FundsApproved;
 use App\Models\Service;
 
 
@@ -116,8 +117,11 @@ class TransactionController extends Controller
         return view('withdrawals', compact('search', 'fund_withdrawal'));
     }
     public function approvewithdrawals($id){
-        //dd($id);
+
         $fund_withdrawal = FundWithdrawal::find($id);
+        $email = User::where('id', '=', $fund_withdrawal->user_id)->select('email')->first();
+        $name = User::where('id', '=', $fund_withdrawal->user_id)->select('name')->first();
+        //dd($email);
         //$fund_withdrawal = DB::table('fund_withdrawals')->where('user_id', '=' ,$id )->first();
         //dd($fund_withdrawal);
         $wallet = Wallet::where('user_id', '=', $fund_withdrawal->user_id)->first(); //get user wallet
@@ -125,7 +129,14 @@ class TransactionController extends Controller
             'approval_status' => 1,
             'approved_date' => Carbon::now()
         ]);
+
+        $email_user = new FundsApproved([
+            'name' => $name,
+        ]);
+
         $wallet->decrement('account_balance',  $fund_withdrawal->amount);
+        Mail::to($email)->send(new FundsApproved($email_user));
+        //Mail::to($request->email)->send(new NewMessage($content, $request));
         return redirect('withdrawals');
     }
     public function singleOngoinginfo($id){

@@ -66,6 +66,7 @@
                                 <table class="datatable table table-stripped">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Account Name</th>
                                             <th>Account Number</th>
                                             <th>Account Balance</th>
@@ -74,8 +75,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($userss as $user)
+                                        @if($userss->count())
+                                        @foreach ($userss as $key =>  $user)
                                         <tr>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{$user->account_name}}</td>
                                             <td>{{$user->account_number}}</td>
                                             <td>₦{{number_format($user->account_balance / 100,2)}}</td>
@@ -83,6 +86,7 @@
                                             <td>{{\Carbon\Carbon::parse($user->updated_at)->diffForHumans()}}</td>
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

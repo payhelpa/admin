@@ -123,14 +123,14 @@
 
 
 </style>
-<div class="d-flex dropdown "style="float:left;">
+<!--<div class="d-flex dropdown "style="float:left;">
     <button class="dropbtn" >Menu</button>
     <div class="dropdown-content">
         <a href="{{route('industry')}}">View Industries</a>
         <a href="{{route ('addindustry')}}">Create Industry</a>
 
     </div>
-</div>
+</div>-->
 
 <div class="row">
 <div class="col-sm-12">

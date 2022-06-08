@@ -73,7 +73,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach($logs as $key => $log)
+                                        <tr>
+                                            <td>{{ $log->admin_id }}</td>
+                                            <td>{{ $log->subject }}</td>
+                                            <td>{{ $log->action }}</td>
+                                            <td>{{ $log->created_at }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

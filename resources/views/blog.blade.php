@@ -105,7 +105,7 @@
                             }
 
 
-                        </style>
+                        </style><!--
                         <div class="d-flex dropdown "style="float:left;">
                             <button class="dropbtn" >Menu</button>
                             <div class="dropdown-content">
@@ -113,7 +113,7 @@
                                 <a href="{{route('allblog')}}">View all blogs</a>
 
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="d-flex justify-content-center"><a href="#" ></a></div>
                     </div>

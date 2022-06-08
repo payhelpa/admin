@@ -149,6 +149,8 @@ Route::get('/providuslog', [UserController::class, 'providuslog'])->middleware([
 
 Route::get('/adminlog', [AdminController::class, 'adminlog'])->middleware(['auth'])->name('adminlog');
 
+Route::get('/calendar', [AdminController::class, 'calendar'])->middleware(['auth'])->name('calendar');
+
 Route::get('/charges', [ChargesController::class, 'charges'])->middleware(['auth'])->name('charges');
 
 Route::get('/charges/setPayhelpaFUCharges', [ChargesController::class, 'setPayhelpaFUCharges'])->middleware(['auth'])->name('charges.setPayhelpaFUCharges');
@@ -185,4 +187,6 @@ Route::get('/industry/update/{id}', [IndustryController::class, 'updateindustry'
 
 Route::put('/industry/update/{id}', [IndustryController::class, 'updateindustry'])->middleware(['auth'])->name('industry.update');
 
+
+Route::get('logActivity', 'HomeController@logActivity');
 require __DIR__.'/auth.php';

@@ -7,20 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewMessage extends Mailable
+class FundsApproved extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $content;
+   // protected array $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($content)
+
+    public function __construct()
     {
-        $this->content = $content;
+
     }
 
     /**
@@ -30,7 +31,7 @@ class NewMessage extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.sample-mail');
+        return $this->markdown('emails.funds-approved');
+        //return $this->view('view.name');
     }
 }
- 

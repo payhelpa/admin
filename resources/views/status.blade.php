@@ -47,12 +47,16 @@
 
 </div>
 <div class="d-flex justify-content-center">
+    <a href="#" ></a>
+</div>
+<!--
+<div class="d-flex justify-content-center">
     <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary btn-sm mr-2'>LU Pending Transactions</a>
     <a href="{{route ('fupending')}}" class='btn btn-outline-primary btn-sm mr-2'>FU Pending Transactions</a>
     <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary btn-sm mr-2'>Ongoing Transactions</a>
     <a href="{{route ('status')}}" class='btn btn-outline-primary btn-sm mr-2'>Successful Transactions</a>
 
-</div>
+</div>-->
 </div>
 
 <div class="row">

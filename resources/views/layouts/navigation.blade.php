@@ -31,7 +31,7 @@
 <div class="app-list">
 <div class="row">
 <div class="col"><a class="app-item" href="inbox.html"><i class="fa fa-envelope"></i><span>Email</span></a></div>
-<div class="col"><a class="app-item" href="calendar.html"><i class="fa fa-calendar"></i><span>Activity Log</span></a></div>
+<div class="col"><a class="app-item" href="{{route('calendar')}}"><i class="fa fa-calendar"></i><span>Activity Log</span></a></div>
 <div class="col"><a class="app-item" href="chat.html"><i class="fa fa-comments"></i><span>Chat</span></a></div>
 </div>
 </div>
