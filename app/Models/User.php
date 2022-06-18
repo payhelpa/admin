@@ -34,6 +34,11 @@ class User extends Authenticatable implements  MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public static function getUsers(){
+        $records = User::select('name','email')->get()->toArray();
+        return $records;
+    }
+
     public function business(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(BusinessUser::class);
