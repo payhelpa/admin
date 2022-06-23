@@ -173,6 +173,8 @@ Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['
 
 Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth'])->name('allblog');
 
+Route::get('/blogdetails/{id}', [BlogController::class, 'blogdetails'])->middleware(['auth'])->name('blogdetails');
+
 Route::get('/industry', [IndustryController::class, 'industry'])->middleware(['auth'])->name('industry');
 
 Route::get('/addindustry', [IndustryController::class, 'addindustry'])->middleware(['auth'])->name('addindustry');
@@ -187,6 +189,23 @@ Route::get('/industry/update/{id}', [IndustryController::class, 'updateindustry'
 
 Route::put('/industry/update/{id}', [IndustryController::class, 'updateindustry'])->middleware(['auth'])->name('industry.update');
 
+Route::get('/tag', [BlogController::class, 'tag'])->middleware(['auth'])->name('tag');
+
+Route::get('/addtag', [BlogController::class, 'addtag'])->middleware(['auth'])->name('addtag');
+
+Route::post('/createtag', [BlogController::class, 'createtag'])->middleware(['auth'])->name('createtag');
+
+Route::get('/tag/delete/{id}', [BlogController::class, 'deletetag'])->middleware(['auth'])->name('tag.delete');
+
+Route::get('/tag/edit/{id}', [BlogController::class, 'edittag'])->middleware(['auth'])->name('tag.edit');
+
+Route::get('/tag/update/{id}', [BlogController::class, 'updatetag'])->middleware(['auth'])->name('tag.update');
+
+Route::put('/tag/update/{id}', [BlogController::class, 'updatetag'])->middleware(['auth'])->name('tag.update');
+
+Route::get('export/', [UserController::class, 'export'])->middleware(['auth'])->name('export');
+
+Route::get('exportnumber/', [UserController::class, 'exportnumber'])->middleware(['auth'])->name('exportnumber');
 
 Route::get('logActivity', 'HomeController@logActivity');
 require __DIR__.'/auth.php';

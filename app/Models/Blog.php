@@ -16,13 +16,21 @@ class Blog extends Model
     use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
-        'title', 'body', 'cover_image', 'slug'
+        'title', 'body', 'cover_image', 'tags', 'slug'
     ];
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(BlogComment::class);
     }
+    public function likes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(BlogLike::class);
+    }
+
+    protected $casts = [
+        'tags' => 'array'
+    ];
 
     public function sluggable(): array
     {

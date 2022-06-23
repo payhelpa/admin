@@ -189,20 +189,46 @@
                             <li><a href="{{route ('unverified')}}">Unverified Users</a></li>
                         </ul>
                     </li>
-                    <li class="submenu">
+                    <!--<li class="submenu">
                         <a href="#"><i class="fe fe-activity"></i> <span> Services</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{route ('addServices')}}">Create Services</a></li>
                             <li><a href="{{route('services')}}">View Services</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li class="submenu">
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                        <li class="submenu">
+                        <a href="javascript:void(0);"> <span>Industry</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('addindustry')}}"><span>Create Industry</span></a></li>
+                            <li><a href="{{route ('industry')}}"> <span>View Industry</span></a></li>
+                        </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"> <span>Service</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="{{route ('addServices')}}"><span>Create Industry</span></a></li>
+                                <li><a href="{{route ('services')}}"> <span>View Industry</span></a></li>
+                            </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>Tags</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="{{route ('addtag')}}"><span>Create Tags</span></a></li>
+                                    <li><a href="{{route ('tag')}}"> <span>View Tags</span></a></li>
+                                </ul>
+                                </li>
+                        </ul>
+                        </li>
+                    <!--<li class="submenu">
                         <a href="#"><i class="fe fe-tiled"></i> <span> Industry</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{route ('addindustry')}}">Create Industry</a></li>
                             <li><a href="{{route('industry')}}">View Industry</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li class="submenu">
                         <a href="#"><i class="fe fe-file"></i> <span> Transaction</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">

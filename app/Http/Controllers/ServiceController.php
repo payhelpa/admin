@@ -7,9 +7,6 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
-
-
-
 class ServiceController extends Controller
 {
     public function services(Request $request){
@@ -23,7 +20,7 @@ class ServiceController extends Controller
     }
 
     public function addServices(Request $request){
-        return view('addservices'); 
+        return view('addservices');
     }
 
     public function createServices(Request $request){
@@ -33,7 +30,7 @@ class ServiceController extends Controller
         ]);
        // Session::flash('message', 'Created successfully!');
         //Session::flash('alert-class', 'alert-success');error
-        return view('addservices', compact('services'))->with('error','Created successfully!');;
+        return view('addservices', compact('services'))->with('error','Created successfully!');
     }
 
     public function editServices($id){

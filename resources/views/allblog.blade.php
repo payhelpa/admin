@@ -1,4 +1,5 @@
 @php use \App\Http\Controllers\UserController; @endphp
+@php use Illuminate\Support\Str; @endphp
 <x-app-layout>
         <x-slot name="header">
             <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -120,37 +121,36 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Blogs</h4>
-                                </div>
+
                                 <div class="card-body">
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                   <!-- <form method="POST" action="{{route('createblog')}}" enctype="multipart/form-data" role="form">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="title" id="title" placeholder="Title"/>
+                                                    <section class="comp-section comp-cards">
+                                                        <div class="section-header">
+                                                        <h3 class="section-title">Blogs</h3>
+                                                        <div class="line"></div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Cover Image </label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-btn">
-                                                                    <span class="btn btn-primary btn-file">
-                                                                    Browse <input type="file" name="cover_image" id="cover_image" value="cover_image">
-                                                                    </span>
-                                                                </span>
-                                                                <input type="text" class="form-control" readonly>
-                                                            </div>
+
+                                                        <div class="row">
+                                                            @foreach($blogs as $blog)
+                                                        <div class="col-12 col-md-6 col-lg-4 d-flex">
+                                                        <div class="card flex-fill">
+                                                        <img alt="Card Image" src="{{$blog->cover_image}}" class="card-img-top">
+                                                        <div class="card-header">
+                                                        <h5 class="card-title mb-0">{{$blog->title}}</h5>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <textarea class="form-control" rows="25" cols="160" id="body" name="body"></textarea>
+                                                        <div class="card-body">
+                                                        <p class="card-text">{{Str::words($blog->body, 13, ' >>>')}}</p>
+                                                        <a class="btn btn-primary" href="{{route('blogdetails',$blog->id)}}">View more</a>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
                                                         </div>
-                                                    </form>-->
+                                                        </div>
+                                                        @endforeach
+                                                        </div>
+
+                                                        </section>
                                                 </div>
                                                 </div>
                                             </div>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Exports\UsersExport;
+use App\Exports\UsersNumberExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\FundWithdrawal;
 use Illuminate\Support\Facades\DB;
@@ -499,6 +502,15 @@ public function providuslog(Request $request){
     }
     return view('providuslog', compact('search', 'log'));
 }
+
+public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function exportnumber()
+    {
+        return Excel::download(new UsersNumberExport, 'usersnumber.xlsx');
+    }
 
 // public function approvewithdrawals($id){
 //     $userss = DB::table('fund_withdrawals')

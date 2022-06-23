@@ -148,6 +148,20 @@
                                                         <textarea class="form-control" rows="25" cols="160" id="body" name="body"></textarea>
                                                     </div>
                                                     <div class="form-group">
+                                                        <div class="form-check">
+                                                            <p class="text-muted">Please select the tag(s) this post is about.</p>
+                                                            @foreach($tags as $tag)
+                                                            <label class="checkbox-inline  mr-2">
+                                                                <input type="checkbox" id="tags" name="tags[]" value="{{$tag->title}}"> {{$tag->title}}
+                                                            </label>
+                                                            @endforeach
+                                                        <div class="invalid-feedback">
+                                                        Please select a tag.
+                                                        </div>
+                                                        </div>
+                                                        </div>
+
+                                                    <div class="form-group">
                                                         <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
                                                     </div>
                                                     </form>
