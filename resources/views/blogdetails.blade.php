@@ -81,9 +81,9 @@
                 </ul>
                 <div class="tab-content">
                 <div class="tab-pane show active" id="product_desc">
-                <div class="product-content"> 
+                <div class="product-content">
                 <p>{{$blog->body}}</p>
-                </div>
+                </div> 
                 </div>
                 @endforeach
                 <div class="tab-pane" id="product_reviews">
