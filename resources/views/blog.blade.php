@@ -26,6 +26,7 @@
             <div class="d-flex justify-content-center">
                 <a href="#" ></a>
             </div>
+            @include('flash-message')
             <div class="page-wrapper">
                 <div class="content container-fluid">
                     <div class="page-header">
@@ -33,6 +34,7 @@
                             <div class="col">
                                 <h3 class="page-title">PayHelpa's Blog </h3>
                             </div>
+                        
                         </div>
                         <style>
                             /* Dropdown Button */
@@ -123,6 +125,7 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Create New Blog</h4>
                                 </div>
+                                @include('flash-message')
                                 <div class="card-body">
                                     <div class="">
                                         <div class="container">

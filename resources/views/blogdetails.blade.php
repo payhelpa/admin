@@ -49,7 +49,7 @@
                     @foreach($blogs as $blog)
                 <div class="pro-image" id="pro_popup">
                 <a href="{{$blog->cover_image}}">
-                <img class="img-fluid" src="{{$blog->cover_image}}" alt="Product Image">
+                <img class="img-fluid" style="height: 15rem; width:20rem" src="{{$blog->cover_image}}" alt="Cover Image">
                 </a>
                 </div>
 
@@ -69,7 +69,11 @@
                 <span><i class="fa fa-star-o "></i></span>
                 <span>/ Reviews (3)</span>
                 </p>
+
                 </div>
+                <a  style="float:right;" href="{{ route('blog.delete',$blog->id) }}" class="btn btn-sm bg-danger-light">
+                    <i class="fe fe-trash"></i> Delete
+                </a>
                 <!--<p class="product_price">$5528</p>
                 <p><b>Availability:</b> In Stock</p>-->
                 </div>
@@ -82,7 +86,7 @@
                 <div class="tab-content">
                 <div class="tab-pane show active" id="product_desc">
                 <div class="product-content">
-                <p>{{$blog->body}}</p>
+                <p>{{strip_tags($blog->body)}}</p>
                 </div>
                 </div>
                 @endforeach

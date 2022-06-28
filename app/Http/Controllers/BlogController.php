@@ -27,22 +27,26 @@ class BlogController extends Controller
 
         $blog = Blog::create([
             'title' =>  request('title'),
-            'body' => strip_tags($request->body),
+            'body' => ($request->body),
             'cover_image' => $upload['url'],
             'tags' => request('tags'),
         ]);
         //$body = strip_tags($request->body);
-        return redirect()->back()->with('error',' Updated Successfully');
+        return redirect()->back()->with('blogsuccess',' Published Successfully');
         //return view('blog');
     }
     public function allblog(){
-        $blogs =Blog::all();
+        $blogs =Blog::latest('created_at')->get();
         return view('allblog', compact('blogs'));
     }
     public function blogdetails($id){
         $blogs =Blog::where('id',$id)->get();
         $blogdetails = BlogComment::where('id',$id)->get();
         return view('blogdetails', compact('blogs','blogdetails'));
+    }
+    public function deleteblog($id){
+        Blog::destroy($id);
+        return redirect()->route('allblog');
     }
     public function createtag(){
         $tag = Tag::create([

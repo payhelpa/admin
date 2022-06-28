@@ -101,14 +101,6 @@
 
                             </style>
                             <div class="card-body">
-                                <div class="d-flex dropdown "style="float:right;">
-                                    <button class='btn btn-outline-primary btn-sm mr-2' >Export</button>
-                                    <div class="dropdown-content">
-                                        <a href="{{route('export')}}">Name & Email</a>
-                                        <a href="{{route('exportnumber')}}">Phone Number</a>
-                                    </div>
-                                </div>
-      
                                 <div class="table-responsive">
                                     <table class="datatable table table-stripped">
                                         <thead>

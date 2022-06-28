@@ -80,6 +80,9 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 </div>
 <div class="card-body">
+    <div class="btn-group" style="float:right;">
+        <a class="btn btn-primary" href="{{route('export')}}">Export</a>
+    </div>
 <div class="table-responsive">
 <table class="datatable table table-stripped">
 <thead>
@@ -90,13 +93,14 @@ This is the most basic example of the datatables with zero configuration. Use th
 <th>Email</th>
 <th>Phone Number</th>
 <th>Send Message</th>
+<th>Login as User</th>
 <th>Created at</th>
 <th class="text-right">Action</th>
 
 </tr>
 </thead>
 <tbody>
-    @foreach ($userss as $user)
+    @foreach ($users as $user)
     <tr>
         @if($user->country == 'NG')
         <td class="text-center"><img src="{{asset('assets/img/NGN 1.png')}}"></td>
@@ -110,12 +114,17 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
         <td>{{$user->phone_number}}</td>
         <td class="text-center"><a href = "{{url('message/'.$user->user_id)}}" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
-        <td>{{$user->created_at}}</td>
+        <td><a href="{{'https://payhelpa.com/auth/admin/login?token=PAY-HELPER#@1~89982+?f6a919HelpERXX&username='.$user->id}}" target="_blank" class="btn btn-sm bg-success">Login</a></td>
+        <td>{{date('Y/m/d', strtotime($user->created_at))}}</td>
+
         <td class="text-right">
+
             <div class="actions">
                 <a href="#" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
-            </div>
+
+        </div>
         </td>
+
 
 
     </tr>

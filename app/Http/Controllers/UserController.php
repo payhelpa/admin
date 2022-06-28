@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Exports\UsersExport;
-use App\Exports\UsersNumberExport;
+use App\Exports\BizUsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use App\Models\FundWithdrawal;
@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NewMessage;
 use App\Models\Admin;
 use App\Mail\AccountVerified;
+use App\Models\BusinessDetail;
+use App\Models\BusinessUser;
 use App\Models\Service;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -101,7 +103,9 @@ class UserController extends Controller
     public static function GetUserPhoneNumber($user_id)
     {
         $user = IndividualDetail::where('user_id', $user_id)->select('phone_number')->first();
-            if($user != null)
+        $user = BusinessDetail::where('user_id', $user_id)->select('phone_number')->first();
+
+        if($user != null)
         {
             echo $user->phone_number;
         }
@@ -170,6 +174,19 @@ class UserController extends Controller
         else
         {
             echo "";
+        }
+    }
+
+    public static function GetActiveUser($user_id)
+    {
+        $user = User::where('id', $user_id)->select('active_status')->first();
+            if($user != null)
+        {
+            echo $user->name;
+        }
+        else
+        {
+            echo "N/A";
         }
     }
     /**
@@ -243,9 +260,18 @@ class UserController extends Controller
     }
 
     public function individualusers (Request $request){
-        $userss = DB::table('individual_details')->get();
 
-        return view('individualusers', compact('userss'));
+        //$userss = DB::table('individual_details')->get();
+        $users = IndividualDetail::get();
+        $activeUsers = User::select('active_status')->get();
+        //dd($activeUsers);
+
+        $userss = $this->IndividualDetail->with(['user'])->whereHas('user', function ($query)  {
+            $query->whereNotNull('active_status');
+        })->get();
+        //dd($userss);
+
+        return view('individualusers', compact('users','activeUsers'));
     }
     public function businessusers (Request $request){
         $userss = DB::table('business_details')->get();
@@ -507,9 +533,9 @@ public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
-    public function exportnumber()
+    public function exportbiz()
     {
-        return Excel::download(new UsersNumberExport, 'usersnumber.xlsx');
+        return Excel::download(new BizUsersExport, 'businessusers.xlsx');
     }
 
 // public function approvewithdrawals($id){

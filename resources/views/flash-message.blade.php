@@ -30,6 +30,12 @@
 </div>
 @endif
 
+@if ($message = Session::get('blogsuccess'))
+<div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Blog Published Successfully! </strong>
+</div>
+@endif
 
 @if ($errors->any())
 <div class="alert alert-danger">

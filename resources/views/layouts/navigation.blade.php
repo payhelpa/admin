@@ -197,7 +197,7 @@
                         </ul>
                     </li>-->
                     <li class="submenu">
-                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Add-on</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                         <li class="submenu">
                         <a href="javascript:void(0);"> <span>Industry</span> <span class="menu-arrow"></span></a>

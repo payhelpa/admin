@@ -137,20 +137,20 @@
                                                             @foreach($blogs as $blog)
                                                         <div class="col-12 col-md-6 col-lg-4 d-flex">
                                                         <div class="card flex-fill">
-                                                        <img alt="Card Image" src="{{$blog->cover_image}}" class="card-img-top">
+                                                        <img class="card-img-top center" alt="Card Image" style="margin-left: auto; margin-right: auto; height: 10rem; width:10rem" src="{{$blog->cover_image}}">
                                                         <div class="card-header">
                                                         <h5 class="card-title mb-0">{{$blog->title}}</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <p class="card-text">{{Str::words($blog->body, 13, ' >>>')}}</p>
+                                                        <p class="card-text">{{strip_tags(Str::words($blog->body, 13)) }}</p>
                                                         <a class="btn btn-primary" href="{{route('blogdetails',$blog->id)}}">View more</a>
+                                                        <a style="float:right;" onclick="return confirm('ARE YOU SURE YOU WANT TO DELETE THIS BLOG?')" href="{{ route('blog.delete',$blog->id) }}"><i class="fe fe-trash"></i></a>
                                                         </div>
                                                         </div>
                                                         </div>
                                                         @endforeach
                                                         </div>
-
-                                                        </section>
+                                                    </section>
                                                 </div>
                                                 </div>
                                             </div>

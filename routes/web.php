@@ -175,6 +175,8 @@ Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth'])
 
 Route::get('/blogdetails/{id}', [BlogController::class, 'blogdetails'])->middleware(['auth'])->name('blogdetails');
 
+Route::get('/blog/delete/{id}', [BlogController::class, 'deleteblog'])->middleware(['auth'])->name('blog.delete');
+
 Route::get('/industry', [IndustryController::class, 'industry'])->middleware(['auth'])->name('industry');
 
 Route::get('/addindustry', [IndustryController::class, 'addindustry'])->middleware(['auth'])->name('addindustry');
@@ -205,7 +207,7 @@ Route::put('/tag/update/{id}', [BlogController::class, 'updatetag'])->middleware
 
 Route::get('export/', [UserController::class, 'export'])->middleware(['auth'])->name('export');
 
-Route::get('exportnumber/', [UserController::class, 'exportnumber'])->middleware(['auth'])->name('exportnumber');
+Route::get('exportbiz/', [UserController::class, 'exportbiz'])->middleware(['auth'])->name('exportbiz');
 
 Route::get('logActivity', 'HomeController@logActivity');
 require __DIR__.'/auth.php';
