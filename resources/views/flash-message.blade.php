@@ -37,6 +37,20 @@
 </div>
 @endif
 
+@if ($message = Session::get('blogdel'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Blog Deleted</strong>
+</div>
+@endif
+
+@if ($message = Session::get('blogfail'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Blog not published. Kindly select tags</strong>
+</div>
+@endif
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert">×</button>

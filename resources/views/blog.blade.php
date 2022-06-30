@@ -17,6 +17,7 @@
             <link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
             <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
             <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
             <!--[if lt IE 9]>
                         <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
                         <script src="{{asset('assets/js/respond.min.js')}}"></script>
@@ -34,57 +35,14 @@
                             <div class="col">
                                 <h3 class="page-title">PayHelpa's Blog </h3>
                             </div>
-                        
+
                         </div>
                         <style>
-                            /* Dropdown Button */
-                            .dropbtn {
-                            background-color: #2962ff;
-                            color: white;
-                            padding: 16px;
-                            font-size: 16px;
-                            border: none;
-                            }
-
-                            /* The container <div> - needed to position the dropdown content */
-                            .dropdown {
-                            position: relative;
-                            display: inline-block;
-                            }
-
-                            /* Dropdown Content (Hidden by Default) */
-                            .dropdown-content {
-                            display: none;
-                            position: absolute;
-                            background-color: #f1f1f1;
-                            min-width: 160px;
-                            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                            z-index: 1;
-                            }
-
-                            /* Links inside the dropdown */
-                            .dropdown-content a {
-                            color: black;
-                            padding: 12px 16px;
-                            text-decoration: none;
-                            display: block;
-                            }
-
-                            /* Change color of dropdown links on hover */
-                            .dropdown-content a:hover {background-color: #ddd;}
-
-                            /* Show the dropdown menu on hover */
-                            .dropdown:hover .dropdown-content {display: block;}
-
-                            /* Change the background color of the dropdown button when the dropdown content is shown */
-                            .dropdown:hover .dropbtn {background-color: #2962ff;}
-
                             /* blog css */
                             .btn-file {
                                 position: relative;
                                 overflow: hidden;
                             }
-
                             .btn-file input[type=file] {
                                 position: absolute;
                                 top: 0;
@@ -100,20 +58,16 @@
                                 cursor: inherit;
                                 display: block;
                             }
-
                             input[readonly] {
                             background-color: white !important;
                             cursor: text !important;
                             }
-
-
                         </style><!--
                         <div class="d-flex dropdown "style="float:left;">
                             <button class="dropbtn" >Menu</button>
                             <div class="dropdown-content">
                                 <a href="{{route('blog')}}">Create New Blog</a>
                                 <a href="{{route('allblog')}}">View all blogs</a>
-
                             </div>
                         </div>-->
 
@@ -134,36 +88,36 @@
                                                     <form method="POST" action="{{route('createblog')}}" enctype="multipart/form-data" role="form">
                                                         @csrf
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title"/>
+                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title" required/>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Cover Image </label>
                                                         <div class="input-group">
                                                             <span class="input-group-btn">
                                                                 <span class="btn btn-primary btn-file">
-                                                                Browse <input type="file" name="cover_image" id="cover_image" value="cover_image">
+                                                                Browse <input type="file" name="cover_image" id="cover_image" value="cover_image" required>
                                                                 </span>
                                                             </span>
                                                             <input type="text" class="form-control" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <textarea class="form-control" rows="25" cols="160" id="body" name="body"></textarea>
+                                                        <textarea class="form-control" rows="25" cols="5" id="body" name="body"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="form-check">
-                                                            <p class="text-muted">Please select the tag(s) this post is about.</p>
+                                                            <label for="division">Tags</label>
+                                                            <p class="text-muted">Please select the tag(s) this post falls under.</p>
                                                             @foreach($tags as $tag)
                                                             <label class="checkbox-inline  mr-2">
                                                                 <input type="checkbox" id="tags" name="tags[]" value="{{$tag->title}}"> {{$tag->title}}
                                                             </label>
                                                             @endforeach
-                                                        <div class="invalid-feedback">
-                                                        Please select a tag.
+                                                            <div class="invalid-feedback">
+                                                            Please select a tag.
+                                                            </div>
                                                         </div>
-                                                        </div>
-                                                        </div>
-
+                                                    </div>
                                                     <div class="form-group">
                                                         <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
                                                     </div>
@@ -198,6 +152,7 @@
             <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
             <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
             <script src="{{asset('assets/js/script.js')}}"></script>
+
 
             <script>
                 ClassicEditor

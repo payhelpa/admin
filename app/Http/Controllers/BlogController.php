@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\BlogComment;
 use App\Models\Tag;
+use Illuminate\Support\Facades\DB;
 use JD\Cloudder\Facades\Cloudder;
 
 class BlogController extends Controller
@@ -15,29 +16,41 @@ class BlogController extends Controller
         return view('blog', compact('tags'));
     }
     public function createblog(Request $request){
-        // if( $request->Hasfile('cover_image') )
-        //     { dd('exist');
-        //     } else {
-        //         dd('false');
-        //      }
         Cloudder::upload(request('cover_image'), null, [
             "folder" => "payhelpa-documents",  "overwrite" => FALSE, "resource_type" => "image"
         ]);
         $upload = Cloudder::getResult();
-
-        $blog = Blog::create([
-            'title' =>  request('title'),
-            'body' => ($request->body),
-            'cover_image' => $upload['url'],
-            'tags' => request('tags'),
-        ]);
+        // $blog = Blog::create([
+        //     'title' =>  request('title'),
+        //     'body' => ($request->body),
+        //     'cover_image' => $upload['url'],
+        //     'tags' => request('tags'),
+        // ]);
         //$body = strip_tags($request->body);
-        return redirect()->back()->with('blogsuccess',' Published Successfully');
-        //return view('blog');
+
+        if (empty(request('tags'))){
+            return redirect()->back()->with('blogfail',' Published Successfully');
+        }
+        else{
+            $blog = Blog::create([
+                'title' =>  request('title'),
+                'body' => ($request->body),
+                'cover_image' => $upload['url'],
+                'tags' => request('tags'),
+            ]);
     }
-    public function allblog(){
-        $blogs =Blog::latest('created_at')->get();
-        return view('allblog', compact('blogs'));
+    return redirect()->back()->with('blogsuccess',' Published Successfully');
+}
+    public function allblog(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $blogs = Blog::where('title','LIKE',"%$search%")->get();
+        }else{
+            $blogs =Blog::latest('created_at')->get();
+        }
+        //return view('providuslog', compact('search', 'log'));
+        //$blogs =Blog::latest('created_at')->get();
+        return view('allblog', compact('search','blogs'));
     }
     public function blogdetails($id){
         $blogs =Blog::where('id',$id)->get();
@@ -46,7 +59,7 @@ class BlogController extends Controller
     }
     public function deleteblog($id){
         Blog::destroy($id);
-        return redirect()->route('allblog');
+        return redirect()->route('allblog')->with('blogdel',' Published Successfully');
     }
     public function createtag(){
         $tag = Tag::create([

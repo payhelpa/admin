@@ -45,6 +45,7 @@
                 <div class="row">
                 <div class="col-md-6 col-sm-12">
                 <div class="product-view">
+                    @include('flash-message')
                 <div class="proimage-wrap">
                     @foreach($blogs as $blog)
                 <div class="pro-image" id="pro_popup">
@@ -59,6 +60,7 @@
                 <div class="col-md-6 col-sm-12">
                 <div class="product-info">
                 <h2>{{$blog->title}}</h2>
+                <i class="text-muted">{{date('l jS \of F Y h:i:s A',strtotime($blog->created_at))}}</i>
                 <!--<p class="mb-0">Product ID: PRO-0001</p>-->
                 <div class="rating">
                 <p>
@@ -86,7 +88,7 @@
                 <div class="tab-content">
                 <div class="tab-pane show active" id="product_desc">
                 <div class="product-content">
-                <p>{{strip_tags($blog->body)}}</p>
+                <p>{!!($blog->body)!!}</p>
                 </div>
                 </div>
                 @endforeach

@@ -130,8 +130,20 @@
                                                     <section class="comp-section comp-cards">
                                                         <div class="section-header">
                                                         <h3 class="section-title">Blogs</h3>
-                                                        <div class="line"></div>
+                                                        <div class="line"></div> <div class="d-flex flex-row-reverse">
+                                                            <form class="form-inline my-2 my-lg-0" action = "" method= "" >
+                                                                <div class="input-group">
+                                                                  <div >
+                                                                    <input type="search" class="form-control mr-sm-2" placeholder ="Search by Title" name="search">
+                                                                    <label class="form-label" for="form1"></label>
+                                                                  </div>
+                                                                  <input type="submit" class="btn btn-primary">
+                                                                </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
+
+                                                        @include('flash-message')
 
                                                         <div class="row">
                                                             @foreach($blogs as $blog)
@@ -142,7 +154,7 @@
                                                         <h5 class="card-title mb-0">{{$blog->title}}</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <p class="card-text">{{strip_tags(Str::words($blog->body, 13)) }}</p>
+                                                        <p class="card-text">{!!(Str::words($blog->body, 13)) !!}</p>
                                                         <a class="btn btn-primary" href="{{route('blogdetails',$blog->id)}}">View more</a>
                                                         <a style="float:right;" onclick="return confirm('ARE YOU SURE YOU WANT TO DELETE THIS BLOG?')" href="{{ route('blog.delete',$blog->id) }}"><i class="fe fe-trash"></i></a>
                                                         </div>
