@@ -135,24 +135,11 @@
 <div class="card">
 <div class="card-header">
 <h4 class="card-title">Create New Industry</h4>
-
-<div class="d-flex flex-row-reverse">
-<div class="top-nav-search " style="background: linear-gradient(-45deg,#3949ab,#2962ff); border-radius: 50px;">
-
-<form class="form-inline my-2 my-lg-0" action = "" method= "" >
-<div class="input-group">
-  <div >
-    <input type="search" class="form-control mr-sm-2" placeholder ="Search" name="search">
-    <label class="form-label" for="form1"></label>
-  </div>
-  <input type="submit" class="btn btn-primary">
-</div>
-</form>
-</div>
-</div>
+@include('flash-message')
 
 </div>
 <div class="card-body">
+
         <!-- Alert message (start) -->
 
         <!-- Alert message (end) -->

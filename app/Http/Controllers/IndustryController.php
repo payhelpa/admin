@@ -28,7 +28,7 @@ class IndustryController extends Controller
         ]);
        // Session::flash('message', 'Created successfully!');
         //Session::flash('alert-class', 'alert-success');error
-        return view('addindustry', compact('industry'))->with('error','Created successfully!');;
+        return redirect()->back()->with('addindus','Created successfully!');;
     }
 
     public function editindustry($id){
