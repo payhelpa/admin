@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Industries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndustryController extends Controller
 {
@@ -12,7 +13,7 @@ class IndustryController extends Controller
         if($search != ""){
             $industry = Industries::where('name','LIKE',"%$search%")->get();
         }else{
-            $industry = Industries::all();
+            $industry = DB::table('industries')->orderBy('name')->get()->all(); //Industries::orderBy('name')->get()->all();
         }
         return view('industry', compact('search', 'industry'));
     }

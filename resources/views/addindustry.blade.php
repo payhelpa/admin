@@ -137,9 +137,12 @@
 <h4 class="card-title">Create New Industry</h4>
 @include('flash-message')
 
+
 </div>
 <div class="card-body">
-
+    <div style="display: flex; float: right; margin-buttom:-40px; ">
+        <a href="{{route ('industry')}}" class='btn btn-primary mr-2' >View Industries</a>
+    </div>
         <!-- Alert message (start) -->
 
         <!-- Alert message (end) -->
