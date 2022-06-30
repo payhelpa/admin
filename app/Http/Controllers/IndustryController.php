@@ -18,7 +18,7 @@ class IndustryController extends Controller
     }
 
     public function addIndustry(Request $request){
-        return view('addIndustry'); 
+        return view('addindustry');
     }
 
     public function createIndustry(Request $request){
