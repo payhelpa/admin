@@ -209,6 +209,26 @@ class UserController extends Controller
         return view('users', compact('search', 'userss'));
     }
 
+    public function subusers(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $users = IndividualDetail::where('name','LIKE',"%$search%")->get();
+        }else{
+            $users = IndividualDetail::get()->all();
+        }
+        return view('subadmin.subusers', compact('search', 'users'));
+    }
+
+    public function subBizusers(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $users = BusinessDetail::where('name','LIKE',"%$search%")->get();
+        }else{
+            $users = BusinessDetail::get()->all();
+        }
+        return view('subadmin.subbizusers', compact('search', 'users'));
+    }
+
     public function profile (Request $request){
         $admin = Auth::user();
         //$admin = DB::table('admins')->first();

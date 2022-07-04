@@ -99,6 +99,17 @@
                                     name="password_confirmation" required />
                 </div>
             </div>
+            <div class="form-group">
+                <div class="mt-4">
+                    <x-label for="role" :value="__('Role 0 or 1')" />
+
+                    <x-input id="role" class="form-control"
+                                    type="number"
+                                    name="role"
+                                    min="0" max="1" required />
+                </div>
+            </div>
+
 
             <div class="form-group">
                 <div class="flex items-center justify-end mt-4">

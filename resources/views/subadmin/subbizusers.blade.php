@@ -40,7 +40,7 @@
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">PayHelpa's Business Users </h3>
+<h3 class="page-title">PayHelpa's Individual Users </h3>
 
 </div>
 
@@ -85,31 +85,27 @@ This is the most basic example of the datatables with zero configuration. Use th
     </div>
 <div class="table-responsive">
 <table class="datatable table table-stripped">
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Send Message</th>
-<th>Created at</th>
-<th class="text-right">Action</th>
 
-</tr>
-</thead>
-<tbody>
-    @foreach ($userss as $user)
-    <tr>
-        <td><a href="{{route('user_details_bis',$user->user_id)}}">{{ucwords(UserController::GetUserName($user->user_id)) }}</a></td>
-        <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
-        <td class="text-center"><a href = "#" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
-        <td>{{$user->created_at}}</td>
-        <td class="text-right">
-            <div class="actions">
-                <a href="#" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
-            </div>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Created at</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+            <tr>
+                <td><a href="#">{{ucwords(UserController::GetUserName($user->user_id)) }}</a></td>
+                <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
+                <td>{{$user->created_at}}</td>
+
+
+
+            </tr>
+            @endforeach
+        </tbody>
 </table>
 
 </div>

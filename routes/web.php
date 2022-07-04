@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
@@ -24,13 +25,24 @@ Route::get('/register', function () {
     return view('auth/register');
 });
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+
+Route::get('/', [LoginController ::class, 'index'])->name('login');
+
+//Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('/loginn', [LoginController::class, 'login'])->name('loginn');
+
+
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
 
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/users', [UserController::class, 'user'])->middleware(['auth'])->name('users');
+
+Route::get('/subadmin.subusers', [UserController::class, 'subusers'])->middleware(['auth'])->name('subusers');
+
+Route::get('/subadmin.subbizusers', [UserController::class, 'subBizusers'])->middleware(['auth'])->name('subbizusers');
 
 Route::get('/individualusers', [UserController::class, 'individualusers'])->middleware(['auth'])->name('individualusers');
 
@@ -171,7 +183,7 @@ Route::get('/blog', [BlogController::class, 'blog'])->middleware(['auth'])->name
 
 Route::post('/createblog', [BlogController::class, 'createblog'])->middleware(['auth'])->name('createblog');
 
-Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth'])->name('allblog');
+Route::get('/allblog', [BlogController::class, 'allblog'])->middleware(['auth',])->name('allblog');
 
 Route::get('/blogdetails/{id}', [BlogController::class, 'blogdetails'])->middleware(['auth'])->name('blogdetails');
 
@@ -210,4 +222,13 @@ Route::get('export/', [UserController::class, 'export'])->middleware(['auth'])->
 Route::get('exportbiz/', [UserController::class, 'exportbiz'])->middleware(['auth'])->name('exportbiz');
 
 Route::get('logActivity', 'HomeController@logActivity');
+
+Route::group(['middleware' => ['auth', 'role']], function () {
+    Route::get('admin-view', 'HomeController@adminView')->name('admin.view');
+});
+
+Route::middleware(['role:1'])->group(function () {
+    //write route hear
+  });
+
 require __DIR__.'/auth.php';

@@ -20,7 +20,12 @@
 
 
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if(auth()->user()->role == 0){
+                @include('layouts.navigation')
+            }@else{
+                @include('subadmin.navigation')
+            }
+            @endif
 
             <!-- Page Heading -->
             <header class="bg-white shadow">

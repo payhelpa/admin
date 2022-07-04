@@ -34,6 +34,7 @@ class BlogController extends Controller
         else{
             $blog = Blog::create([
                 'title' =>  request('title'),
+                'blog_description' =>  request('blog_description'),
                 'body' => ($request->body),
                 'cover_image' => $upload['url'],
                 'tags' => request('tags'),

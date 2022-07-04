@@ -22,7 +22,7 @@
 <body>
 
 <x-guest-layout>
-
+    <x-auth-card>
        <!-- <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -51,14 +51,17 @@
 <h1>Login</h1>
 <p class="account-subtitle">Access to our dashboard</p>
 
- <form method="POST" action="{{ route('loginn') }}">
+ <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">
                 <input type="email" id="email" class="form-control" name="email" required autofocus>
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
-                </div>
+               <!-- <x-label for="email" :value="__('Email')" />
+
+                <x-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus />
+            --></div>
 
 
             <div class="form-group">
@@ -66,16 +69,23 @@
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
+                <!--<x-label for="password" :value="__('Password')" />
 
+                <x-input id="password" class="form-control"
+                                type="password"
+                                name="password"
+                                required autocomplete="current-password" />-->
             </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">
             Login
         </button>
-
+        <!--<x-button class="btn btn-primary btn-block">
+            {{ __('Log in') }}
+        </x-button>-->
     </div>
 </form>
-
+</x-auth-card>
 </x-guest-layout>
 </div>
 </div>

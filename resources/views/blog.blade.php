@@ -91,6 +91,9 @@
                                                         <input type="text" class="form-control" name="title" id="title" placeholder="Title" required/>
                                                     </div>
                                                     <div class="form-group">
+                                                        <input type="text" class="form-control" name="blog_description" id="blog_description" placeholder="Blog Description" required/>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label>Cover Image </label>
                                                         <div class="input-group">
                                                             <span class="input-group-btn">

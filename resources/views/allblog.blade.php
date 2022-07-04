@@ -154,7 +154,7 @@
                                                         <h5 class="card-title mb-0">{{$blog->title}}</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <p class="card-text">{!!(Str::words($blog->body, 13)) !!}</p>
+                                                        <p class="card-text">{!!(Str::words($blog->blog_description, 13)) !!}</p>
                                                         <a class="btn btn-primary" href="{{route('blogdetails',$blog->id)}}">View more</a>
                                                         <a style="float:right;" onclick="return confirm('ARE YOU SURE YOU WANT TO DELETE THIS BLOG?')" href="{{ route('blog.delete',$blog->id) }}"><i class="fe fe-trash"></i></a>
                                                         </div>

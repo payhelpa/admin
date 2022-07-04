@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <!--<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('subadmin.Dashboard') }}
         </h2>-->
     </x-slot>
 
@@ -40,7 +40,7 @@
 <div class="page-header">
 <div class="row">
 <div class="col">
-<h3 class="page-title">PayHelpa's Business Users </h3>
+<h3 class="page-title">PayHelpa's Individual Users </h3>
 
 </div>
 
@@ -56,7 +56,7 @@
 <div class="col-sm-12">
 <div class="card">
 <div class="card-header">
-<h4 class="card-title">List of Business Users</h4>
+<h4 class="card-title">List of Individual Users</h4>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
 </p>-->
@@ -81,32 +81,42 @@ This is the most basic example of the datatables with zero configuration. Use th
 </div>
 <div class="card-body">
     <div class="btn-group" style="float:right;">
-        <a class="btn btn-primary" href="{{route('exportbiz')}}">Export</a>
+        <a class="btn btn-primary" href="{{route('export')}}">Export</a>
     </div>
 <div class="table-responsive">
 <table class="datatable table table-stripped">
 <thead>
 <tr>
+
+<th>Type</th>
 <th>Name</th>
 <th>Email</th>
-<th>Send Message</th>
+<th>Phone Number</th>
 <th>Created at</th>
-<th class="text-right">Action</th>
+
 
 </tr>
 </thead>
 <tbody>
-    @foreach ($userss as $user)
+    @foreach ($users as $user)
     <tr>
-        <td><a href="{{route('user_details_bis',$user->user_id)}}">{{ucwords(UserController::GetUserName($user->user_id)) }}</a></td>
+        @if($user->country == 'NG')
+        <td class="text-center"><img src="{{asset('assets/img/NGN 1.png')}}"></td>
+     @elseif($user->country == 'US')
+        <td class="text-center"><img src="{{asset('assets/img/USA 1.png')}}"></td>
+        @else
+        <td class="text-center"><img src=""></td>
+
+     @endif
+        <td><a href="#">{{ucwords(UserController::GetUserName($user->user_id)) }}</a></td>
         <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
-        <td class="text-center"><a href = "#" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
-        <td>{{$user->created_at}}</td>
-        <td class="text-right">
-            <div class="actions">
-                <a href="#" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
-            </div>
-        </td>
+        <td>{{$user->phone_number}}</td>
+        <td>{{date('Y/m/d', strtotime($user->created_at))}}</td>
+
+
+
+
+
     </tr>
     @endforeach
 </tbody>
