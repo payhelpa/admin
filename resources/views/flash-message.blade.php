@@ -54,7 +54,14 @@
 @if ($message = Session::get('addindus'))
 <div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Industry added Successfully! </strong>
+    <strong>Added Successfully! </strong>
+</div>
+@endif
+
+@if ($message = Session::get('addonupdate'))
+<div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Updated Successfully! </strong>
 </div>
 @endif
 

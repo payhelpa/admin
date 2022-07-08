@@ -42,7 +42,7 @@ class IndustryController extends Controller
         $industry->name = $request->input('name');
         $industry->description = $request->input('description');
         $industry->update();
-        return redirect()->back()->with('error',' Updated Successfully');
+        return redirect()->route('industry')->with('addonupdate',' Updated Successfully');
 
 
        // return view('addindustry');

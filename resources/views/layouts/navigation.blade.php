@@ -199,18 +199,25 @@
                     <li class="submenu">
                         <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Add-on</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                        <li class="submenu">
-                        <a href="javascript:void(0);"> <span>Industry</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a href="{{route ('addindustry')}}"><span>Create Industry</span></a></li>
-                            <li><a href="{{route ('industry')}}"> <span>View Industry</span></a></li>
-                        </ul>
-                        </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>Country</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="{{route ('addcountry')}}"><span>Add Country</span></a></li>
+                                    <li><a href="{{route ('country')}}"> <span>View Countries</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                            <a href="javascript:void(0);"> <span>Industry</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="{{route ('addindustry')}}"><span>Create Industry</span></a></li>
+                                <li><a href="{{route ('industry')}}"> <span>View Industries</span></a></li>
+                            </ul>
+                            </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"> <span>Service</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a href="{{route ('addServices')}}"><span>Create Industry</span></a></li>
-                                <li><a href="{{route ('services')}}"> <span>View Industry</span></a></li>
+                                <li><a href="{{route ('addServices')}}"><span>Create Service</span></a></li>
+                                <li><a href="{{route ('services')}}"> <span>View Services</span></a></li>
                             </ul>
                             </li>
                             <li class="submenu">

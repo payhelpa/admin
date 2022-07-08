@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method where(string $string, string $string1, $slug)
  * @method create(array $array)
- */
+ */ 
 class Blog extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;

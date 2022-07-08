@@ -73,6 +73,9 @@
                 </p>
 
                 </div>
+                <a  style="float:left;" href="#" class="btn btn-info btn-sm">
+                    <i class="fe fe-edit"></i> Edit
+                </a>
                 <a  style="float:right;" href="{{ route('blog.delete',$blog->id) }}" class="btn btn-sm bg-danger-light">
                     <i class="fe fe-trash"></i> Delete
                 </a>

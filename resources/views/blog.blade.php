@@ -27,7 +27,7 @@
             <div class="d-flex justify-content-center">
                 <a href="#" ></a>
             </div>
-            @include('flash-message')
+
             <div class="page-wrapper">
                 <div class="content container-fluid">
                     <div class="page-header">
@@ -116,6 +116,10 @@
                                                                 <input type="checkbox" id="tags" name="tags[]" value="{{$tag->title}}"> {{$tag->title}}
                                                             </label>
                                                             @endforeach
+                                                            <div class="form-group  mt-2" >
+                                                                <label>Tag not found?</label>
+                                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="open">Add Tag</button>
+                                                            </div>
                                                             <div class="invalid-feedback">
                                                             Please select a tag.
                                                             </div>
@@ -124,7 +128,55 @@
                                                     <div class="form-group">
                                                         <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
                                                     </div>
-                                                    </form>
+                                                    </form><!--
+                                                    <form method="POST" action="{{route('createtag')}}">
+                                                        @csrf
+                                                        <div class="form-group  mt-2" >
+                                                            <label>Tag not found? Add Tag</label>
+                                                            <input style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;" type="text" class="form-control" name="title" id="title" placeholder="Add New Tag"   />
+                                                            <input style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;" type="text" class="form-control" name="description" id="description" placeholder="Add Tag Description"   />
+                                                            <input type="submit" class="btn btn-primary btn-sm" name= "submit" />
+                                                        </div>
+                                                    </form>-->
+
+    <form method="post" action="{{url('createtag')}}" id="form">
+        @csrf
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    	<div class="alert alert-danger" style="display:none"></div>
+      <div class="modal-header">
+
+        <h5 class="modal-title">Add Tag for Blog</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-4">
+              <label for="Title">Title:</label>
+              <input style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;" type="text" class="form-control" name="title" id="title" placeholder="Add New Tag"   />
+            </div>
+          </div>
+          <div class="row">
+              <div class="form-group col-md-4">
+                <label for="Description">Description:</label>
+                <input style=" width: 400px; display: flex; flex-direction: column; margin-top: 10px; font-weight: 600;" type="text" class="form-control" name="description" id="description" placeholder="Add Tag Description"   />
+
+              </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button  class="btn btn-success" id="ajaxSubmit">Save changes</button>
+        </div>
+    </div>
+  </div>
+</div>
+  </form>
                                                 </div>
                                                 </div>
                                             </div>
@@ -135,6 +187,7 @@
                     </div>
                 </div>
             </div>
+
             <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
             <script src="bower_components/wysihtml/dist/wysihtml-toolbar.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -156,6 +209,18 @@
             <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
             <script src="{{asset('assets/js/script.js')}}"></script>
 
+
+            <script type="text/javascript">
+                function display() {
+                    var z = prompt("enter a tag");
+                    if(z != null) {
+                        document.getElementById("demo").innerHTML = "Tad Added! " + z + "..";
+                        document.getElementById("case").style.visibility = 'visible';
+                    } else {
+                        document.getElementById("demo").innerHTML = "Tad Added!";
+                    }
+                }
+                </script>
 
             <script>
                 ClassicEditor

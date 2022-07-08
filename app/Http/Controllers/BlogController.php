@@ -20,13 +20,7 @@ class BlogController extends Controller
             "folder" => "payhelpa-documents",  "overwrite" => FALSE, "resource_type" => "image"
         ]);
         $upload = Cloudder::getResult();
-        // $blog = Blog::create([
-        //     'title' =>  request('title'),
-        //     'body' => ($request->body),
-        //     'cover_image' => $upload['url'],
-        //     'tags' => request('tags'),
-        // ]);
-        //$body = strip_tags($request->body);
+
 
         if (empty(request('tags'))){
             return redirect()->back()->with('blogfail',' Published Successfully');
@@ -58,6 +52,21 @@ class BlogController extends Controller
         $blogdetails = BlogComment::where('id',$id)->get();
         return view('blogdetails', compact('blogs','blogdetails'));
     }
+
+    public function editblog($id){
+        $blogs = Blog::find($id);
+        return view('blogupdate')->with('blogs',$blogs);
+    }
+    public function updateblog(Request $request,$id){
+        $blog = Blog::find($id);
+        $blog->title = $request->input('title');
+        $blog->description = $request->input('description');
+        $blog->body = $request->input('body');
+        $blog->body = $request->input('body');
+        $blog->tags = $request->input('tags');
+        $blog->update();
+        return redirect()->route('allblog')->with('error',' Updated Successfully');
+    }
     public function deleteblog($id){
         Blog::destroy($id);
         return redirect()->route('allblog')->with('blogdel',' Published Successfully');
@@ -67,7 +76,8 @@ class BlogController extends Controller
             'title' =>  request('title'),
             'description' => request('description')
         ]);
-        return view('addtag', compact('tag'))->with('error','Created successfully!');
+        //return view('addtag', compact('tag'))
+        return redirect()->back()->with('error','Created successfully!');
     }
     public function addtag(Request $request){
         return view('addtag');

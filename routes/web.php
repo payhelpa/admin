@@ -8,6 +8,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ChargesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\IndustryController;
 use Illuminate\Support\Facades\DB;
 
@@ -220,6 +221,22 @@ Route::put('/tag/update/{id}', [BlogController::class, 'updatetag'])->middleware
 Route::get('export/', [UserController::class, 'export'])->middleware(['auth'])->name('export');
 
 Route::get('exportbiz/', [UserController::class, 'exportbiz'])->middleware(['auth'])->name('exportbiz');
+
+Route::get('/country', [CountryController::class, 'country'])->middleware(['auth'])->name('country');
+
+Route::get('/addcountry', [CountryController::class, 'addcountry'])->middleware(['auth'])->name('addcountry');
+
+Route::post('/createcountry', [CountryController::class, 'createcountry'])->middleware(['auth'])->name('createcountry');
+
+Route::get('/country/delete/{id}', [CountryController::class, 'deletecountry'])->middleware(['auth'])->name('country.delete');
+
+Route::get('/country/edit/{id}', [CountryController::class, 'editcountry'])->middleware(['auth'])->name('country.edit');
+
+Route::get('/country/update/{id}', [CountryController::class, 'updatecountry'])->middleware(['auth'])->name('country.update');
+
+Route::put('/country/update/{id}', [CountryController::class, 'updatecountry'])->middleware(['auth'])->name('country.update');
+
+
 
 Route::get('logActivity', 'HomeController@logActivity');
 

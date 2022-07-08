@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @method static create(array $array)
- * @method static where(string $string, string $string1, string $string2)
+ * @method where(string $string, string $string1, $slug)
+ * @method create(array $array)
  */
 class Country extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
 
     protected  $fillable = [
-        'name', 'slug'
+        'name', 'logo' , 'phone_number_code' ,'currency' , 'slug'
     ];
 
     public function states(): \Illuminate\Database\Eloquent\Relations\HasMany
