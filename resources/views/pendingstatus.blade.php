@@ -45,13 +45,6 @@
 <div class="d-flex justify-content-center">
     <a href="#" ></a>
 </div>
-<!--<div class="d-flex justify-content-center">
-    <a href="{{route ('statusdeclined')}}" class='btn btn-outline-primary btn-sm mr-2'>LU Pending Transactions</a>
-    <a href="{{route ('fupending')}}" class='btn btn-outline-primary btn-sm mr-2'>FU Pending Transactions</a>
-    <a href="{{route ('ongoingstatus')}}" class='btn btn-outline-primary btn-sm mr-2'>Ongoing Transactions</a>
-    <a href="{{route ('status')}}" class='btn btn-outline-primary btn-sm mr-2'>Successful Transactions</a>
-
-</div>-->
 </div>
 
 <div class="row">
@@ -78,14 +71,14 @@ This is the most basic example of the datatables with zero configuration. Use th
 </tr>
 </thead>
 <tbody>
-	@foreach ($userss as $user)
+	@foreach ($pendingtransactions as $pendingtransaction)
 	<tr>
-		<td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-        <td>₦{{number_format($user->rate / 100,2)}}</td>
-        <td>${{number_format($user->dollar_amount / 100,2)}}</td>
-		<td>₦{{number_format($user->amount_requested_for_in_naira / 100,2)}}</td>
-        <td>{{\Carbon\Carbon::parse($user->created_at)->diffForHumans()}}</td>
-		<td><a href="{{route('singlependinginfo',$user->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
+		<td>{{ucwords(UserController::GetUserName($pendingtransaction->user_id)) }}</td>
+        <td>₦{{number_format($pendingtransaction->rate / 100,2)}}</td>
+        <td>${{number_format($pendingtransaction->dollar_amount / 100,2)}}</td>
+		<td>₦{{number_format($pendingtransaction->amount_requested_for_in_naira / 100,2)}}</td>
+        <td>{{\Carbon\Carbon::parse($pendingtransaction->created_at)->diffForHumans()}}</td>
+		<td><a href="{{route('singlependinginfo',$pendingtransaction->id)}}" class="btn btn-outline-primary mr-2"></i>View </a></td>
 	</tr>
 	@endforeach
 </tbody>

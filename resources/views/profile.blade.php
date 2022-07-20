@@ -321,6 +321,7 @@ Edit
 </div>
 </div>
 <div class="profile-menu">
+    @include('flash-message')
 <ul class="nav nav-tabs nav-tabs-solid">
 <li class="nav-item">
 <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
@@ -420,27 +421,6 @@ Edit
                         <button class="btn btn-success" type="button"><i class="fe fe-check-verified"></i> Active</button>
                         </div>
                         </div>
-
-                        <!--
-                        <div class="card">
-                        <div class="card-body">
-                        <h5 class="card-title d-flex justify-content-between">
-                        <span>Skills </span>
-                        <a class="edit-link" href="#"><i class="fa fa-edit mr-1"></i> Edit</a>
-                        </h5>
-                        <div class="skill-tags">
-                        <span>Html5</span>
-                        <span>CSS3</span>
-                        <span>WordPress</span>
-                        <span>Javascript</span>
-                        <span>Android</span>
-                        <span>iOS</span>
-                        <span>Angular</span>
-                        <span>PHP</span>
-                        </div>
-                        </div>
-                        </div>
-                        -->
                         </div>
                         </div>
 
@@ -456,13 +436,13 @@ Edit
                         <div class="col-md-10 col-lg-6">
                         <form method="POST" action="{{ url('changePassword') }}">
                             @csrf
-                        <!--<div class="form-group">
+                        <div class="form-group">
                         <label>Old Password</label>
-                        <input type="password" class="form-control">
-                        </div>-->
+                        <input type="password" id="current-password" name="current-password" class="form-control">
+                        </div>
                         <div class="form-group">
                         <label>New Password</label>
-                        <input type="password" id="password" name="password" class="form-control">
+                        <input type="password" id="new-password" name="new-password" class="form-control">
                         </div>
                         <div class="form-group">
                         <label>Confirm Password</label>

@@ -68,11 +68,19 @@ class TransactionController extends Controller
         ->first();
         return view('transactions', compact('userss'));
     }
-    public function ongoingstatus(Request $request){
-        $userss = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
+    public function unitedstateTransaction(Request $request){
+        $lupendingtransactions = DB::table('naira_solicitations')->where('is_taken', 0)->get();
+
+        $fupendingtransactions = DB::table('offers')->get();
+
+        $ongoingtransactions = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true)->where('status', '!=' , 6);
         })->get();
-        return view('ongoingstatus', compact('userss'));
+
+        $successSolicitations = $this->model->with(['user', 'solicitors'])->where('status', '=', 6)->whereHas('transaction', function ($query)  {
+            $query->where('is_payment_confirmed', '=', true);
+        })->get();
+        return view('ongoingstatus', compact('ongoingtransactions', 'lupendingtransactions' , 'fupendingtransactions', 'successSolicitations'));
     }
     public function status(Request $request){
         $solicitations = $this->model->with(['user', 'solicitors'])->where('status', '=', 6)->whereHas('transaction', function ($query)  {
@@ -151,8 +159,8 @@ class TransactionController extends Controller
         // $userss = $this->model->with(['user'])->where('is_taken', '=', false)->whereHas('transaction', function ($query)  {
         //     $query->where('is_payment_confirmed', '=', true);
         // })->get();
-        $userss = DB::table('naira_solicitations')->where('is_taken', 0)->get();
-        return view('pendingstatus', compact('userss'));
+        $pendingtransactions = DB::table('naira_solicitations')->where('is_taken', 0)->get();
+        return view('ongoingstatus', compact('pendingtransactions'));
     }
 
     public function singlependinginfo($id){

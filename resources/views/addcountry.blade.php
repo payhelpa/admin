@@ -171,6 +171,9 @@
         <div class="form-group">
             <input type="text" class="form-control" name="currency" id="currency" placeholder="Currency" required/>
         </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="currency_symbol" id="currency_symbol" placeholder="Symbol" required/>
+        </div>
 
         <div class="form-group">
             <input type="submit" name="Submit" value="Submit" class="btn btn-primary form-control" />

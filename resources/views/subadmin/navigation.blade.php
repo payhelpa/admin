@@ -173,8 +173,8 @@
                         <li class="submenu">
                             <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span> Users</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a href="{{route ('subusers')}}">Individual Users</a></li>
-                                <li><a href="{{route ('subbizusers')}}">Business Users</a></li>
+                                <li><a href="{{route ('subusersnig')}}">Nigerian Users</a></li>
+                                <li><a href="{{route ('subusersus')}}">United State Users</a></li>
                             </ul>
                         </li>
 

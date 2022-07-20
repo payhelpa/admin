@@ -34,17 +34,17 @@
     <div class="d-flex justify-content-center">
         <a href="#" ></a>
     </div>
-<div class="page-wrapper">
-<div class="content container-fluid">
+    <div class="page-wrapper">
+    <div class="content container-fluid">
 
-<div class="page-header">
-<div class="row">
-<div class="col">
-<h3 class="page-title">PayHelpa's Individual Users </h3>
+    <div class="page-header">
+    <div class="row">
+    <div class="col">
+    <h3 class="page-title">PayHelpa's Individual Users </h3>
 
-</div>
+    </div>
 
-</div>
+    </div>
 
 <div class="d-flex justify-content-center">
 

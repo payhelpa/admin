@@ -50,7 +50,7 @@ class LoginController extends Controller
                 return redirect('dashboard');
             }
             else{
-                return redirect('subadmin.subusers');
+                return redirect('subadmin.subusersnig');
             }
         }else{
             return redirect()->route('login')->with('error', 'wrong');

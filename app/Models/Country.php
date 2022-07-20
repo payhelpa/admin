@@ -16,7 +16,7 @@ class Country extends Model
     use HasFactory, SoftDeletes, Sluggable;
 
     protected  $fillable = [
-        'name', 'logo' , 'phone_number_code' ,'currency' , 'slug'
+        'name', 'logo' , 'phone_number_code' ,'currency' , 'currency_symbol' , 'slug'
     ];
 
     public function states(): \Illuminate\Database\Eloquent\Relations\HasMany

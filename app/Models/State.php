@@ -13,17 +13,22 @@ class State extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name', 'country_id'
     ];
+
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
 
     public function individuals(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(IndividualUser::class);
+        return $this->hasMany(IndividualDetail::class);
     }
 
     public function business(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(BusinessUser::class);
+        return $this->hasMany(BusinessDetail::class);
     }
 
 

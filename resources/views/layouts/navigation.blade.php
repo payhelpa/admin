@@ -176,19 +176,35 @@
                     <li class="submenu">
                         <a href="{{route ('users')}}"><i class="fe fe-users"></i> <span> Users</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a href="{{route ('users')}}">All Users</a></li>
-                            <li><a href="{{route ('individualusers')}}">Individual Users</a></li>
-                            <li><a href="{{route ('businessusers')}}">Business Users</a></li>
+                            <li><a href="{{route ('users')}}">Canadian Users</a></li>
+                            <li><a href="{{route ('Nigusers')}}">Nigerian Users</a></li>
+                            <li><a href="{{route ('USusers')}}">United State Users</a></li>
+                            <li><a href="{{route ('users')}}">UK Users</a></li>
+                            <li><a href="{{route ('users')}}">ProHelpers</a></li>
+
+
                         </ul>
                     </li>
+                    <li>
+                        <a href="{{route ('verifyBusiness')}}"><i class="fe fe-map"></i> <span>Verify Business</span></a>
+                    </li>
                     <li class="submenu">
-                        <a href="{{route ('verify')}}"><i class="fe fe-document"></i> <span> Verify</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-file"></i> <span> Transaction</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{route ('unitedstateTransaction')}}">United State</a></li>
+                            <!--<li><a href="{{route ('statusdeclined')}}">LU Pending Transactions</a></li>
+                            <li><a href="{{route('fupending')}}">FU Pending Transactions</a></li>
+                            <li><a href="{{route('status')}}">Successful Transactions</a></li>-->
+                        </ul>
+                    </li>
+                    <!--<li class="submenu">
+                        <a href="{{route ('verifyBusiness')}}"><i class="fe fe-document"></i> <span>Verify Business Users</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{route ('verify')}}">Verify Individual Users</a></li>
                             <li><a href="{{route ('verifyBusiness')}}">Verify Business Users</a></li>
                             <li><a href="{{route ('unverified')}}">Unverified Users</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!--<li class="submenu">
                         <a href="#"><i class="fe fe-activity"></i> <span> Services</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
@@ -236,15 +252,6 @@
                             <li><a href="{{route('industry')}}">View Industry</a></li>
                         </ul>
                     </li>-->
-                    <li class="submenu">
-                        <a href="#"><i class="fe fe-file"></i> <span> Transaction</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a href="{{route ('statusdeclined')}}">LU Pending Transactions</a></li>
-                            <li><a href="{{route('fupending')}}">FU Pending Transactions</a></li>
-                            <li><a href="{{route ('ongoingstatus')}}">Ongoing Transactions</a></li>
-                            <li><a href="{{route('status')}}">Successful Transactions</a></li>
-                        </ul>
-                    </li>
 
                     <li>
                         <a href="{{route ('wallet')}}"><i class="fe fe-money"></i> <span>Wallet</span></a>

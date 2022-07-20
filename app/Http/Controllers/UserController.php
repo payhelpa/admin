@@ -56,8 +56,8 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $countuser = User::count();
-        $ver = User::whereNotNull('kyc_verified')->count();
+        $countuser = User::all();
+        $countverifiedUsers = User::whereNotNull('kyc_verified')->count();
         $counttransaction = Transaction::count();
 
         $userdata = User::select(DB::raw("COUNT(*) as count"))
@@ -77,10 +77,15 @@ class UserController extends Controller
                 $monthCount[]=count($values);
             }
             //recent transaction
-        $userss = Transaction::latest('created_at')
+        $recentTransactions = Transaction::latest('created_at')
+        ->limit(6)
+        ->get();
+
+        //recent registered users
+        $recentUsers = User::latest('created_at')
         ->limit(5)
         ->get();
-        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('countuser', 'counttransaction','ver','userdata', 'userss'));
+        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('countuser', 'counttransaction','countverifiedUsers','userdata', 'recentTransactions','recentUsers'));
 
     // $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
         //    //->whereDate('transactions.created_at')
@@ -209,24 +214,40 @@ class UserController extends Controller
         return view('users', compact('search', 'userss'));
     }
 
-    public function subusers(Request $request){
-        $search = $request['search'] ?? "";
-        if($search != ""){
-            $users = IndividualDetail::where('name','LIKE',"%$search%")->get();
-        }else{
-            $users = IndividualDetail::get()->all();
-        }
-        return view('subadmin.subusers', compact('search', 'users'));
+    public function subusersnig(Request $request){
+         //Nigerian Individual users
+        $users = IndividualDetail::where('country_id', 1)->get();
+
+         //Nigerian Busines users
+         $businessusers = BusinessDetail::where('country_id', 1)->get();
+
+         return view('subadmin.sub-nigusers', compact('users','businessusers'));
+
+        // $search = $request['search'] ?? "";
+        // if($search != ""){
+        //     $users = IndividualDetail::where('name','LIKE',"%$search%")->get();
+        // }else{
+        //     $users = IndividualDetail::get()->all();
+        // }
+        // return view('subadmin.subusers', compact('search', 'users'));
     }
 
-    public function subBizusers(Request $request){
-        $search = $request['search'] ?? "";
-        if($search != ""){
-            $users = BusinessDetail::where('name','LIKE',"%$search%")->get();
-        }else{
-            $users = BusinessDetail::get()->all();
-        }
-        return view('subadmin.subbizusers', compact('search', 'users'));
+    public function subusersus(Request $request){
+         //US Individual users
+         $users = IndividualDetail::where('country_id', 2)->get();
+
+         //US Busines users
+         $businessusers = BusinessDetail::where('country_id', 2)->get();
+
+         return view('subadmin.sub-ususers', compact('users','businessusers'));
+
+        // $search = $request['search'] ?? "";
+        // if($search != ""){
+        //     $users = BusinessDetail::where('name','LIKE',"%$search%")->get();
+        // }else{
+        //     $users = BusinessDetail::get()->all();
+        // }
+        // return view('subadmin.subbizusers', compact('search', 'users'));
     }
 
     public function profile (Request $request){
@@ -254,18 +275,18 @@ class UserController extends Controller
 
     public function changePassword(Request $request){
 
-        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-        //     // The passwords matches
-        //     return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
-        // }
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+             // The passwords matches
+            return redirect()->back()->with("adminpassworderror","Your current password does not matches with the password you provided. Please try again.");
+        }
 
-        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-        //     //Current password and new password are same
-        //     return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
-        // }
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+             //Current password and new password are same
+            return redirect()->back()->with("passworderror","New Password cannot be same as your current password. Please choose a different password.");
+        }
 
         $validatedData = $request->validate([
-            // 'current-password' => 'required',
+            'current-password' => 'required',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -275,31 +296,54 @@ class UserController extends Controller
         $admin->password = Hash::make($request['password']);//$request->get('password'));
         $admin->save();
 
-        return redirect()->back()->with("success","Password changed successfully !");
+        return redirect()->back()->with("passwordsuccess","Password changed successfully!");
 
     }
 
-    public function individualusers (Request $request){
+    public function USusers (Request $request){
 
-        //$userss = DB::table('individual_details')->get();
-        $users = IndividualDetail::get();
-        $activeUsers = User::select('active_status')->get();
+        //US Individual users
+        $users = IndividualDetail::where('country_id', 2)->get();
+
+        //US Busines users
+        $businessusers = BusinessDetail::where('country_id', 2)->get();
+
+        return view('users.us-users', compact('users','businessusers'));
+    }
+
+    public function Nigusers (Request $request){
+        //Nigerian Individual users
+        $users = IndividualDetail::where('country_id', 1)->get();
+        $activeUsersID = IndividualDetail::select('user_id')->get();
+
+        $activeUsers = User::select('active_status')->find($activeUsersID);
         //dd($activeUsers);
 
-        $userss = $this->IndividualDetail->with(['user'])->whereHas('user', function ($query)  {
-            $query->whereNotNull('active_status');
-        })->get();
-        //dd($userss);
+        //Nigerian Busines users
+        $businessusers = BusinessDetail::where('country_id', 1)->get();
 
-        return view('individualusers', compact('users','activeUsers'));
+        return view('users.nig-users', compact('users','activeUsers', 'businessusers'));
     }
-    public function businessusers (Request $request){
-        $userss = DB::table('business_details')->get();
-        return view('businessusers', compact('userss'));
-    }
+
+    // public function businessusers (Request $request){
+    //     $userss = DB::table('business_details')->get();
+    //     return view('businessusers', compact('userss'));
+    // }
 
     public function user_details($id){
-        $userss = DB::table('individual_details')->where('user_id',$id)->get();
+        //dd($id);
+        $users = IndividualDetail::where('user_id',$id)->get();
+        $activeUsers =  $this->model->where('user_id',$id)->find($id);//User::where('user_id',$id)->get($id);
+
+        // $this->user = User::where('user_id',$id)->firstOrFail();
+
+
+        // $this->model = $this->user->model;
+
+       // dd($activeUsers);
+
+        //dd("$users");
+       // $userss = DB::table('individual_details')->where('user_id',$id)->get();
         $pendingtrans = DB::table('naira_solicitations')->where('user_id',$id)->count();
         $ongoingtrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',0)->count();
         $sucesstrans = DB::table('transactions')->where('user_id',$id)->where('is_payment_confirmed',1)->count();
@@ -307,17 +351,16 @@ class UserController extends Controller
         $walletnum = DB::table('wallets')->where('user_id',$id)->select('account_number')->get();
         $walletname = DB::table('wallets')->where('user_id',$id)->select('account_name')->get();
         $wallets = DB::table('wallets')->where('user_id',$id)->get();
-        return view('user_details', compact('userss','pendingtrans','ongoingtrans','sucesstrans', 'wallets', 'walletbal', 'walletnum' , 'walletname'));
+        return view('user_details', compact('users','activeUsers','pendingtrans','ongoingtrans','sucesstrans', 'wallets', 'walletbal', 'walletnum' , 'walletname'));
     }
     public function user_details_bis($id){
         $userss = DB::table('business_details')->where('user_id',$id)->get();
         return view('user_details_bis', compact('userss'));
     }
     public function update_status($id){
-        $post = DB::table('users')
-                ->select('active_status')
-                ->where('id', '=' ,$id )
-                ->first();
+        //dd($id);
+        $post = User::find($id);
+        //dd($post);
 
                 if ($post->active_status == 1) {
                     $status = 0;

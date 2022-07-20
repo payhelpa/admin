@@ -62,7 +62,7 @@
                         </span>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$countuser}}</h3>
+                        <h3>{{$countuser->count()}}</h3>
                         <h6 class="text-muted">Total Registered Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-primary w-50"></div>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$ver}}</h3>
+                        <h3>{{$countverifiedUsers}}</h3>
                         <h6 class="text-muted">Total Verified Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-warning w-50"></div>
@@ -163,79 +163,89 @@
 
         </div>-->
     </div>
-<div class="row">
-<div class="col-md-12 d-flex">
+    <div class="row">
+        <div class="col-md-6 d-flex">
 
-<div class="card card-table flex-fill">
-<div class="card-header">
-<h4 class="card-title">Recent Transactions</h4>
-</div>
-<div class="card-body">
-    <div class="table-responsive">
+        <div class="card card-table flex-fill">
+        <div class="card-header">
+        <h4 class="card-title">Recent Transactions</h4>
+        </div>
+        <div class="card-body">
+        <div class="table-responsive">
         <table class="table table-hover table-center">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Transaction Ref Number</th>
-                    <th>Payment Type</th>
-                    <th>Amount Requested</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            @foreach ($userss as $user)
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Payment Type</th>
+                <th class="text-center">Amount Requested</th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        @foreach ($recentTransactions as $recentTransaction)
             <tbody>
-                <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
-                <td>{{$user->transaction_ref}}</td>
-                <td>{{$user->payment_type}}</td>
-                <td>₦{{number_format($user->amount_paid / 100,2)}}</td>
+                <td>{{ucwords(UserController::GetUserName($recentTransaction->user_id)) }}</td>
                 <td>
-                    @if($user->is_payment_confirmed == '1')
-                        <a class="btn btn-sm bg-success-light">Confirmed</a>
+                    @if($recentTransaction->payment_type == 'bank_transfer')
+                        <span>Bank Transfer</span>
                     @else
-                        <a class="btn btn-sm bg-info-light">Not Yet Confirmed</a>
+                    {{$recentTransaction->payment_type}}
+                    @endif
+                </td>
+                <td class="text-center">₦{{number_format($recentTransaction->amount_paid / 100,2)}}</td>
+                <td>
+                    @if($recentTransaction->is_payment_confirmed == '1')
+                    <span class="badge badge-pill bg-success inv-badge text-center">Confirmed</span>
+                    @else
+                    <span class="badge badge-pill bg-danger inv-badge text-center">Not Yet Confirmed</span>
                     @endif
                 </td>
             </tbody>
             @endforeach
         </table>
-    </div>
-</div>
-</div>
+        </div>
+        </div>
+        </div>
 
-</div>
-<!--<div class="col-md-6 d-flex">
+        </div>
+        <div class="col-md-6 d-flex">
 
-<div class="card flex-fill">
-<div class="card-header">
-<h4 class="card-title">Feed Activity</h4>
-</div>
-<div class="card-body">
-<ul class="activity-feed">
-<li class="feed-item">
-<div class="feed-date">Apr 13</div>
-<span class="feed-text"><a href="profile.html">John Doe</a> added new product <a href="product-details.html">"Smart Watch"</a></span>
-</li>
-<li class="feed-item">
-<div class="feed-date">Mar 21</div>
-<span class="feed-text"><a href="profile.html">Justin Lee</a> requested amount of <a href="invoice.html">$5,781</a></span>
-</li>
-<li class="feed-item">
-<div class="feed-date">Feb 2</div>
-<span class="feed-text">New user registered <a href="profile.html">"Mary Wiley"</a></span>
-</li>
-<li class="feed-item">
-<div class="feed-date">Jan 27</div>
-<span class="feed-text"><a href="profile.html">Robert Martin</a> gave a review for <a href="product-details.html">"Dell Laptop"</a></span>
-</li>
-<li class="feed-item">
-<div class="feed-date">Jan 14</div>
-<span class="feed-text">New customer registered <a href="profile.html">"Tori Carter"</a></span>
-</li>
-</ul>
-</div>
-</div>
+        <div class="card flex-fill">
+        <div class="card-header">
+        <h4 class="card-title">Recent Registered Users</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                @foreach ($recentUsers as $user)
+                    <tbody>
+                        <td>{{$user->name}}</td>
+                        <td >{{$user->email}}</td>
+                        <td>
+                            @if($user->role == '1')
+                            <span>Individual User</span>
+                            @else
+                            <span>Business User</span>
+                            @endif
+                        </td>
 
-</div>
+                    </tbody>
+                    @endforeach
+                </table>
+                </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+
+<!--
 ----script---
    //var _xidata=JSON.parse(' json_encode($susmonthCounts) ');
 
@@ -274,7 +284,7 @@
     });
 
 </script>
-</div>
+
 </div>
 </div>
 

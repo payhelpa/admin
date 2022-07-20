@@ -179,6 +179,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 <th>Name</th>
 <th>Country Code </th>
 <th>Currency</th>
+<th>Symbol</th>
 <th>Created at</th>
 <th class="text-right">Action</th>
 
@@ -191,6 +192,7 @@ This is the most basic example of the datatables with zero configuration. Use th
         <td>{{$country->name}}</td>
         <td>{{$country->phone_number_code}}</td>
         <td>{{$country->currency}}</td>
+        <td>{{$country->currency_symbol}}</td>
         <td>{{$country->created_at}}</td>
         <td class="text-right">
             <div class="actions">

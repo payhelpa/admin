@@ -78,6 +78,9 @@
                                                 <input type="text" name="phone_number_code" id="phone_number_code" value="{{$country->phone_number_code}}" style="border: 1px solid gray;  border-radius: 5px;">
                                                 <br><br>Currency:
                                                 <input type="text" name="currency" id="currency" value="{{$country->currency}}" style="border: 1px solid gray;  border-radius: 5px;">
+                                                <br><br>Symbol:
+                                                <input type="text" name="currency_symbol" id="currency_symbol" value="{{$country->currency_symbol}}" style="border: 1px solid gray;  border-radius: 5px;">
+
 
                                                 <br><br>
                                                 <input type="submit" value="Update" style="border: 1px solid gray;  border-radius: 5px;">

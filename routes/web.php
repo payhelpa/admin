@@ -41,13 +41,13 @@ Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware(['aut
 
 Route::get('/users', [UserController::class, 'user'])->middleware(['auth'])->name('users');
 
-Route::get('/subadmin.subusers', [UserController::class, 'subusers'])->middleware(['auth'])->name('subusers');
+Route::get('/subadmin.subusersnig', [UserController::class, 'subusersnig'])->middleware(['auth'])->name('subusersnig');
 
-Route::get('/subadmin.subbizusers', [UserController::class, 'subBizusers'])->middleware(['auth'])->name('subbizusers');
+Route::get('/subadmin.subusersus', [UserController::class, 'subusersus'])->middleware(['auth'])->name('subusersus');
 
-Route::get('/individualusers', [UserController::class, 'individualusers'])->middleware(['auth'])->name('individualusers');
+Route::get('/USusers', [UserController::class, 'USusers'])->middleware(['auth'])->name('USusers');
 
- Route::get('/businessusers', [UserController::class, 'businessusers'])->middleware(['auth'])->name('businessusers');
+ Route::get('/Nigusers', [UserController::class, 'Nigusers'])->middleware(['auth'])->name('Nigusers');
 
  Route::get('/profile', [UserController::class, 'profile'])->middleware(['auth'])->name('profile');
 
@@ -97,7 +97,7 @@ Route::get('/statusdeclined', [TransactionController::class, 'statusdeclined'])-
 
 Route::get('/pendinginfo/{user_id}', [TransactionController::class, 'pendinginfo'])->middleware(['auth'])->name('pendinginfo');
 
-Route::get('/ongoingstatus', [TransactionController::class, 'ongoingstatus'])->middleware(['auth'])->name('ongoingstatus');
+Route::get('/unitedstateTransaction', [TransactionController::class, 'unitedstateTransaction'])->middleware(['auth'])->name('unitedstateTransaction');
 
 Route::get('/singleOngoinginfo/{id}', [TransactionController::class, 'singleOngoinginfo'])->middleware(['auth'])->name('singleOngoinginfo');
 

@@ -112,6 +112,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     }
     .profile-head h6{
     color: #0062cc;
+    margin-top: 40px;
     }
     .profile-edit-btn{
     border: none;
@@ -172,8 +173,8 @@ This is the most basic example of the datatables with zero configuration. Use th
     font-weight: 600;
     }
     .profile-tab p{
-    font-weight: 600;
-    color: #0062cc;
+        font-weight: 600;
+        color: #0062cc;
     }
     #customers {
 
@@ -189,7 +190,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     }
 
     #customers td, #customers th {
-    padding: 28px;
+    padding: 18px;
     border-top: 1px solid #D8D8D8;
     }
 
@@ -200,7 +201,7 @@ This is the most basic example of the datatables with zero configuration. Use th
 </style>
 
   <div class="container emp-profile">
-    @foreach ($userss as $user)
+    @foreach ($users as $user)
     <!--<div class="col-md-6">
         <div class="profile-head-acc-num">
             <h2>{{ucwords(UserController::GetUserAccountBal($user->user_id)) }}</h2>
@@ -217,7 +218,15 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="profile-head">
                         <h5>{{ucwords(UserController::GetUserName($user->user_id)) }}</h5>
 
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <p class="proile-rating">
+                        @if($user->verification_level == 'tier_three')
+                            <span class="badge badge-success text-white">Tier three</span>
+                        @elseif($user->verification_level == 'tier_two')
+                                <span class="badge badge-warning text-white">Tier two</span>
+                        @else
+                            <span class="badge badge-danger text-white">Tier one</span>
+                        @endif
+                        </p>
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -229,85 +238,92 @@ This is the most basic example of the datatables with zero configuration. Use th
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#wallet"  role="tab" aria-controls="profile" aria-selected="false">Wallet</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#action"  role="tab" aria-controls="profile" aria-selected="false">Action</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-2">
+
+
                     <h6 class="profile-edit-btn">Wallet:<span>₦</span></h6>
 
                 </div>
             </div>
-            <div class="row">
-            <div class="col-md-10" id="customers">
-                <div class="tab-content profile-tab" id="myTabContent ">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <table class="table table-striped">
+            <div class="col-lg-10" id="customers">
+            <div class="card" >
+                <div class="card-body tab-content profile-tab" id="myTabContent ">
+                    <div class="table-responsive tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <table class="table table-hover mb-0">
                             <tbody>
                                 <tr>
-                                <th scope="row">User Id</th>
-                                <td>{{$user->user_id}}</td>
+                                    <th scope="row">User Id</th>
+                                    <td>{{$user->user_id}}</td>
                                 </tr>
                                 <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
+                                    <th scope="row">Name</th>
+                                    <td>{{ucwords(UserController::GetUserName($user->user_id)) }}</td>
                                 </tr>
                                 <tr>
-                                <th scope="row">Email</th>
-                                <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
+                                    <th scope="row">Username</th>
+                                    <td>{{$user->username}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td>{{ucwords(UserController::GetUserEmail($user->user_id)) }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Valid ID Number</th>
                                     <td>{{$user->valid_id_number}}</td>
-                                    </tr>
-                            <tr>
-                                <th scope="row">Occupation</th>
-                                <td>{{$user->occupation}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Phone Number</th>
-                                <td>{{$user->phone_number}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Home Address</th>
-                                <td>{{$user->home_address}}</td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{$user->dob}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Country</th>
-                                <td>{{$user->country}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Transaction Limit</th>
-                                <td>{{$user->transaction_limit}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Phone Number Verified At</th>
-                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->phone_number_verified_at))}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">State</th>
-                                <td>{{$user->state_id}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Document Submitted</th>
-                                <td><a href="{{route('showimage',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">Created At</th>
-                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->created_at))}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Updated At</th>
-                                <td>{{date('l jS \of F Y h:i:s A', strtotime($user->updated_at))}}</td>
-                            </tr>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Occupation</th>
+                                    <td>{{$user->occupation}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone Number</th>
+                                    <td>{{$user->phone_number}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Document Submitted</th>
+                                    <td><a href="{{route('showimage',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Home Address</th>
+                                    <td>{{$user->home_address}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DOB</th>
+                                    <td>{{$user->dob}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Country</th>
+                                    <td>{{$user->country->name}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">State</th>
+                                    <td>{{$user->state->name ?? 'None'}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Transaction Limit</th>
+                                    <td>{{$user->transaction_limit}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone Number Verified At</th>
+                                    <td>{{date('l jS \of F Y h:i:s A', strtotime($user->phone_number_verified_at))}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Created At</th>
+                                    <td>{{date('l jS \of F Y h:i:s A', strtotime($user->created_at))}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Updated At</th>
+                                    <td>{{date('l jS \of F Y h:i:s A', strtotime($user->updated_at))}}</td>
+                                </tr>
                             </tbody>
                         </table>
-
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
@@ -342,33 +358,63 @@ This is the most basic example of the datatables with zero configuration. Use th
                     <div class="tab-pane fade" id="wallet" role="tabpanel" aria-labelledby="profile-tab">
                         @foreach ($wallets as $wallet)
                         <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Account Number</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>{{$wallet->account_number}}</p>
-                                    </div>
+                            <div class="col-md-4">
+                                <label>Account Number</label>
+                            </div>
+                            <div class="col-md-4">
+                                <p>{{$wallet->account_number}}</p>
+                            </div>
                         </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Account Name</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>{{$wallet->account_name}}</p>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Account Balance  </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>₦{{number_format($wallet->account_balance/ 100,2)}}</p>
-                                    </div>
-                                </div>
-                                @endforeach
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Account Name</label>
+                            </div>
+                            <div class="col-md-4">
+                                <p>{{$wallet->account_name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Account Balance  </label>
+                            </div>
+                            <div class="col-md-4">
+                                <p>₦{{number_format($wallet->account_balance/ 100,2)}}</p>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
-                </div>
+                    <div class="tab-pane fade" id="action" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="table-responsive tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                            <table class="table table-hover mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            @if($user->verification_level == 'tier_three')
+                                            <span>Move to Teir two</span>
+                                            @elseif($user->verification_level == 'tier_two')
+                                                    <span>Move to Teir one</span>
+                                            @else
+                                                <span>Tier one</span>
+                                            @endif
+                                        </th>
+                                        <td><button type="button" class="btn btn-secondary btn-sm">Move</button></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Country</th>
+                                        <td>{{$user->country->name}}</td>
+                                    </tr>
+                                    
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                                </div>
             </div>
         </div>
     </form>

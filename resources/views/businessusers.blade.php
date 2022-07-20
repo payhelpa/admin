@@ -83,6 +83,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     <div class="btn-group" style="float:right;">
         <a class="btn btn-primary" href="{{route('exportbiz')}}">Export</a>
     </div>
+    
 <div class="table-responsive">
 <table class="datatable table table-stripped">
 <thead>

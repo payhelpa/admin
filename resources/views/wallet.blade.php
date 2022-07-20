@@ -48,17 +48,15 @@
                         <div class="card-header">
                             <h4 class="card-title">List of Users Wallet</h4>
                             <div class="d-flex flex-row-reverse">
-                                <div class="top-nav-search " style="background: linear-gradient(-45deg,#3949ab,#2962ff); border-radius: 50px;">
-                                    <form class="form-inline my-2 my-lg-0" action = "" method= "" >
-                                        <div class="input-group">
-                                            <div >
-                                                <input type="search" class="form-control mr-sm-2" placeholder ="Search" name="search">
-                                                <label class="form-label" for="form1"></label>
-                                            </div>
-                                            <input type="submit" class="btn btn-primary">
+                                <form class="form-inline my-2 my-lg-0" action = "" method= "" >
+                                    <div class="input-group">
+                                        <div >
+                                            <input type="search" class="form-control mr-sm-2" placeholder ="Search Account Number, Account Name" name="search">
+                                            <label class="form-label" for="form1"></label>
                                         </div>
-                                    </form>
-                                </div>
+                                        <input type="submit" class="btn btn-primary">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="card-body">

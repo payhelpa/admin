@@ -35,6 +35,7 @@ class CountryController extends Controller
                 'phone_number_code' => $request->phone_number_code,
                 'logo' => $upload['url'],
                 'currency' => request('currency'),
+                'currency_symbol' => request('currency_symbol'),
             ]);
             //dd('$country');
     //}
@@ -59,6 +60,7 @@ class CountryController extends Controller
         $country->logo = $upload['url'];
         $country->phone_number_code = $request->input('phone_number_code');
         $country->currency = $request->input('currency');
+        $country->currency_symbol = $request->input('currency_symbol');
         $country->update();
         return redirect()->route('country')->with('addonupdate',' Updated Successfully');
 
