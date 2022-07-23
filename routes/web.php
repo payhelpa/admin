@@ -130,6 +130,8 @@ Route::get('/user/delete/{id}', [UserController::class, 'deleteuser'])->middlewa
 
 Route::get('/update_verify/{id}', 'App\Http\Controllers\UserController@update_verify')->name('update_verify');
 
+Route::get('/update_verification_level/{id}', [UserController::class, 'update_verification_level'])->name('update_verification_level');
+
 Route::get('/update_verifyBsn/{id}', [UserController::class, 'update_verifyBsn'])->name('update_verifyBsn');
 
 Route::get('/wallet', [TransactionController::class, 'wallet'])->middleware(['auth'])->name('wallet');

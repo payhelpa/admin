@@ -46,7 +46,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="card">
                         <div class="card-header">
-                        <h4 class="card-title">Top line justified</h4>
+                        <h4 class="card-title"></h4>
                         </div>
                         <div class="card-body">
                         <ul class="nav nav-tabs nav-tabs-top nav-justified">

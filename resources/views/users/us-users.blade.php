@@ -88,8 +88,14 @@
                                                             @else
                                                             <td><span class="badge badge-danger text-white">Tier one</span></td>
                                                             @endif
-                                                            <td class="text-right">
-                                                                
+                                                            <td class="text-left">
+                                                                <div class="actions text-center">
+                                                                @if($user->user->active_status)
+                                                                    <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
+                                                                @else
+                                                                    <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO UNSUSPEND THIS USER?')" class="btn btn-sm bg-success-light mr-2"></i>Unsuspend</a>
+                                                                @endif
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -120,9 +126,13 @@
                                                         <td class="text-center"><a href = "#" ><i class="fa fa-envelope" style="text-align:center"></i></a></td>
                                                         <td><a href="{{'https://payhelpa.com/auth/admin/login?token=PAY-HELPER#@1~89982+?f6a919HelpERXX&business_name='.$user->id}}" target="_blank" class="btn btn-sm bg-success">Login</a></td>
                                                         <td>{{$user->created_at}}</td>
-                                                        <td class="text-right">
-                                                            <div class="actions">
-                                                                <a href="#" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
+                                                        <td class="text-left">
+                                                            <div class="actions text-center">
+                                                            @if($user->user->active_status)
+                                                                <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-sm bg-danger-light">Suspend</a>
+                                                            @else
+                                                                <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO UNSUSPEND THIS USER?')" class="btn btn-sm bg-success-light mr-2"></i>Unsuspend</a>
+                                                            @endif
                                                             </div>
                                                         </td>
                                                     </tr>

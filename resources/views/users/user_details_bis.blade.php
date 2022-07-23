@@ -40,11 +40,11 @@
 
 </div>
 <div class="d-flex justify-content-center">
-      
-      <a href="#" ></a>      
+
+      <a href="#" ></a>
 </div>
 </div>
- 
+
 <div class="row">
 <div class="col-sm-12">
 <div class="card">
@@ -170,7 +170,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     color: #0062cc;
     }
     #customers {
-  
+
   border-collapse: collapse;
   width: 100%;
     }
@@ -182,7 +182,7 @@ This is the most basic example of the datatables with zero configuration. Use th
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
     }
 
-    #customers td, #customers th {  
+    #customers td, #customers th {
     padding: 28px;
     border-top: 1px solid #D8D8D8;
     }
@@ -196,11 +196,11 @@ This is the most basic example of the datatables with zero configuration. Use th
   <div class="container emp-profile">
     @foreach ($userss as $user)
         <form method="post">
-            <div class="row">             
+            <div class="row">
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>{{ucwords(UserController::GetUserName($user->user_id)) }}</h5>
-                        <h6>   </h6>                        
+                        <h6>   </h6>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">User Info</a>
@@ -236,32 +236,32 @@ This is the most basic example of the datatables with zero configuration. Use th
                               </tr>
                               <tr>
                                 <th scope="row">Company Address</th>
-                                <td>{{$user->company_address}}</td>
+                                <td>{{$user->business_address}}</td>
                               </tr>
-                              
+
                               <tr>
-                                <th scope="row">CEO Name </th>
-                                <td>{{$user->ceo_name}}</td>
+                                <th scope="row">business Name </th>
+                                <td>{{$user->business_name}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Office Address</th>
-                                <td>{{$user->office_address}}</td>
+                                <td>{{$user->business_desc}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">CAC Number</th>
-                                <td>{{$user->cac_number}}</td>
-                              </tr>                              
+                                <td>{{$user->website}}</td>
+                              </tr>
                               <tr>
                                 <th scope="row">Phone Number Verified At</th>
                                 <td>{{$user->phone_number_verified_at}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">State ID</th>
-                                <td>{{$user->state_id}}</td>
+                                <td>{{$user->rc_number}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">State ID</th>
-                                <td>{{$user->state_id}}</td>
+                                <td>{{$user->rc_number}}</td>
                               </tr>
                               <tr>
                                 <th scope="row">Created At</th>
@@ -273,9 +273,9 @@ This is the most basic example of the datatables with zero configuration. Use th
                               </tr>
                             </tbody>
                           </table>
-                            
+
                 </div>
-  
+
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="row">
                                             <div class="col-md-4">
@@ -309,11 +309,11 @@ This is the most basic example of the datatables with zero configuration. Use th
                         </div>
                     </div>
                 </div>
-            </form>  
-      @endforeach       
+            </form>
+      @endforeach
         </div>
-            
-        </div>    
+
+        </div>
     </div>
 </div>
 </div>

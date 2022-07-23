@@ -62,7 +62,9 @@
                         </span>
                     </div>
                     <div class="dash-widget-info">
-                        <h3>{{$countuser->count()}}</h3>
+
+                        <h3>{{$countuser}}</h3>
+
                         <h6 class="text-muted">Total Registered Users</h6>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-primary w-50"></div>

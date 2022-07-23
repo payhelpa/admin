@@ -23,6 +23,7 @@ use App\Mail\NewMessage;
 use App\Models\Admin;
 use App\Mail\AccountVerified;
 use App\Mail\FundsApproved;
+use App\Models\Offer;
 use App\Models\Service;
 
 
@@ -69,15 +70,21 @@ class TransactionController extends Controller
         return view('transactions', compact('userss'));
     }
     public function unitedstateTransaction(Request $request){
-        $lupendingtransactions = DB::table('naira_solicitations')->where('is_taken', 0)->get();
+        $lupendingtransactions = DB::table('naira_solicitations')->where('is_taken', 0)->where('country_id', 2)->get();
 
-        $fupendingtransactions = DB::table('offers')->get();
+        $fupendingtransactions = Offer::whereHas('user', function ($query)  {
+            $query->whereHas(function ($q)  {
+                $q->where('country_id', '=', 1);
+            });
+        })->get();//Offer:://DB::table('offers')->get();
 
-        $ongoingtransactions = $this->model->with(['user', 'solicitors'])->whereHas('transaction', function ($query)  {
+
+
+        $ongoingtransactions = $this->model->with(['user', 'solicitors'])->where('country_id', 2)->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true)->where('status', '!=' , 6);
         })->get();
 
-        $successSolicitations = $this->model->with(['user', 'solicitors'])->where('status', '=', 6)->whereHas('transaction', function ($query)  {
+        $successSolicitations = $this->model->with(['user', 'solicitors'])->where('status', '=', 6)->where('country_id', 2)->whereHas('transaction', function ($query)  {
             $query->where('is_payment_confirmed', '=', true);
         })->get();
         return view('ongoingstatus', compact('ongoingtransactions', 'lupendingtransactions' , 'fupendingtransactions', 'successSolicitations'));
@@ -97,7 +104,8 @@ class TransactionController extends Controller
     public function successinfo($user_id){
         $userss = DB::table('transactions')->where('user_id', $user_id)->where('is_payment_confirmed', 1)->get();
         return view('successinfo', compact('userss'));
-    }public function fupending(){
+    }
+    public function fupending(){
         $userss = DB::table('offers')->get();
         return view('fupending', compact('userss'));
     }

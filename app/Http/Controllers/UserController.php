@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $countuser = User::all();
+        $countuser = User::count();
         $countverifiedUsers = User::whereNotNull('kyc_verified')->count();
         $counttransaction = Transaction::count();
 
@@ -85,7 +85,7 @@ class UserController extends Controller
         $recentUsers = User::latest('created_at')
         ->limit(5)
         ->get();
-        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('countuser', 'counttransaction','countverifiedUsers','userdata', 'recentTransactions','recentUsers'));
+        return view('dashboard', ['userschart'=>$userschart, 'months'=>$months, 'monthCount'=>$monthCount], compact('counttransaction','countverifiedUsers','userdata', 'countuser', 'recentTransactions','recentUsers'));
 
     // $post = User::join('transactions', 'users.user_id' , '=', 'transactions.lu_id')
         //    //->whereDate('transactions.created_at')
@@ -351,11 +351,11 @@ class UserController extends Controller
         $walletnum = DB::table('wallets')->where('user_id',$id)->select('account_number')->get();
         $walletname = DB::table('wallets')->where('user_id',$id)->select('account_name')->get();
         $wallets = DB::table('wallets')->where('user_id',$id)->get();
-        return view('user_details', compact('users','activeUsers','pendingtrans','ongoingtrans','sucesstrans', 'wallets', 'walletbal', 'walletnum' , 'walletname'));
+        return view('users.user_details', compact('users','activeUsers','pendingtrans','ongoingtrans','sucesstrans', 'wallets', 'walletbal', 'walletnum' , 'walletname'));
     }
     public function user_details_bis($id){
         $userss = DB::table('business_details')->where('user_id',$id)->get();
-        return view('user_details_bis', compact('userss'));
+        return view('users.user_details_bis', compact('userss'));
     }
     public function update_status($id){
         //dd($id);
@@ -370,7 +370,7 @@ class UserController extends Controller
                 }
                 $val = array('active_status' => $status);
             DB::table('users')->where('id',$id)->update($val);
-            return redirect('users');
+            return redirect()->back();
     }
     /**
      * The function verifies users
@@ -601,6 +601,27 @@ public function export()
         return Excel::download(new BizUsersExport, 'businessusers.xlsx');
     }
 
+    public function update_verification_level($id){
+        //dd($id);
+        $tier_level = IndividualDetail::where('user_id',$id)->first();
+        //dd($tier_level);
+
+                if($tier_level->verification_level == 'tier_three') {
+                    $tier_level = 'tier_two';
+                }
+                elseif($tier_level->verification_level == 'tier_two') {
+                    $tier_level = 'tier_one';
+                }
+                else{
+                    $tier_level = 'tier_one';
+                }
+
+                //$val = array('verification_level' => $tier_level);
+                IndividualDetail::where('user_id',$id)->update(['verification_level' => $tier_level]);
+            //DB::table('users')->where('id',$id)->update($val);
+            return redirect()->back();
+    }
+
 // public function approvewithdrawals($id){
 //     $userss = DB::table('fund_withdrawals')
 //             ->where('user_id', '=' ,$id )
@@ -610,4 +631,5 @@ public function export()
 
 
     //$user_wallet->increment('account_balance',  $amount);
-}
+    }
+

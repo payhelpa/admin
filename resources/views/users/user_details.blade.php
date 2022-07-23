@@ -50,10 +50,7 @@
 <div class="card">
 <div class="card-header">
 <h4 class="card-title">User Details</h4>
- <a href="{{route ('users')}}"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-</svg>
-</a>
+ 
 <i class="bi bi-arrow-return-left"></i>
 <!--<p class="card-text">
 This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
@@ -287,10 +284,6 @@ This is the most basic example of the datatables with zero configuration. Use th
                                     <td>{{$user->phone_number}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Document Submitted</th>
-                                    <td><a href="{{route('showimage',$user->user_id)}}" class="btn btn-outline-primary mr-2"></i>Show </a></td>
-                                </tr>
-                                <tr>
                                     <th scope="row">Home Address</th>
                                     <td>{{$user->home_address}}</td>
                                 </tr>
@@ -389,6 +382,10 @@ This is the most basic example of the datatables with zero configuration. Use th
                             <table class="table table-hover mb-0">
                                 <tbody>
                                     <tr>
+                                        <th scope="row">Document Submitted</th>
+                                        <td><a href="{{route('showimage',$user->user_id)}}" class="btn btn-secondary btn-sm"></i>Show </a></td>
+                                    </tr>
+                                    <tr>
                                         <th scope="row">
                                             @if($user->verification_level == 'tier_three')
                                             <span>Move to Teir two</span>
@@ -398,14 +395,25 @@ This is the most basic example of the datatables with zero configuration. Use th
                                                 <span>Tier one</span>
                                             @endif
                                         </th>
-                                        <td><button type="button" class="btn btn-secondary btn-sm">Move</button></td>
+                                        <td><a href="{{route('update_verification_level',$user->user_id)}}" class="btn btn-secondary btn-sm"></i>Move </a></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            @if($user->user->active_status == 1)
+                                            <span>Suspend User</span>
+                                            @else
+                                                <span>Unsuspend User</span>
+                                            @endif
+                                        </th>
+                                        <td>
+                                            @if($user->user->active_status)
+                                                <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO SUSPEND THIS USER?')" class="btn btn-danger btn-sm">Suspend</a>
+                                            @else
+                                                <a href="{{route('update_status',$user->user_id)}}" onclick="return confirm('ARE YOU SURE YOU WANT TO UNSUSPEND THIS USER?')" class="btn btn-success btn-sm"></i>Unsuspend</a>
+                                            @endif
+                                        </td>
                                     </tr>
 
-                                    <tr>
-                                        <th scope="row">Country</th>
-                                        <td>{{$user->country->name}}</td>
-                                    </tr>
-                                    
 
                                 </tbody>
                             </table>

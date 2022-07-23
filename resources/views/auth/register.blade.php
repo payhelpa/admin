@@ -99,16 +99,29 @@
                                     name="password_confirmation" required />
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-4">
+                <div class="mt-4">
+                    <x-label for="role" :value="__('Role')" />
+
+                    <select class="custom-select" id="role" name="role" required>
+                    <option value="" disabled selected>Select a role</option>
+                    <option value="0">Super Admin</option>
+                    <option value="1">Content Admin</option>
+                    <option value="2">Finance Admin</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a role</div>
+                </div>
+                </div>
+            <!--<div class="form-group">
                 <div class="mt-4">
                     <x-label for="role" :value="__('Role 0 or 1')" />
 
                     <x-input id="role" class="form-control"
                                     type="number"
                                     name="role"
-                                    min="0" max="1" required />
+                                    required />
                 </div>
-            </div>
+            </div>-->
 
 
             <div class="form-group">
